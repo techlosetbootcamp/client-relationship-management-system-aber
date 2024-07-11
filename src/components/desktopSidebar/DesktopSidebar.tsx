@@ -1,115 +1,82 @@
 import React from "react";
 import logo from "@/assets/images/logo.svg";
 import Image from "next/image";
-import Img1 from "@/assets/images/nav-icon1.svg";
-import img2 from "@/assets/images/nav-icon2.svg";
-import img3 from "@/assets/images/nav-icon3.svg";
-import img4 from "@/assets/images/nav-icon4.svg";
-import img5 from "@/assets/images/nav-icon5.svg";
-import img6 from "@/assets/images/nav-icon6.svg";
-import img7 from "@/assets/images/nav-icon7.svg";
-import img8 from "@/assets/images/nav-icon8.svg";
-import img9 from "@/assets/images/nav-icon9.svg";
 
-const navData = [
-  {
-    text: "Dashboard",
-    icon: Img1,
-    path: "#",
-  },
-  {
-    text: "Notifications",
-    icon: img2,
-    path: "#",
-  },
-  {
-    text: "Customers",
-    icon: img3,
-    path: "#",
-  },
-  {
-    text: "Order Review",
-    icon: img4,
-    path: "#",
-  },
-  {
-    text: "Analytics",
-    icon: img5,
-    path: "#",
-  },
-  {
-    text: "Documents",
-    icon: img6,
-    path: "#",
-  },
-  {
-    text: "Help",
-    icon: img7,
-    path: "#",
-  },
-  {
-    text: "Settings",
-    icon: img8,
-    path: "#",
-  },
-  {
-    text: "Log Out",
-    icon: img9,
-    path: "#",
-  },
-];
+import { NavLinks } from "@/constants/NavLinks";
+import Link from "next/link";
+
+import Img from "@/assets/images/Icon1";
 
 const DesktopSidebar = () => {
   return (
     // Apply shadow later
-    <div className="bg-white w-[220px] border-2" >  
-      <div className="px-[16px] py-[32px]">
-        <Image
-          src={logo}
-          alt="company-logo"
-        />
+    <div className="bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
+      <div className="px-[16px] py-[32px] flex flex-col gap-[32px]">
+        <div className="px-[16px]">
+          <Image src={logo} alt="company-logo" className="" />
+        </div>
 
-        <div className="py-[32px] flex flex-col gap-[32px]">
+        <div className="flex flex-col gap-[32px]">
           <div className="flex flex-col gap-[16px]">
-            <p className="py-[8px]">General</p>
-            <div className="flex flex-col gap-[4px]">
-              {navData.slice(0, 6).map((item) => {
-                  return (
-                      <div key={item.text} className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] ">
-                     
-                    <Image src={item.icon} alt="nav-icon" />
-                
-                    <div className="">
-                      {item.text}
+            <p className="py-[8px] text-mediumGray text-[12px] leading-[18px] font-albertSans font-[700]">
+              GENERAL
+            </p>
+            <div className="flex flex-col gap-[16px] ">
+              {NavLinks.slice(0, 6).map((item) => {
+                return (
+                  <Link key={item.text} href={item.path} className="">
+                    <div
+                      key={item.text}
+                      className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                    >
+                      {/* <Img fill=""/> */}
+
+                      {/* <Image src={item.icon} alt="nav-icon" /> */}
+                      <div className="flex items-center">{item.icon}</div>
+                      {/* <item.icon/> */}
+
+                      <div className="font-barlow ">{item.text}</div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
-
-           
             </div>
           </div>
 
           <div className=" flex flex-col gap-[16px]">
-            <p className="py-[8px]">Support</p>
-            <div className="flex flex-col gap-[4px]">
-              {navData.slice(6, 9).map((item) => {
+            <p className="py-[8px] text-mediumGray text-[12px] leading-[18px] font-albertSans font-[700]">
+              SUPPORT
+            </p>
+            <div className="flex flex-col gap-[16px] ">
+              {NavLinks.slice(6, 8).map((item) => {
                 return (
-                  <div key={item.text} className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] ">
-                    <Image src={item.icon} alt="nav-icon" />
-                    <div className="">
-                      {item.text}
-                    </div>
+                  <div
+                    key={item.text}
+                    className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                  >
+                    <div className="flex items-center">{item.icon}</div>
+                    <div className="font-barlow">{item.text}</div>
                   </div>
                 );
               })}
-
-           
             </div>
+          </div>
+
+          <div className="">
+            {NavLinks.slice(8, 9).map((item) => {
+              return (
+                <div
+                  key={item.text}
+                  className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                >
+                  <div className="flex items-center">{item.icon}</div>
+                  <div className="font-barlow">{item.text}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
-
     </div>
   );
 };

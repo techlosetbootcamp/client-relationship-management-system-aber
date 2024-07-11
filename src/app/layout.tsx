@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Albert_Sans, Barlow } from "next/font/google";
 import "./globals.css";
 import MobileSidebar from "@/components/mobileSidebar/MobileSidebar";
 import DesktopSidebar from "@/components/desktopSidebar/DesktopSidebar";
-import img from "../assets/images/bg.png"
+import img from "../assets/images/bg.png";
 import Image from "next/image";
+import DesktopFooter from "@/components/desktopFooter/DesktopFooter";
+import { albertSans,barlow } from "@/assets/fonts/Fonts";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+// const albertSans = Albert_Sans({
+//   subsets: ["latin"],
+//   variable :"--font-albert-sans",
+//   weight: ["400", "500", "600", "700", "800"],
+// });
+// const barlow = Barlow({
+//   subsets: ["latin"],
+//   variable:"--font-barlow",
+//   weight: ["400", "500", "600", "700", "800"],
+// });
 
 export const metadata: Metadata = {
   title: "Client Relationship Management System",
@@ -19,30 +31,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
-     
-        <div className="absolute top-[220px] opacity-[51%]">
-          <Image src={img} alt="bg" className="w-[1218px] h-[1190px] "/>
+    <html lang="en">
+      <body
+        className={`${albertSans.variable} ${barlow.variable} relative  h-auto  bg-[#F8F9FA] box-border`}
+      >
+        <div className="absolute bottom-12 w-full left-0">
+          <Image src={img} alt="bg" className="w-[1218px] h-[1190px]" />
+          {/* <Image src={img} alt="bg" className="w-[1218px] h-[1190px] " /> */}
         </div>
 
-      <body className={`sticky ${inter.className} px-[72px] z-10 py-[22px] z-10 bg-[#F8F9FA]`}>
-      
+        <div className="flex sticky box-border  gap-[29px] px-[72px] w-full">
+          {/* <MobileSidebar/> */}
+          {/* Make common card wrapper for all the components */}
+          <DesktopSidebar />
+          {children}
+        </div>
 
-        {/* <MobileSidebar/> */}
-        <DesktopSidebar/>
-        {children}
-    
-      
-        </body>
+        <DesktopFooter />
+      </body>
     </html>
   );
 }
-
-// Left
-// 952.06px
-// Border
-// 2px
-// Rotation
-// -90°
-// Opacity
-// 11%
