@@ -41,8 +41,8 @@ const productsData = [
 
 export default function Home() {
   return (
-    <main className="h-full my-[41px]">
-      <div className="flex justify-between w-full mb-[56px] ">
+    <main className="h-full my-[41px] w-full border  box-border">
+      <div className="flex justify-between w-full mb-[56px] box-border ">
         <div className="flex gap-[22px]  items-center">
           <Avatar
             img={avatarImg}
@@ -80,16 +80,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex gap-[21px]">
+      <div className="flex gap-[21px] w-full justify-between box-border ">
         <div className="flex flex-col gap-[20px]">
-          <div className="w-full ">
-            <div className="flex gap-[21px] ">
-              <div className="">
-                <Card />
-              </div>
-              <div>
-                <Card2 />
-              </div>
+          <div className="w-full box-border ">
+            <div className="flex gap-[21px] w-full flex-1 ">
+              <Card />
+
+              <Card2 />
             </div>
           </div>
 
@@ -115,15 +112,18 @@ export default function Home() {
           </div>
         </div>
 
-        <CardWrapper height="h-[500px]" width="w-[285px]" flex="col">
+        <CardWrapper height="h-[500px]" width="lg:w-[233px] xl:w-[285px] flex-1" flex="col">
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             Best Selling Products
           </p>
           <div className="border border-divider w-full" />
-          <div className="flex flex-col gap-[12px]">
-            {productsData.map((item,i) => {
+          <div className="flex flex-col  gap-[12px]">
+            {productsData.map((item, i) => {
               return (
-                <div key={i} className="bg-lightGray w-full p-[8px] rounded-[5px] flex gap-[8px] items-center">
+                <div
+                  key={i}
+                  className="bg-lightGray w-full p-[8px] rounded-[5px] flex gap-[8px] items-center"
+                >
                   <Avatar
                     img={item.img}
                     size="h-[67px] w-[67px] rounded-[5px]"
@@ -152,7 +152,7 @@ export default function Home() {
       <div className="flex gap-[21px] mt-[22px] ">
         <Table width="w-[741px]" height="h-[500px]" />
 
-        <CardWrapper height="h-[500px]" width="w-[285px]" flex="col">
+        <CardWrapper height="h-[500px]" width="w-[285px] flex-1" flex="col">
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             City Order Statistics
           </p>

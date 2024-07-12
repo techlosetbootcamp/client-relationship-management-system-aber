@@ -26,7 +26,7 @@ const salesStats = [
 export const WeeklySalesStats = () => {
   // height-397 for overview page and height-387 for analytics page
   return (
-    <CardWrapper width="w-[631px]" height="h-[387px]" flex="col">
+    <CardWrapper width="w-full" height="h-[387px]" flex="col">
       <p className="text-[16px] leading-[24px] text-darkGray font-barlow font-semibold">
         Sales Statistic
       </p>

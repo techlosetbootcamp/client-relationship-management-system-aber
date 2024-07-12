@@ -31,23 +31,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{border: "5px solid orange"}}>
       <body
         className={`${albertSans.variable} ${barlow.variable} relative  h-auto  bg-[#F8F9FA] box-border`}
       >
-        <div className="absolute bottom-12 w-full left-0">
+        <div className="absolute bottom-2 w-full left-0">
           <Image src={img} alt="bg" className="w-[1218px] h-[1190px]" />
           {/* <Image src={img} alt="bg" className="w-[1218px] h-[1190px] " /> */}
         </div>
 
-        <div className="flex sticky box-border  gap-[29px] px-[72px] w-full">
+        <div className="flex sticky box-border flex-col gap-[60px] w-full">
           {/* <MobileSidebar/> */}
           {/* Make common card wrapper for all the components */}
+          <div className=" gap-[29px] lg:px-[39px] xl:px-[72px] flex">
+
           <DesktopSidebar />
           {children}
+          </div>
+          <div>
+        <DesktopFooter />
+
+          </div>
         </div>
 
-        <DesktopFooter />
       </body>
     </html>
   );

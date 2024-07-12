@@ -10,37 +10,22 @@ import {
   BarElement,
 } from "chart.js";
 
+
 ChartJs.register(Tooltip, CategoryScale, LinearScale, BarElement);
 
-const BarChart = () => {
-    
+type AxisProps = {
+  axis: string;
+};
+
+const BarChart = ({ axis,data }: any) => {
   return (
     <Bar
-   
-    options={{
-        indexAxis : "y",
-        responsive:true,
-        maintainAspectRatio:false
-    }}
-      data={{
-        labels: ["May", "Jun", "Jul"],
-        datasets: [
-          {
-           
-            label: "Dataset",
-            data: [6500, 5000, 4000],
-            
-            backgroundColor: [
-              "#9A55FF",
-              "#41A5FF",
-              "#ED4D5C",
-              
-            ],
-       
-            borderWidth: 1,
-          },
-        ],
+      options={{
+        indexAxis: axis,
+        responsive: true,
+        maintainAspectRatio: false,
       }}
+      data={data}
     />
   );
 };

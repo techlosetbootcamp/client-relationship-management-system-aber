@@ -9,6 +9,7 @@ const config: Config = {
     "./src/commonComponents/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/assets/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/charts/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -32,7 +33,8 @@ const config: Config = {
         "darkGray" : "#212529",
         "borderGray" : "#0000001f",
         "primaryPurple" : "#9A55FF",
-        "lightGreen" : "#E1F4CB",
+        "lightGreen" : "#E1F4CB",  
+        "green" : "#C9F19C",
         "secondaryGreen" : "#62912C",
         "blue" : "#47178E",
         "lightBlue" : "#DBEEFF",
@@ -43,6 +45,16 @@ const config: Config = {
 
       },
 
+    },
+
+    screens: {
+      'xxs' : '320px',
+      'xs' : '428px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1194px',
+      'xl': '1440px',
+      '2xl': '1600px',
     },
   },
   plugins: [],

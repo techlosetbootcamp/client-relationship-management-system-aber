@@ -6,6 +6,25 @@ import Avatar from "../avatar/Avatar";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import BarChart from "@/charts/barChart/BarChart";
 
+
+
+const data={
+  labels: ["May", "Jun", "Jul"],
+  datasets: [
+    {
+      label: "Dataset",
+      data: [6500, 5000, 4000],
+
+      backgroundColor: ["#9A55FF", "#41A5FF", "#ED4D5C"],
+
+      borderWidth: 1,
+    },
+  ],
+}
+
+
+
+
 const Card2 = () => {
   return (
     <CardWrapper width="w-[561px]" height="h-[240px]" flex="row">
@@ -51,10 +70,9 @@ const Card2 = () => {
           </div>
         </div>
 
-        <div></div>
       </div>
       <div className="w-full h-full flex items-center">
-        <BarChart/>
+        <BarChart axis="y" data={data}/>
       </div>
     </CardWrapper>
   );
