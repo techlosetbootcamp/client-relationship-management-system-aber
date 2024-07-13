@@ -10,6 +10,7 @@ type AvatarProps = {
 }
 
 const Avatar = ({size, img, background} : AvatarProps) => {
+
   return (
     <div className={`${size} ${background} flex justify-center`}>
       {

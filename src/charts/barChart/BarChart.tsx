@@ -18,6 +18,7 @@ type AxisProps = {
 };
 
 const BarChart = ({ axis,data }: any) => {
+
   return (
     <Bar
       options={{

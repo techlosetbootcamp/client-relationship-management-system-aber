@@ -6,6 +6,7 @@ type HeaderProps = {
   text: string;
 };
 export const Header = ({ text }: HeaderProps) => {
+
   return (
     <div className="flex justify-between py-[41px]">
       <p className="text-[32px] leading-[48px] text-darkGray font-bold font-albertSans">
