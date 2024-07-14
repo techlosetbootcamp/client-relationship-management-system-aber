@@ -15,10 +15,9 @@ import { Header } from '@/components/header/Header'
 const Page = () => {
  
   return (
-    <div className='w-full h-[500px]'>
+    <div className='w-full h-screen'>
       <Header text='Documents'/>
 
-      {/* <Map/> */}
 
    
     </div>

@@ -6,6 +6,9 @@ import { DeviceUsers } from "@/components/deviceUsers/DeviceUsers";
 import { CustomerDemographic } from "@/components/customerDemographic/CustomerDemographic";
 import Table from "@/components/table/Table";
 import { Header } from "@/components/header/Header";
+import dynamic from 'next/dynamic'
+
+
 
 const customerData = [
   {

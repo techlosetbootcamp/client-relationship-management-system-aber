@@ -1,5 +1,10 @@
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
+import dynamic from "next/dynamic";
 import React from "react";
+const Map = dynamic(()=> import("@/components/map/Map"),{
+  ssr : false
+})
+
 
 export const CustomerDemographic = () => {
   return (
@@ -8,7 +13,9 @@ export const CustomerDemographic = () => {
         Customer Demographic
       </p>
       <div className="border-t border-borderGray" />
-      <div>Insert Map</div>
+      <div className="h-[416px]">
+        <Map/>
+      </div>
     </CardWrapper>
   );
 };
