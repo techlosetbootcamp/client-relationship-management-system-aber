@@ -7,7 +7,7 @@ import Button from "@/components/button/Button";
 
 const Table = ({ width, height }: TableProps) => {
   return (
-    <CardWrapper width={width} height={height} flex="col">
+    <CardWrapper width={width} height={height} flex="flex-col">
       <div className={`flex justify-between w-full pb-[12px] font-barlow`}>
         <p>New Customers</p>
         <div>Pagination</div>

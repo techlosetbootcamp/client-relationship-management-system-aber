@@ -1,3 +1,4 @@
+import LineChart from "@/charts/lineChart/LineChart";
 import Avatar from "@/components/avatar/Avatar";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import React from "react";
@@ -23,10 +24,38 @@ const salesStats = [
   },
 ];
 
+
+const salesStatsDataset =  [
+  {
+    label: "My First Dataset",
+    data: [0,4, 8, 12, 16, 20,24],
+    fill: false,
+    borderColor: "rgb(75, 192, 192)",
+    tension: 0.1,
+  },
+  {
+    label: "My First Dataset",
+    data: [0,6, 12, 18, 24, 30, 36],
+    fill: false,
+    borderColor: "rgb(112, 75, 192)",
+    tension: 0.1,
+  },
+  {
+    label: "My First Dataset",
+    data: [0,5, 10, 15, 20, 25, 30],
+    fill: false,
+    borderColor: "rgb(192, 77, 75)",
+    tension: 0.1,
+  },
+
+]
+
+const salesStatsLabels = ["1Jul", "2Jul","3Jul","4Jul","5Jul","6Jul","7Jul"]
+
 export const WeeklySalesStats = () => {
   // height-397 for overview page and height-387 for analytics page
   return (
-    <CardWrapper width="w-full" height="h-[387px]" flex="col">
+    <CardWrapper width="w-[631px]" height="h-[387px]" flex="flex-col">
       <p className="text-[16px] leading-[24px] text-darkGray font-barlow font-semibold">
         Sales Statistic
       </p>
@@ -57,7 +86,9 @@ export const WeeklySalesStats = () => {
         })}
       </div> */}
 
-      <div className="border-2 h-full">Insert Map</div>
+      <div className=" border h-full">
+        <LineChart datasets={salesStatsDataset} labels={salesStatsLabels} display={true}/>
+      </div>
     </CardWrapper>
   );
 };

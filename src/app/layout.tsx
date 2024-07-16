@@ -43,7 +43,7 @@ export default function RootLayout({
         <div className="flex sticky box-border flex-col gap-[60px] w-full">
           {/* <MobileSidebar/> */}
           {/* Make common card wrapper for all the components */}
-          <div className=" gap-[29px] lg:px-[39px] xl:px-[72px] flex">
+          <div className=" gap-[29px] sm:pr-[45px] sm:pl-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex">
 
           <DesktopSidebar />
           {children}

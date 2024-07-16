@@ -27,11 +27,11 @@ const data={
 
 const Card2 = () => {
   return (
-    <CardWrapper width="w-[561px]" height="h-[240px]" flex="row">
-      <div className="w-full flex flex-col gap-[17px]">
-        <p className="font-[600] font-barlow">Monthly Income</p>
+    <CardWrapper width="xl:w-[561px] lg:w-[459px] " height="xl:h-[240px] lg:h-[196px]" flex=" sm:flex-col md:flex-row md:flex-1">
+      <div className="md:w-[45%] flex flex-col sm:gap-[13.91px] xl:gap-[17px]">
+        <p className="font-[600] md:text-[13px] md:leading-[19.6px] xl:text-[16px] xl:leading-[24px] font-barlow">Monthly Income</p>
         <div className="flex justify-between">
-          <p className="font-bold text-[24px] leading-[36px] font-albertSans">$ 6,567.00</p>
+          <p className="font-bold md:text-[19.6px] xl:text-[24px] md:leading-[24.5px] xl:leading-[36px] font-albertSans">$ 6,567.00</p>
           <div>
             <Button
               text={"5.6%"}
@@ -49,29 +49,29 @@ const Card2 = () => {
             />
           </div>
         </div>
-        <p className="text-mediumGray text-[14px] leading-[21px] font-barlow font-[500]">
+        <p className="text-mediumGray md:text-[12px] xl:text-[14px] md:leading-[18px] xl:leading-[21px] font-barlow font-[500]">
           Compared to the previous month
         </p>
         <div className="border border-divider w-full" />
 
-        <div className="flex gap-[12px] items-center">
+        <div className="flex sm:gap-[9.82px] xl:gap-[12px] items-center">
           <Avatar
             img={<Img2 fill="fill-white" hover=""/>}
-            size="h-[28.5px] w-[28.5px] rounded-full"
+            size="sm:h-[23.32px] xl:h-[28.5px] sm:w-[23.32px] xl:w-[28.5px] rounded-full"
             background="bg-primaryPurple"
           />
           <div>
-            <p className="text-darkGray text-[15px] font-semibold leading-[22.5px] font-barlow ">
+            <p className="text-darkGray md:text-[12.2px] xl:text-[15px] font-semibold md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
               Accounting
             </p>
-            <p className="text-mediumGray text-[15px] font-medium leading-[22.5px] font-barlow ">
+            <p className="text-mediumGray md:text-[12.2px] xl:text-[15px] font font-medium md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
               July 1, 2023 - July 31, 2023
             </p>
           </div>
         </div>
 
       </div>
-      <div className="w-full h-full flex items-center">
+      <div className="md:w-[55%] h-full flex items-center">
         <BarChart axis="y" data={data}/>
       </div>
     </CardWrapper>

@@ -10,7 +10,7 @@ import Img from "@/assets/images/Icon1";
 const DesktopSidebar = () => {
   return (
     // Apply shadow later
-    <div className="bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
+    <div className="xs:hidden lg:block bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
       <div className="px-[16px] py-[32px] flex flex-col gap-[32px]">
         <div className="px-[16px]">
           <Image src={logo} alt="company-logo" className="" />

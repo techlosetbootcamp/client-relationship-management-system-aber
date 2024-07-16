@@ -9,6 +9,7 @@ import {
   Polygon,
   Tooltip,
   Pane,
+  SVGOverlay,
 } from "react-leaflet";
 // import MarkerIcon from "../node_modules/leaflet/dist/images/marker-icon-2x.png";
 // import MarkerShadow from "../node_modules/leaflet/dist/images/marker-shadow.png";
@@ -30,6 +31,16 @@ const calculateCentroid = (coords: string | any[]) => {
   centroidY /= coords.length;
   return [centroidX, centroidY];
 };
+
+const CustomSVGOverlay = ({ coordinates,label,centroid }:any) => (
+  <SVGOverlay
+    bounds={coordinates}  // Define the bounds of your SVG overlay
+    attribution="Custom SVG Overlay"
+    className="flex items-center justify-center overflow-hidden"
+  >
+    <text x={"35%"} y={"55%"} overflow="hidden" fill="white" fontSize="6px" className="border border-secondaryRed">{label}</text>
+  </SVGOverlay>
+);
 
 const Map = () => {
   return (
@@ -63,6 +74,7 @@ const Map = () => {
           const stateName = state.properties.name;
           const stateType = state.geometry.type==="Polygon"
           const centroid = calculateCentroid(coordinate);
+          console.log("centroid", centroid)
 
           return (
             <Polygon
@@ -106,22 +118,36 @@ const Map = () => {
         // center
         offset={10}
     /> */}
+
+    {/* {
+      centroid!=null && 
               <ReactLeafletTextPath
-                positions={coordinate}
-                // options={{
-                //   repeat: true,
-                //   attributes: { fill: "black", "font-size": "14px" },
-                // }}
+                positions={[41.476292, -72.812885]}
+                offset={10}
+                 
+                options={{
+                  repeat: true,
+                  attributes: { "fill": "white", "font-size": "12px",
+
+                    "dx":5,
+                    "dy":10
+                   },
+                }}
+                
                 center
                 align
                 text={stateName}
               />
+    } */}
                 
               {/* </ReactLeafletTextPath> */}
               {/* <Pane>hello</Pane> */}
               {/* <div>hello</div> */}
-              {/* <Tooltip>{population}</Tooltip> */}
+              <Tooltip>{stateName}</Tooltip>
               {/* <p className="border-2 text-[#000] text-[20px]">population</p> */}
+
+
+              <CustomSVGOverlay label={stateName} centroid={centroid} coordinates={coordinate} />
             </Polygon>
           );
         })}

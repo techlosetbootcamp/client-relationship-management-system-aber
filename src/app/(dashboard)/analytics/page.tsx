@@ -44,7 +44,7 @@ const Page = () => {
       </div>
 
       <div className="flex gap-[25px]">
-        <CardWrapper width="w-[277px]" height="h-[428px]" flex="col">
+        <CardWrapper width="w-[277px]" height="h-[428px]" flex="flex-col">
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Source of Purchases
           </p>
@@ -59,7 +59,7 @@ const Page = () => {
           </div>
         </CardWrapper>
 
-        <CardWrapper width="w-[745px] flex-1" height="h-[428px]" flex="col">
+        <CardWrapper width="w-[745px]" height="h-[428px]" flex="flex-col flex-1">
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Sales Per Week
           </p>
@@ -68,7 +68,7 @@ const Page = () => {
       </div>
 
       <div className="flex gap-[25px]">
-        <CardWrapper width="w-[607px] flex-1" height="h-[324px]" flex="col">
+        <CardWrapper width="w-[607px]" height="h-[324px]" flex="flex-col flex-1">
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Sales Per Country
           </p>
@@ -78,7 +78,7 @@ const Page = () => {
           </div>
         </CardWrapper>
 
-        <CardWrapper width="w-[415px]" height="h-[320px]" flex="col">
+        <CardWrapper width="w-[415px]" height="h-[320px]" flex="flex-col">
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Sales History
           </p>

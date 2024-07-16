@@ -5,7 +5,7 @@ import React from 'react'
 export const CardWrapper = (props: any) => {
     
   return (
-    <div className={`bg-white rounded-[10.5px] border-[0.75px] border-borderGray py-[${props.reverse ? "16px" : "24px"}] px-[${props.reverse ? "24px" : "16px"}] flex gap-[12px] flex-${props.flex} ${props.width} ${props.height}`}>
+    <div className={`bg-white rounded-[10.5px] border-[0.75px] border-borderGray py-[${props.reverse ? "16px" : "24px"}] px-[${props.reverse ? "24px" : "16px"}] flex sm:gap-[9.82px] xl:gap-[12px] ${props.flex} ${props.width} ${props.height}`}>
         {props.children}
     </div>
   )

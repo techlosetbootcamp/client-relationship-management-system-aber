@@ -11,6 +11,11 @@ import productImg from "@/assets/images/productImg.svg";
 import Table from "@/components/table/Table";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import img from "@/assets/images/ArrowUp.svg";
+import dynamic from "next/dynamic";
+const Map = dynamic(()=> import("@/components/map/Map"),{
+  ssr : false
+})
+
 
 const productsData = [
   {
@@ -42,11 +47,11 @@ const productsData = [
 export default function Home() {
   return (
     <main className="h-full my-[41px] w-full border  box-border">
-      <div className="flex justify-between w-full mb-[56px] box-border ">
+      <div className="flex justify-between w-full border-2 mb-[56px] box-border ">
         <div className="flex gap-[22px]  items-center">
           <Avatar
             img={avatarImg}
-            size="h-[89px] w-[89px] rounded-full"
+            size="lg:h-[80.1px] lg:w-[80.1px] xl:h-[89px] xl:w-[89px] rounded-full"
             background=""
           />
 
@@ -61,7 +66,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="h-[38px] w-[300px] rounded-[4px] overflow-hidden flex self-center">
+        <div className="h-[38px] w-[300px] rounded-[4px] xs:hidden md:flex self-center">
           <InputField height={"h-full"} width=" w-[201px]" />
           <Button
             text={"Search"}
@@ -80,17 +85,17 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex gap-[21px] w-full justify-between box-border ">
+      <div className="flex sm:gap-[20.55px] md:gap-[17.18px] xl:gap-[21px] lg:flex-row xs:flex-col w-full justify-between box-border ">
         <div className="flex flex-col gap-[20px]">
           <div className="w-full box-border ">
-            <div className="flex gap-[21px] w-full flex-1 ">
+            <div className="flex md:flex-row xs:flex-col gap-[21px] w-full flex-1 ">
               <Card />
 
               <Card2 />
             </div>
           </div>
 
-          <div className="w-full flex gap-[21px]">
+          <div className="w-full flex sm:gap-[17.18px] xl:gap-[21px] overflow-hidden">
             <GraphCard
               btnText="3.4%"
               color="text-secondaryGreen"
@@ -112,7 +117,11 @@ export default function Home() {
           </div>
         </div>
 
-        <CardWrapper height="h-[500px]" width="lg:w-[233px] xl:w-[285px] flex-1" flex="col">
+        <CardWrapper
+          height="lg:h-[409px] xl:h-[500px]"
+          width="lg:w-[233px] xl:w-[285px] "
+          flex="flex-col  flex-1"
+        >
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             Best Selling Products
           </p>
@@ -126,20 +135,20 @@ export default function Home() {
                 >
                   <Avatar
                     img={item.img}
-                    size="h-[67px] w-[67px] rounded-[5px]"
+                    size="lg:h-[55px] lg:w-[55px]  xl:h-[67px] xl:w-[67px] rounded-[5px]"
                     background=""
                   />
 
                   <div className="flex items-center justify-between flex-1">
-                    <div className="flex flex-col gap-[8px]">
-                      <p className="text-blue text-[14px] font-semibold leading-[16.8px] font-albertSans">
+                    <div className="flex flex-col lg:gap-[6.54px] xl:gap-[8px]">
+                      <p className="text-blue  font-semibold lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-albertSans">
                         {item.itemName}
                       </p>
-                      <p className="text-mediumGray leading-[16.8px] text-[14px] font-barlow">
+                      <p className="text-mediumGray lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-barlow">
                         {item.itemCategory}
                       </p>
                     </div>
-                    <p className="text-blue text-[14px] font-semibold leading-[16.8px] font-albertSans">
+                    <p className="text-blue font-semibold lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px]  font-albertSans">
                       {item.price}
                     </p>
                   </div>
@@ -149,15 +158,24 @@ export default function Home() {
           </div>
         </CardWrapper>
       </div>
-      <div className="flex gap-[21px] mt-[22px] ">
-        <Table width="w-[741px]" height="h-[500px]" />
+      <div className="flex xs:flex-col lg:flex-row sm:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px] ">
+        <Table
+          width="lg:w-[606px] xl:w-[741px]"
+          height="lg:h-[412px] xl:h-[500px]"
+        />
 
-        <CardWrapper height="h-[500px]" width="w-[285px] flex-1" flex="col">
+        <CardWrapper
+          height="sm:h-[409px] xl:h-[500px]"
+          width="lg:w-[233px] xl:w-[285px] "
+          flex="flex-col flex-1"
+        >
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             City Order Statistics
           </p>
           <div className="border border-borderGray" />
-          <div className="border h-full">Map</div>
+          <div className="border h-full">
+            <Map/>
+          </div>
         </CardWrapper>
       </div>
     </main>

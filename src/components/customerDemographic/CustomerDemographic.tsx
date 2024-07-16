@@ -8,7 +8,7 @@ const Map = dynamic(()=> import("@/components/map/Map"),{
 
 export const CustomerDemographic = () => {
   return (
-    <CardWrapper height="h-[396px]" flex="col">
+    <CardWrapper height="h-[396px]" flex="flex-col">
       <p className="text-[16px] leading-[24px] text-darkGray font-semibold font-barlow">
         Customer Demographic
       </p>

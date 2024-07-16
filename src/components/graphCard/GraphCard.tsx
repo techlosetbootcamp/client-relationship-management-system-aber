@@ -14,23 +14,36 @@ type GraphCardProps = {
   background: string;
 };
 
+const chartDataset = [
+  
+{
+  label: "My First Dataset",
+  data: [1, 2, 1, 7, 5, 6, 8],
+  fill: false,
+  borderColor: "rgb(75, 192, 192)",
+  tension: 0.1,
+},
+]
+
+const chartlabels= [1, 2, 3, 4, 5, 6, 7]
+
 const GraphCard = ({ btnText, img, color, background }: GraphCardProps) => {
   return (
-    <CardWrapper width="w-[233px]" height="h-[240px]" flex="col">
+    <CardWrapper width="sm:w-[190px] sm:flex-1 xl:w-[233px]" height="sm:h-[196px] md:h-[240px] lg:h-[196px] xl:h-[240px]" flex="flex-col">
       <div className="">
 
       <Avatar
         img={<Img2 fill="fill-white" hover=""/>}
-        size="h-[28.5px] w-[28.5px] rounded-full"
+        size="sm:h-[23.32px] xl:h-[28.5px] sm:w-[23.32px]  xl:w-[28.5px] rounded-full"
         background="bg-primaryPurple"
         />
         </div>
 
-      <p className="font-semibold font-barlow text-[15px] leading-[22.5px] text-mediumGray">
+      <p className="font-semibold font-barlow sm:text-[12.2px] xl:text-[15px] sm:leading-[18.4px] xl:leading-[22.5px]  text-mediumGray">
         Total Profit
       </p>
       <div className="flex justify-between">
-        <p className="font-bold text-[24px] leading-[36px] font-albertSans">$ 3,393.00</p>
+        <p className="font-bold sm:text-[19.6px] xl:text-[24px] sm:leading-[24.5px] xl:leading-[36px] font-albertSans">$ 3,393.00</p>
         <div>
           <Button
             text={btnText}
@@ -49,8 +62,8 @@ const GraphCard = ({ btnText, img, color, background }: GraphCardProps) => {
         </div>
       </div>
 
-      <div className="h-[77px]">
-        <LineChart/>
+      <div className=" sm:h-[62.5px] md:h-[77px] lg:h-[62.5px] xl:h-[77px]">
+        <LineChart datasets={chartDataset} labels={chartlabels} display={false}/>
       </div>
     </CardWrapper>
   );

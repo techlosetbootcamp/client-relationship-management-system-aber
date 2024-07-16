@@ -47,7 +47,7 @@ const Page = () => {
         {customerData.map((item,i) => {
           return (
             // reverse
-            <CardWrapper key={i} height="h-[128px]" width="w-[241px]" flex="col">
+            <CardWrapper key={i} height="h-[128px]" width="w-[241px]" flex="flex-col">
               <div className="w-full h-full flex items-center gap-[12px] ">
                 <Avatar
                   img={<Img fill={item.fill} hover=""/>}

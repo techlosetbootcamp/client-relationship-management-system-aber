@@ -50,8 +50,8 @@ const config: Config = {
     screens: {
       'xxs' : '320px',
       'xs' : '428px',
-      'sm': '640px',
-      'md': '768px',
+      'sm': '428px',
+      'md': '840px',
       'lg': '1194px',
       'xl': '1440px',
       '2xl': '1600px',

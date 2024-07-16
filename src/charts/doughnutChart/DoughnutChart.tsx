@@ -2,7 +2,7 @@
 import React from "react";
 
 import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJs, ArcElement, Title } from "chart.js";
+import { Chart as ChartJs, ArcElement } from "chart.js";
 
 ChartJs.register(ArcElement);
 

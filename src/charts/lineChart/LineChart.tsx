@@ -1,42 +1,38 @@
 "use client";
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJs, PointElement, LineElement } from "chart.js";
+import { Chart as ChartJs, PointElement, LineElement , LinearScale, CategoryScale} from "chart.js";
 
-ChartJs.register(PointElement, LineElement);
+ChartJs.register(PointElement, LineElement, LinearScale, CategoryScale);
 
-const LineChart = () => {
+
+
+const LineChart = ({datasets,labels,display}:any) => {
   return (
     <Line
-    
       options={{
         scales: {
           x: {
             ticks: {
-              display: false,
+              display: display,
             },
           },
           y: {
             ticks: {
-              display: false,
+              display: display,
             },
           },
         },
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
       }}
-   
       data={{
-        labels: [1, 2, 3, 4, 5, 6, 7],
-        datasets: [
-          {
-            label: "My First Dataset",
-            data: [1, 2, 1, 7, 5, 6, 8],
-            fill: false,
-            borderColor: "rgb(75, 192, 192)",
-            tension: 0.1,
-          },
-        ],
+        labels: labels,
+        datasets: datasets,
       }}
     />
   );
