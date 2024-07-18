@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 // import { Albert_Sans, Barlow } from "next/font/google";
 import "./globals.css";
@@ -7,6 +8,8 @@ import img from "../assets/images/bg.png";
 import Image from "next/image";
 import DesktopFooter from "@/components/desktopFooter/DesktopFooter";
 import { albertSans,barlow } from "@/assets/fonts/Fonts";
+import AuthProvider from "@/components/authProvider/AuthProvider";
+
 
 // const inter = Inter({ subsets: ["latin"] });
 // const albertSans = Albert_Sans({
@@ -46,7 +49,11 @@ export default function RootLayout({
           <div className=" gap-[29px] sm:pr-[45px] sm:pl-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex">
 
           <DesktopSidebar />
+          <AuthProvider>
+  
           {children}
+          </AuthProvider>
+   
           </div>
           <div>
         <DesktopFooter />

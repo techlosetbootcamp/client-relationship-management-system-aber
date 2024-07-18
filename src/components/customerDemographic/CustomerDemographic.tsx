@@ -5,6 +5,34 @@ const Map = dynamic(()=> import("@/components/map/Map"),{
   ssr : false
 })
 
+const handleMouseOver = (e: any) => {
+  const layer = e.target;
+  layer.setStyle({
+    fillOpacity: 0.7,
+    weight: 1,
+    dashArray: "",
+    color: "#666",
+  });
+};
+
+const handleMouseOut = (e: any) => {
+  const layer = e.target;
+  layer.setStyle({
+    fillOpacity: 0.7,
+    weight: 1,
+    color: "white",
+  });
+};
+
+
+// const mapEventHandlers = {
+//   mouseover : handleMouseOver,
+//   mouseout: handleMouseOut,
+
+// }
+// const handleClick = (e: any) => {
+//   // Define click handler logic
+// };
 
 export const CustomerDemographic = () => {
   return (
@@ -14,7 +42,7 @@ export const CustomerDemographic = () => {
       </p>
       <div className="border-t border-borderGray" />
       <div className="h-[416px]">
-        <Map/>
+        <Map  />
       </div>
     </CardWrapper>
   );
