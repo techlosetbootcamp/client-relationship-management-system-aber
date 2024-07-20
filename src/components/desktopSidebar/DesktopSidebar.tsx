@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import logo from "@/assets/images/logo.svg";
 import Image from "next/image";
@@ -6,8 +7,10 @@ import { NavLinks } from "@/constants/NavLinks";
 import Link from "next/link";
 
 import Img from "@/assets/images/Icon1";
+import { usePathname } from "next/navigation";
 
 const DesktopSidebar = () => {
+  const pathname = usePathname();
   return (
     // Apply shadow later
     <div className="xs:hidden lg:block bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
@@ -24,10 +27,10 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(0, 6).map((item) => {
                 return (
-                  <Link key={item.text} href={item.path} className="">
+                  <Link key={item.text} href={item.path} className={`${pathname===item.path ? "active" : ""}  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}>
                     <div
                       key={item.text}
-                      className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                      className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer"
                     >
                       {/* <Img fill=""/> */}
 

@@ -1,13 +1,25 @@
-import { PrismaClient } from "@prisma/client";
-import { NextAuthOptions } from "next-auth";
-import NextAuth from "next-auth/next";
+import NextAuth, { Awaitable, RequestInternal, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { NextResponse } from "next/server";
+import { NextAuthOptions } from "next-auth";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-export const authOptions: NextAuthOptions = {
+// const users = [
+//   {
+//     id: "1",
+//     email: "test1@test.com",
+//     password: 123456,
+//   },
+//   {
+//     id: "2",
+//     email: "test2@test.com",
+//     password: 123456,
+//   },
+// ];
+
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -15,59 +27,48 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        console.log("req in head", credentials);
-        if (!credentials?.email || !credentials?.password) {
+      authorize: async function (credentials) {
+        if (!credentials || !credentials.email || !credentials.password) {
           return null;
-        } 
-        return null
-        
-          // try {
-          //   await prisma.$connect();
-          //   // return null
-          //   const user = await prisma.user.findFirst({
-          //     where: {
-          //       email: credentials?.email,
-          //     },
-          //   });
+        }
+        try {
+          await prisma.$connect();
 
-          //   if (!user) {
-          //     return NextResponse.json(
-          //       { message: "User does not exist" },
-          //       { status: 422 }
-          //     );
-          //   }
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials?.email,
+            },
+          });
 
-          //   const userPassword = await bcrypt.compare(
-          //     credentials?.password,
-          //     user.password
-          //   );
+          if (!user) {
+            return null;
+          }
+          const userPassword = await bcrypt.compare(
+            credentials?.password,
+            user.password
+          );
 
-          //   if (!userPassword) {
-          //     return NextResponse.json(
-          //       { message: "Invalid email or password" },
-          //       { status: 422 }
-          //     );
-          //   }
-
-          //   return NextResponse.json({ user }, { status: 201 });
-          // } catch (error) {
-          //   console.log("hey this is the error", error);
-          // } finally {
-          //   await prisma.$disconnect();
-            
-           
-           
-          // }
-
-     
-          
-        
+          console.log("userpassword here", userPassword);
+          if (!userPassword) {
+            console.log("inside userpassword");
+            return null;
+          }
+          return user;
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          await prisma.$disconnect();
+        }
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 7,
+  },
+  debug: true,
 };
 
 const handler = NextAuth(authOptions);

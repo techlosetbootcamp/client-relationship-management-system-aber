@@ -55,7 +55,7 @@ const salesStatsLabels = ["1Jul", "2Jul","3Jul","4Jul","5Jul","6Jul","7Jul"]
 export const WeeklySalesStats = () => {
   // height-397 for overview page and height-387 for analytics page
   return (
-    <CardWrapper width="w-[631px]" height="h-[387px]" flex="flex-col">
+    <CardWrapper width="w-full" height="min-h-[387px]" flex="flex-col flex-1">
       <p className="text-[16px] leading-[24px] text-darkGray font-barlow font-semibold">
         Sales Statistic
       </p>
@@ -86,7 +86,7 @@ export const WeeklySalesStats = () => {
         })}
       </div> */}
 
-      <div className=" border h-full">
+      <div className="w-full border h-full">
         <LineChart datasets={salesStatsDataset} labels={salesStatsLabels} display={true}/>
       </div>
     </CardWrapper>
