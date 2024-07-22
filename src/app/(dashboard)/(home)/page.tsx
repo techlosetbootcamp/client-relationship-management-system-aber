@@ -67,7 +67,7 @@ export default function Home() {
         </div>
 
         <div className="h-[38px] w-[300px] rounded-[4px] xs:hidden md:flex self-center">
-          <InputField height={"h-full"} width=" w-[201px]" />
+          <InputField placeholder="Type Here" height={"h-full"} width=" w-[201px]" rounded='rounded-[0px]'/>
           <Button
             text={"Search"}
             fontSize="text-[16px]"

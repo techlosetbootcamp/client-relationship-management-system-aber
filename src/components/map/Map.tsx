@@ -69,12 +69,12 @@ const Map = () => {
             item[0],
           ]);
 
-          console.log("here is coordinate",coordinate[0])
+          // console.log("here is coordinate",coordinate[0])
           const population = state.properties.density;
           const stateName = state.properties.name;
           const stateType = state.geometry.type==="Polygon"
           const centroid = calculateCentroid(coordinate);
-          console.log("centroid", centroid)
+          // console.log("centroid", centroid)
 
           return (
             <Polygon

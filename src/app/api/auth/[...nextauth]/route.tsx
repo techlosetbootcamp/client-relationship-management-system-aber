@@ -74,6 +74,10 @@ const authOptions: NextAuthOptions = {
     strategy: "jwt",
     maxAge: 60 * 60 * 24 * 7,
   },
+  pages : {
+    signIn:"/login"
+
+  },
   debug: true,
 };
 
