@@ -1,4 +1,5 @@
 import BarChart from "@/charts/barChart/BarChart";
+import WeeklyScheduleMatrix from "@/charts/barChart/WeeklyScheduleMatrix";
 import DoughnutChart from "@/charts/doughnutChart/DoughnutChart";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import { Header } from "@/components/header/Header";
@@ -64,6 +65,11 @@ const Page = () => {
             Sales Per Week
           </p>
           <div className="border border-borderGray" />
+          <div className="h-[284px] border-2 ">
+
+          <WeeklyScheduleMatrix/>
+        
+          </div>
         </CardWrapper>
       </div>
 

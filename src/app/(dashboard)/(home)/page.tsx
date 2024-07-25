@@ -12,10 +12,9 @@ import Table from "@/components/table/Table";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import img from "@/assets/images/ArrowUp.svg";
 import dynamic from "next/dynamic";
-const Map = dynamic(()=> import("@/components/map/Map"),{
-  ssr : false
-})
-
+const Map = dynamic(() => import("@/components/map/Map"), {
+  ssr: false,
+});
 
 const productsData = [
   {
@@ -67,7 +66,13 @@ export default function Home() {
         </div>
 
         <div className="h-[38px] w-[300px] rounded-[4px] xs:hidden md:flex self-center">
-          <InputField placeholder="Type Here" height={"h-full"} width=" w-[201px]" rounded='rounded-[0px]'/>
+          <InputField
+            placeholder="Type Here"
+            height={"h-full"}
+            width=" w-[201px]"
+            rounded="rounded-[0px]"
+            onChange={()=>{}}
+          />
           <Button
             text={"Search"}
             fontSize="text-[16px]"
@@ -174,7 +179,7 @@ export default function Home() {
           </p>
           <div className="border border-borderGray" />
           <div className="border h-full">
-            <Map/>
+            <Map />
           </div>
         </CardWrapper>
       </div>

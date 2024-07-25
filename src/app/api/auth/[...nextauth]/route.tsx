@@ -4,6 +4,8 @@ import { NextAuthOptions } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const prisma = new PrismaClient();
 
@@ -78,6 +80,8 @@ const authOptions: NextAuthOptions = {
     signIn:"/login"
 
   },
+
+  
   debug: true,
 };
 

@@ -11,6 +11,16 @@ import { getServerSession } from "next-auth";
 import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 
+const onLogin = async () => {
+  console.log("button is clicked");
+
+  await signIn("credentials", {
+    email: "test1@test.com",
+    password: "123456",
+    redirect: true,
+    callbackUrl: "/",
+  });
+};
 
 // const onSignUp = async() =>{
 //   // const response = await axios
@@ -25,22 +35,10 @@ const loginWithGoogle = async () => {
 };
 
 const Page = () => {
+  const [username, setUsername] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-
-  const onLogin = async () => {
-    console.log();
-  
-    await signIn("credentials", {
-      email: email,
-      password: password,
-      // email: "test1@test.com",
-      // password: "123456",
-      redirect: true,
-      callbackUrl: "/",
-    });
-  };
-  
+  const [confirmPassword, setConfirmPassword] = useState<string>("")
   // const router = useRouter()
   // const {data} = useSession();
   // console.log("session data",data)
@@ -59,28 +57,40 @@ const Page = () => {
         <form action="" className="w-full">
           <div className="flex flex-col gap-[15px] w-full">
             <InputField
-              placeholder="Enter Your Email"
+              placeholder="Username"
+              width="w-full"
+              height="h-[45px]"
+              rounded="rounded-[8px]"
+              onChange={(e)=>setUsername(e.target.value)}
+            />
+
+            <InputField
+              placeholder="Email"
               width="w-full"
               height="h-[45px]"
               rounded="rounded-[8px]"
               onChange={(e)=>setEmail(e.target.value)}
             />
             <InputField
-              placeholder="Enter Your Password"
+              placeholder="Password"
               width="w-full"
               height="h-[45px]"
               rounded="rounded-[8px]"
               onChange={(e)=>setPassword(e.target.value)}
             />
 
-            <p className="text-primaryPurple -mt-[12px] text-[14px] font-[600] text-end">
-              Forgot Password?
-            </p>
+            <InputField
+              placeholder="Confirm Password"
+              width="w-full"
+              height="h-[45px]"
+              rounded="rounded-[8px]"
+              onChange={(e)=>setConfirmPassword(e.target.value)}
+            />
 
             <div className="w-full">
               <div onClick={onLogin}>
                 <Button
-                  text="Login"
+                  text="Sign up"
                   background="bg-primaryPurple"
                   width="w-full"
                   py="py-[8px]"
@@ -96,9 +106,12 @@ const Page = () => {
               </div>
               <div>
                 <p className="text-[12px] mt-[5px] text-center">
-                  Don't Have an Account? 
-                  <Link href={"/sign-up"}>
-                    <span className="text-primaryPurple font-[600] cursor-pointer"> Sign up</span>
+                  Already Have an Account?
+                  <Link href="/login">
+                    <span className="text-primaryPurple font-[600] cursor-pointer">
+                      {" "}
+                      Login
+                    </span>
                   </Link>
                 </p>
               </div>
