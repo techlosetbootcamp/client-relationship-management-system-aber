@@ -15,7 +15,7 @@ export const POST = async (req: Request) => {
   }
 
   try {
-    console.log("in try")
+    console.log("in try");
     const userExist = await prisma.user.findFirst({
       where: {
         email: email,
@@ -28,11 +28,10 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ message: "User Does not exist" });
     }
     console.log("above user exist");
-    const token = process.env.NEXTAUTH_SECRET + userExist.id
-    // const resetUrl = `http://localhost:3000/reset-password/?${token}`
-    const resetUrl = `http://localhost:3000/reset-password/${userExist.id}/?${token}`
-    const emailTemplate = resetPasswordTemplate(resetUrl)
-    SendEmail(emailTemplate)
+    const token = process.env.NEXTAUTH_SECRET + userExist.id;
+    const resetUrl = `http://localhost:3000/reset-password/${userExist.id}/?${token}`;
+    const emailTemplate = resetPasswordTemplate(resetUrl);
+    SendEmail(emailTemplate);
 
     return NextResponse.json({ message: "User exist" });
   } catch (error) {

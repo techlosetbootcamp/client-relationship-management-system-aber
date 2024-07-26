@@ -10,6 +10,14 @@ import Img from "@/assets/images/Icon1";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
+const SignOutHandler = async() =>{
+  console.log("SIgnput Button is clikced")
+  await signOut({
+    redirect:true,
+    callbackUrl: '/login'
+  })
+}
+
 const DesktopSidebar = () => {
   const pathname = usePathname();
   return (
@@ -71,7 +79,7 @@ const DesktopSidebar = () => {
               return (
                 <div
                   key={item.text}
-                  onClick={()=>signOut()}
+                  onClick={SignOutHandler}
                   className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
                 >
                   <div className="flex items-center">{item.icon}</div>
