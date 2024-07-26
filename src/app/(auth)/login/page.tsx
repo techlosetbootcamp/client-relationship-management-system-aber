@@ -11,7 +11,6 @@ import { getServerSession } from "next-auth";
 import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 
-
 // const onSignUp = async() =>{
 //   // const response = await axios
 // }
@@ -25,12 +24,12 @@ const loginWithGoogle = async () => {
 };
 
 const Page = () => {
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const onLogin = async () => {
-    console.log();
-  
+    console.log(email, password, "Button is clicked");
+
     await signIn("credentials", {
       email: email,
       password: password,
@@ -40,7 +39,7 @@ const Page = () => {
       callbackUrl: "/",
     });
   };
-  
+
   // const router = useRouter()
   // const {data} = useSession();
   // console.log("session data",data)
@@ -56,55 +55,59 @@ const Page = () => {
         {" "}
         {/*self-center */}
         <Image src={logo} alt="logo-image" height={30} priority />
-        <form action="" className="w-full">
-          <div className="flex flex-col gap-[15px] w-full">
-            <InputField
-              placeholder="Enter Your Email"
-              width="w-full"
-              height="h-[45px]"
-              rounded="rounded-[8px]"
-              onChange={(e)=>setEmail(e.target.value)}
-            />
-            <InputField
-              placeholder="Enter Your Password"
-              width="w-full"
-              height="h-[45px]"
-              rounded="rounded-[8px]"
-              onChange={(e)=>setPassword(e.target.value)}
-            />
-
-            <p className="text-primaryPurple -mt-[12px] text-[14px] font-[600] text-end">
+        {/* <form action="" className="w-full"> */}
+        <div className="flex flex-col gap-[15px] w-full">
+          <InputField
+            placeholder="Enter Your Email"
+            width="w-full"
+            height="h-[45px]"
+            rounded="rounded-[8px]"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <InputField
+            placeholder="Enter Your Password"
+            width="w-full"
+            height="h-[45px]"
+            rounded="rounded-[8px]"
+            onChange={(e) => setPassword(e.target?.value)}
+          />
+          <Link href={"/forget-password"}>
+            <p className="text-primaryPurple -mt-[12px] text-[14px] font-[600] text-end cursor-pointer">
               Forgot Password?
             </p>
+          </Link>
 
-            <div className="w-full">
-              <div onClick={onLogin}>
-                <Button
-                  text="Login"
-                  background="bg-primaryPurple"
-                  width="w-full"
-                  py="py-[8px]"
-                  rounded="rounded-[8px]"
-                  color="text-white"
-                  fontSize="text-[18px]"
-                  fontWeight="font-[600]"
-                  img={""}
-                  gap=""
-                  px=""
-                  lineHeight=""
-                />
-              </div>
-              <div>
-                <p className="text-[12px] mt-[5px] text-center">
-                  Don't Have an Account? 
-                  <Link href={"/sign-up"}>
-                    <span className="text-primaryPurple font-[600] cursor-pointer"> Sign up</span>
-                  </Link>
-                </p>
-              </div>
+          <div className="w-full">
+            <div onClick={onLogin}>
+              <Button
+                text="Login"
+                background="bg-primaryPurple"
+                width="w-full"
+                py="py-[8px]"
+                rounded="rounded-[8px]"
+                color="text-white"
+                fontSize="text-[18px]"
+                fontWeight="font-[600]"
+                img={""}
+                gap=""
+                px=""
+                lineHeight=""
+              />
+            </div>
+            <div>
+              <p className="text-[12px] mt-[5px] text-center">
+                Don&apos;t Have an Account?
+                <Link href={"/sign-up"}>
+                  <span className="text-primaryPurple font-[600] cursor-pointer">
+                    {" "}
+                    Sign up
+                  </span>
+                </Link>
+              </p>
             </div>
           </div>
-        </form>
+        </div>
+        {/* </form>  THIS WAS CAUSING THE ERROR */}
         <div className="border-t w-full flex justify-center sticky">
           <p className="px-[15px] -top-[12px] bg-white absolute z-10">OR</p>
           {/* <span className='w-full'></span> */}

@@ -1,3 +1,4 @@
+"use client";    //fix it later on
 import Avatar from "@/components/avatar/Avatar";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";

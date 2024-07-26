@@ -4,8 +4,6 @@ import { NextAuthOptions } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
-import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 const prisma = new PrismaClient();
 
@@ -32,6 +30,12 @@ const authOptions: NextAuthOptions = {
       },
       authorize: async function (credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
+          console.log(
+            "something is not present",
+            credentials,
+            credentials?.email,
+            credentials?.password
+          );
           return null;
         }
         try {
@@ -68,20 +72,47 @@ const authOptions: NextAuthOptions = {
 
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ||""
-    })
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 24 * 7,
   },
-  pages : {
-    signIn:"/login"
-
+  pages: {
+    signIn: "/login",
   },
 
-  
+  callbacks: {
+    async jwt({ token, user, session }) {
+ 
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ token, user, session }) {
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
+      };
+    },
+
+  },
+  // callbacks: {
+  //   async jwt({ token, user, session }) {
+  //     if (user) {
+  //       token.id = user.id;
+  //     }
+  //     return token;
+  //   },
+  // },
+
   debug: true,
 };
 

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import logo from "@/assets/images/logo.svg";
 import googleLogo from "@/assets/images/google.svg";
@@ -9,18 +9,9 @@ import { signIn, useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 // import { useRouter } from 'next/router'
 import { redirect, useRouter } from "next/navigation";
+import axios from "axios";
 import Link from "next/link";
 
-const onLogin = async () => {
-  console.log("button is clicked");
-
-  await signIn("credentials", {
-    email: "test1@test.com",
-    password: "123456",
-    redirect: true,
-    callbackUrl: "/",
-  });
-};
 
 // const onSignUp = async() =>{
 //   // const response = await axios
@@ -35,10 +26,29 @@ const loginWithGoogle = async () => {
 };
 
 const Page = () => {
-  const [username, setUsername] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
+  const [username, setUsername] = useState<string>("abc")
+  const [email, setEmail] = useState<string>("def")
   const [password, setPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
+  const router = useRouter()
+
+
+  const onsubmit = async () => {
+    console.log("button is clicked",username, email,password,confirmPassword);
+    const response = await axios.post("http://localhost:3000/api/auth/sign-up",{username,email,password,confirmPassword})
+    console.log("In sign-up page", response);
+    if(response.status===201){
+      router.push("/login")
+    }
+  
+    // await signIn("credentials", {
+    //   email: "test1@test.com",
+    //   password: "123456",
+    //   redirect: true,
+    //   callbackUrl: "/",
+    // });
+  };
+  
   // const router = useRouter()
   // const {data} = useSession();
   // console.log("session data",data)
@@ -54,7 +64,7 @@ const Page = () => {
         {" "}
         {/*self-center */}
         <Image src={logo} alt="logo-image" height={30} priority />
-        <form action="" className="w-full">
+        {/* <form action="" className="w-full"> */}
           <div className="flex flex-col gap-[15px] w-full">
             <InputField
               placeholder="Username"
@@ -88,7 +98,7 @@ const Page = () => {
             />
 
             <div className="w-full">
-              <div onClick={onLogin}>
+              <div onClick={onsubmit}>
                 <Button
                   text="Sign up"
                   background="bg-primaryPurple"
@@ -117,7 +127,7 @@ const Page = () => {
               </div>
             </div>
           </div>
-        </form>
+        {/* </form> */}
         <div className="border-t w-full flex justify-center sticky">
           <p className="px-[15px] -top-[12px] bg-white absolute z-10">OR</p>
           {/* <span className='w-full'></span> */}

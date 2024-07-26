@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 type InputProps = {
@@ -5,13 +6,11 @@ type InputProps = {
   width : string,
   rounded:string,
   placeholder : string,
-  onChange : (e:any) => void
+  onChange : (e:any) => void;
 };
-
 
 // import outline too
 const InputField = ({ height, width, rounded, placeholder,onChange}: InputProps) => {
-
 
   return (
     <div>

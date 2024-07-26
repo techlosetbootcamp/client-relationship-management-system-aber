@@ -6,10 +6,17 @@ import bcrypt from "bcryptjs"
 const prisma = new PrismaClient();
 
 export const POST = async (req: Request) => {
-  const { email, name, password } = await req.json();
+  const { email,  username, password, confirmPassword } = await req.json();
+  console.log(req)
 
-  if (!email || !name || !password) {
+  console.log("in sign-up api", username,email,password, confirmPassword )
+
+  if (!email || !username || !password || !confirmPassword) {
     return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
+  }
+
+  if(password!=confirmPassword){
+    return NextResponse.json({message:"Passwords does not match"})
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -22,7 +29,7 @@ export const POST = async (req: Request) => {
       data: {
         email,
         password:hashedPassword,
-        name,
+        username,
       },
     });
 
