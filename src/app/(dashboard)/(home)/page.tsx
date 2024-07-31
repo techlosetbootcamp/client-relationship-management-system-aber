@@ -13,6 +13,8 @@ import Table from "@/components/table/Table";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import img from "@/assets/images/ArrowUp.svg";
 import dynamic from "next/dynamic";
+import { DashboardTableHeadings } from "@/constants/TableHeadings";
+import { DashboardTableData } from "@/constants/TableData";
 const Map = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
 });
@@ -166,8 +168,18 @@ export default function Home() {
       </div>
       <div className="flex xs:flex-col lg:flex-row sm:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px] ">
         <Table
+        heading="New Customers"
+        background="bg-white"
           width="lg:w-[606px] xl:w-[741px]"
           height="lg:h-[412px] xl:h-[500px]"
+          pagination = {true}
+          divider={true}
+          checkbox={false}
+          bgHeader="bg-lightPurple"
+          bgRows="bg-white"
+          tableHeading={DashboardTableHeadings}
+          tableData={DashboardTableData}
+
         />
 
         <CardWrapper

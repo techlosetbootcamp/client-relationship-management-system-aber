@@ -42,6 +42,7 @@ const config: Config = {
         "lightPurple" : "#EFE6FF",
         "lightRed" : "#FFE3E6",
         "secondaryRed" : "#ED4D5C"
+        
 
       },
 

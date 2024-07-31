@@ -1,20 +1,8 @@
+import { ButtonProps } from "@/types/Types";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 
-type ButtonProps = {
-  background: string;
-  img: string | StaticImageData | null;
-  width: string;
-  rounded: string;
-  gap: string;
-  color: string;
-  text: string;
-  fontWeight: string;
-  fontSize: string;
-  px: string;
-  py: string;
-  lineHeight: string;
-};
+
 
 const Button = ({
   background,
@@ -29,10 +17,11 @@ const Button = ({
   px,
   py,
   lineHeight,
+  border
 }: ButtonProps) => {
   return (
     <button
-      className={`${background} ${width} ${rounded} ${gap} ${px} ${py}  flex items-center justify-center`}
+      className={`${background} ${width} ${border} ${rounded} ${gap} ${px} ${py}  flex items-center justify-center`}
     >
       {img && <Image src={img} alt="icon" />}
 

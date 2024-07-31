@@ -19,7 +19,8 @@ const apiRoutes = [
 
 export function middleware(request: NextRequest) {
   let headers = new Headers(request.headers);
-  const authorization = headers.get("cookie")?.split(" ")[2];
+  const authorization = headers.get("cookie")?.includes("next-auth.session-token");
+  console.log("authorization", authorization)
 
   if (apiRoutes.includes(request.nextUrl.pathname)) {
     if (!authorization) {

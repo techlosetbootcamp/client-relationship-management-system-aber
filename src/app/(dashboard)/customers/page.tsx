@@ -6,51 +6,55 @@ import { DeviceUsers } from "@/components/deviceUsers/DeviceUsers";
 import { CustomerDemographic } from "@/components/customerDemographic/CustomerDemographic";
 import Table from "@/components/table/Table";
 import { Header } from "@/components/header/Header";
-import dynamic from 'next/dynamic'
-
-
+import dynamic from "next/dynamic";
+import { CustomerTableHeadings } from "@/constants/TableHeadings";
+import { CustomerTableData } from "@/constants/TableData";
 
 const customerData = [
   {
     text1: "Total Customers",
     text2: "10,678",
     background: "bg-white",
-    fill : "fill-primaryPurple"
+    fill: "fill-primaryPurple",
   },
   {
     text1: "New Customers",
     text2: "1,000",
     background: "bg-secondaryBlue",
-    fill : "fill-white"
+    fill: "fill-white",
   },
   {
     text1: "New Members",
     text2: "8,864",
     background: "bg-secondaryGreen",
-    fill : "fill-white"
+    fill: "fill-white",
   },
   {
     text1: "Non-Members",
     text2: "832",
     background: "bg-secondaryRed",
-    fill : "fill-white"
+    fill: "fill-white",
   },
 ];
 
 const Page = () => {
   return (
     <div className="flex flex-col gap-[22px] ml-[12px]">
-   
       <Header text="Customers" />
 
       <div className="flex justify-between justify-center w-full border-2">
-        {customerData.map((item,i) => {
+        {customerData.map((item, i) => {
           return (
             // reverse
-            <CardWrapper key={i} height="h-[128px]" width="w-[241px]" flex="flex-col">
+            <CardWrapper
+              key={i}
+              height="h-[128px]"
+              width="w-[241px]"
+              flex="flex-col"
+            >
               <div className="w-full h-full flex items-center gap-[12px] ">
                 <Avatar
-                  img={<Img fill={item.fill} hover=""/>}
+                  img={<Img fill={item.fill} hover="" />}
                   size="h-[42px] w-[42px] rounded-full"
                   background={item.background}
                 />
@@ -73,7 +77,19 @@ const Page = () => {
 
       <CustomerDemographic />
 
-      <Table height="h-[744px]" width="" />
+      <Table
+        height="h-[744px]"
+        width=""
+        heading=""
+        pagination={false}
+        divider={false}
+        background="!bg-transparent !border-0"
+        bgHeader="bg-transparent"
+        bgRows="bg-white border border-borderGray"
+        checkbox={true}
+        tableHeading={CustomerTableHeadings}
+        tableData={CustomerTableData}
+      />
     </div>
   );
 };
