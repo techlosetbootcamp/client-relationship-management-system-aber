@@ -68,6 +68,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
                   gap=""
                   px=""
                   lineHeight=""
+                  border=""
                 />
               </div>
               

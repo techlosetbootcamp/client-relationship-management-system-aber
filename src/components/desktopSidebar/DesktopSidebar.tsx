@@ -62,6 +62,7 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(6, 8).map((item) => {
                 return (
+                  <Link key={item.text} href={item.path} className={`${pathname===item.path ? "active" : ""}  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}>
                   <div
                     key={item.text}
                     className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
@@ -69,6 +70,7 @@ const DesktopSidebar = () => {
                     <div className="flex items-center">{item.icon}</div>
                     <div className="font-barlow">{item.text}</div>
                   </div>
+                  </Link>
                 );
               })}
             </div>

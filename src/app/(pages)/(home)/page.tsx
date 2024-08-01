@@ -89,6 +89,7 @@ export default function Home() {
             py="py-[6px]"
             px="px-[12px]"
             lineHeight="leading-[24px]"
+            border=""
           />
         </div>
       </div>
@@ -192,7 +193,7 @@ export default function Home() {
           </p>
           <div className="border border-borderGray" />
           <div className="border h-full">
-            <Map />
+          <Map hover={true} fill={true} zoom={4} longitude={38.0311988} latitude={-102.1390331}/>
           </div>
         </CardWrapper>
       </div>

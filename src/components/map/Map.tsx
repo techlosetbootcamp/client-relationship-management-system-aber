@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -32,23 +32,35 @@ const calculateCentroid = (coords: string | any[]) => {
   return [centroidX, centroidY];
 };
 
-const CustomSVGOverlay = ({ coordinates,label,centroid }:any) => (
+const CustomSVGOverlay = ({ coordinates, label, centroid }: any) => (
   <SVGOverlay
-    bounds={coordinates}  // Define the bounds of your SVG overlay
+    bounds={coordinates} // Define the bounds of your SVG overlay
     attribution="Custom SVG Overlay"
     className="flex items-center justify-center overflow-hidden"
   >
-    <text x={"35%"} y={"55%"} overflow="hidden" fill="white" fontSize="6px" className="border border-secondaryRed">{label}</text>
+    <text
+      x={"35%"}
+      y={"55%"}
+      overflow="hidden"
+      fill="white"
+      fontSize="6px"
+      className="border border-secondaryRed"
+    >
+      {label}
+    </text>
   </SVGOverlay>
 );
 
-const Map = () => {
+const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
+  const [hoveredPolygonId, setHoveredPolygonId] = useState<string | null>(null);
   return (
     <div className=" border-2 h-full w-full">
       <MapContainer
         className="h-full w-full"
-        center={[38.0311988, -102.1390331]}
-        zoom={4}
+        // center={[38.0311988, -102.1390331]}
+        center={[longitude, latitude]}
+        zoom={zoom}
+        // zoom={4}
         scrollWheelZoom={false}
       >
         <TileLayer
@@ -64,49 +76,66 @@ const Map = () => {
         </Marker> */}
 
         {statesData.features.map((state) => {
-          const coordinate : LatLngExpression[] | any= state.geometry.coordinates[0].map((item) => [
-            item[1],
-            item[0],
-          ]);
+          const coordinate: LatLngExpression[] | any =
+            state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
 
           // console.log("here is coordinate",coordinate[0])
           const population = state.properties.density;
           const stateName = state.properties.name;
-          const stateType = state.geometry.type==="Polygon"
+          const stateType = state.geometry.type === "Polygon";
           const centroid = calculateCentroid(coordinate);
           // console.log("centroid", centroid)
 
+          // if(hover){
+          // const fillColor = isHovered ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF");
+
+          // }else{
+
+          //   const isHovered = state.id === hoveredPolygonId;
+          //   const fillColor = isHovered ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF");
+          // }
+          const isHovered = state.id === hoveredPolygonId;
+          let fillColor = "transparent";
+          if (fill && hover) {
+            fillColor = isHovered ? "#9A55FF" : "#ADB5BD";
+          } else if (fill || hover) {
+            fillColor = population > 80 ? "#47178E" : "#CFAFFF";
+          }
+
           return (
             <Polygon
-            key={state.id}
+              key={state.id}
               positions={coordinate}
               pathOptions={{
                 // fillColor:`"#a220cd",`
-                fillColor: `${population > 80 ? "#47178E" : "#CFAFFF"}`,
+                // fillColor: hover ? (isHovered ? "#9A55FF" :"#ADB5BD" ):(population > 80 ? "#47178E" : "#CFAFFF"),
+                fillColor: fillColor,
+                // fillColor: hover ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF"),
                 fillOpacity: 1,
                 weight: 1,
                 opacity: 1,
                 // dashArray:'3',
-                color: "white",
+                color:fill ? "white" : "transparent",
               }}
-        
               eventHandlers={{
                 mouseover: (e) => {
+                  setHoveredPolygonId(state.id);
                   const layer = e.target;
                   layer.setStyle({
                     filOpacity: 0.7,
                     weight: 1,
                     dashArray: "",
-                    color: "#666",
+                    color: fill && "#666",
                   });
                 },
                 mouseout: (e) => {
+                  setHoveredPolygonId(null);
                   const layer = e.target;
                   layer.setStyle({
                     filOpacity: 0.7,
                     weight: 1,
                     // dashArray: "3",
-                    color: "white",
+                    color: fill && "white",
                   });
                 },
                 click: (e) => {},
@@ -119,7 +148,7 @@ const Map = () => {
         offset={10}
     /> */}
 
-    {/* {
+              {/* {
       centroid!=null && 
               <ReactLeafletTextPath
                 positions={[41.476292, -72.812885]}
@@ -139,15 +168,22 @@ const Map = () => {
                 text={stateName}
               />
     } */}
-                
+
               {/* </ReactLeafletTextPath> */}
               {/* <Pane>hello</Pane> */}
               {/* <div>hello</div> */}
-              <Tooltip>{stateName}</Tooltip>
               {/* <p className="border-2 text-[#000] text-[20px]">population</p> */}
 
-
-              <CustomSVGOverlay label={stateName} centroid={centroid} coordinates={coordinate} />
+              {fill && (
+                <>
+                  <Tooltip>{stateName}</Tooltip>
+                  <CustomSVGOverlay
+                    label={stateName}
+                    centroid={centroid}
+                    coordinates={coordinate}
+                  />
+                </>
+              )}
             </Polygon>
           );
         })}

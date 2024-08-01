@@ -7,12 +7,12 @@ const privateRoutes = [
   "/documents",
   "/order-review",
 ];
-const publicRoutes = ["/login", "/forget-password"];
+const publicRoutes = ["/login", "/forget-password","/sign-up"];
 
 const apiRoutes = [
   "/api/users",
   "/api/auth/signin",
-  "/api/auth/sign-up",
+  // "/api/auth/sign-up",
   "/api/auth/forget-password",
   "/api/auth/reset-password",
 ];

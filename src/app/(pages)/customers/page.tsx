@@ -39,7 +39,7 @@ const customerData = [
 
 const Page = () => {
   return (
-    <div className="flex flex-col gap-[22px] ml-[12px]">
+    <div className="flex flex-col gap-[22px] ml-[12px] w-full">
       <Header text="Customers" />
 
       <div className="flex justify-between justify-center w-full border-2">
@@ -79,7 +79,7 @@ const Page = () => {
 
       <Table
         height="h-[744px]"
-        width=""
+        width="w-full"
         heading=""
         pagination={false}
         divider={false}

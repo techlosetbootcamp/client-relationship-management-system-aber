@@ -18,11 +18,11 @@ import { DocumentsTableData } from '@/constants/TableData'
 const Page = () => {
  
   return (
-    <div className="flex flex-col gap-[22px] ml-[12px]">
+    <div className="flex flex-col gap-[22px] ml-[12px] w-full">
       <Header text='Documents'/>
       <Table
       heading='tabs will be here'
-      width='w-[1047px]'
+      width='w-full'
       height='h-[940px]'
       pagination={false}
       divider={false}

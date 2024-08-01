@@ -9,41 +9,57 @@ import "react-date-range/dist/theme/default.css";
 import Image from "next/image";
 import useCalendar from "@/hooks/useCalendar";
 
-
 // type SelectionRange = {
-    //   startDate: Date;
+//   startDate: Date;
 //   endDate: Date;
 //   key: string;
 // };
 
 const Calendar = () => {
-    const {range,setRange} = useCalendar()
-  
+  const { range, setRange, startDate, startDay, endDay, month, year } =
+    useCalendar();
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log("range", range, format(range[0].startDate, "PP"));
-  const start = format(range[0].startDate, "PP");
-  const end = format(range[0].endDate, "PP");
-  const startDay = format(range[0].startDate, "dd");
-  const endDay = format(range[0].endDate, "dd");
-  const month = format(range[0].endDate, "MMM");
-  const year = format(range[0].endDate, "yyyy");
-  console.log(startDay, endDay, month, year);
+  // const start = format(range[0].startDate, "PP");
+  // const end = format(range[0].endDate, "PP");
+  // const startDay = format(range[0].startDate, "dd");
+  // const endDay = format(range[0].endDate, "dd");
+  // const month = format(range[0].endDate, "MMM");
+  // const year = format(range[0].endDate, "yyyy");
+  // console.log(startDay, endDay, month, year);
 
   return (
-  
-      
+    <div>
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className="z-10 h-[38px] bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
+      >
+        {startDay != endDay ? (
+          <p>
+            {startDay} - {endDay} {month}, {year}
+          </p>
+        ) : (
+          <p>{startDate}</p>
+        )}
 
-      <div>
+        <Image src={dropDown} alt="" />
+      </div>
+      <div
+        className={`absolute mt-[16px] right-[75px] ${
+          isOpen ? "block" : "hidden"
+        }`}
+      >
         <DateRange
-        //   onChange={(item) => setRange([item.selection])}
-        onChange={(item) => {
+          //   onChange={(item) => setRange([item.selection])}
+          onChange={(item) => {
             const selection = item.selection;
             if (selection) {
               setRange([
                 {
                   startDate: selection.startDate || new Date(),
                   endDate: selection.endDate || new Date(),
-                  key: selection.key || 'selection',
+                  key: selection.key || "selection",
                 },
               ]);
             }
@@ -58,7 +74,7 @@ const Calendar = () => {
           // onChange={handleSelect}
         />
       </div>
-   
+    </div>
   );
 };
 

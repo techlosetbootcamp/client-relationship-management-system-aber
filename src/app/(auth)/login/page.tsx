@@ -92,6 +92,7 @@ const Page = () => {
                 gap=""
                 px=""
                 lineHeight=""
+                border=""
               />
             </div>
             <div>
@@ -129,6 +130,7 @@ const Page = () => {
             gap="gap-[15px]"
             px=""
             lineHeight=""
+            border=""
           />
         </div>
       </div>

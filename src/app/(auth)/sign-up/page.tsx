@@ -26,8 +26,8 @@ const loginWithGoogle = async () => {
 };
 
 const Page = () => {
-  const [username, setUsername] = useState<string>("abc")
-  const [email, setEmail] = useState<string>("def")
+  const [username, setUsername] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
   const router = useRouter()
@@ -40,23 +40,8 @@ const Page = () => {
     if(response.status===201){
       router.push("/login")
     }
-  
-    // await signIn("credentials", {
-    //   email: "test1@test.com",
-    //   password: "123456",
-    //   redirect: true,
-    //   callbackUrl: "/",
-    // });
   };
   
-  // const router = useRouter()
-  // const {data} = useSession();
-  // console.log("session data",data)
-  // if(data){
-  //   // return redirect("/")
-  //   router2.push("/")
-  //   return null
-  // }
 
   return (
     <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
@@ -112,6 +97,7 @@ const Page = () => {
                   gap=""
                   px=""
                   lineHeight=""
+                  border=""
                 />
               </div>
               <div>
@@ -149,6 +135,7 @@ const Page = () => {
             gap="gap-[15px]"
             px=""
             lineHeight=""
+            border=""
           />
         </div>
       </div>

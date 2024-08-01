@@ -82,18 +82,17 @@ const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
+    
   },
 
   callbacks: {
     async jwt({ token, user, session }) {
- 
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     async session({ token, user, session }) {
-
       return {
         ...session,
         user: {
@@ -102,7 +101,6 @@ const authOptions: NextAuthOptions = {
         },
       };
     },
-
   },
   // callbacks: {
   //   async jwt({ token, user, session }) {

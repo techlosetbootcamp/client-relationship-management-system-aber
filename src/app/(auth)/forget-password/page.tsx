@@ -51,6 +51,7 @@ const Page = () => {
                   gap=""
                   px=""
                   lineHeight=""
+                  border=""
                 />
               </div>
               

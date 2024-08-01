@@ -47,7 +47,7 @@ export const NavLinks = [
     {
       text: "Settings",
       icon: <Icon8 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "#",
+      path: "/settings",
     },
     {
       text: "Log Out",

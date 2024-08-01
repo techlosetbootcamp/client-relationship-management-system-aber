@@ -42,7 +42,7 @@ const Pagination = () => {
       </div>
       {pages.map((item) => {
         return (
-            <div onClick={()=>setCurrentPage(item.pageNumber)}>
+            <div key={item.pageNumber}  onClick={()=>setCurrentPage(item.pageNumber)}>
           <Button
             text={item.pageNumber}
             background={item.pageNumber===currentPage ?"bg-primaryPurple" : "bg-white"}

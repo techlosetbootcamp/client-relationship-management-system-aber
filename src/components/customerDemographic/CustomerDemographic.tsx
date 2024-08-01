@@ -1,6 +1,6 @@
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
-import dynamic from "next/dynamic";
 import React from "react";
+import dynamic from "next/dynamic";
 const Map = dynamic(()=> import("@/components/map/Map"),{
   ssr : false
 })
@@ -42,7 +42,7 @@ export const CustomerDemographic = () => {
       </p>
       <div className="border-t border-borderGray" />
       <div className="h-[416px]">
-        <Map  />
+        <Map  hover={false} fill={true} zoom={4} longitude={38.0311988} latitude={-102.1390331}/>
       </div>
     </CardWrapper>
   );
