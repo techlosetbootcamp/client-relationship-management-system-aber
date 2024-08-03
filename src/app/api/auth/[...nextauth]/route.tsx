@@ -82,13 +82,29 @@ const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
-    
   },
 
   callbacks: {
-    async jwt({ token, user, session }) {
+    async jwt({ token, user, session, trigger }) {
+      console.log("session in jwt callback", session);
       if (user) {
-        token.id = user.id;
+        return {
+          ...token,
+          id: user.id,
+        };
+      }
+      if (trigger === "update" && session) {
+        if (session?.name) {
+          token.name = session?.name;
+        }
+
+        if (session?.email) {
+          token.email = session?.email;
+        }
+
+        if (session?.image) {
+          token.picture = session?.image;
+        }
       }
       return token;
     },
@@ -98,6 +114,9 @@ const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.id,
+          name: token.name,
+          email: token.email,
+          image: token.picture,
         },
       };
     },

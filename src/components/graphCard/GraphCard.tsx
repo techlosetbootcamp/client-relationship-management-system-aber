@@ -58,6 +58,7 @@ const GraphCard = ({ btnText, img, color, background }: GraphCardProps) => {
             lineHeight="leading-[15.75px]"
             py="py-[0.75px]"
             px="px-[6px]"
+            border=""
           />
         </div>
       </div>

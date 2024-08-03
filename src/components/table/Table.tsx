@@ -160,7 +160,7 @@ const Table = ({
                     console.log("key", key, "value", value, typeof value);
                     if (key === "status" && typeof value !== "object") {
                       return (
-                        <td className="py-[8px] text-start flex-1">
+                        <td key={key} className="py-[8px] text-start flex-1">
                           <Button
                             text={value}
                             fontSize="text-[12px]"
@@ -191,7 +191,7 @@ const Table = ({
                       (key === "customer" || key==="author")
                     ) {
                       return (
-                        <td className="py-[8px] text-start  flex items-center gap-[8px] flex-1">
+                        <td key={key} className="py-[8px] text-start  flex items-center gap-[8px] flex-1">
                           <Avatar
                             img={value.img}
                             size="h-[31px] w-[31px] rounded-full"
@@ -202,7 +202,7 @@ const Table = ({
                       );
                     } else if (typeof(value) === "object" && (key === "product" || key==="documentName")) {
                       return (
-                        <td className="py-[8px] text-start flex-1">
+                        <td key={key} className="py-[8px] text-start flex-1">
                         <div className="flex gap-[8px]">
                           <Avatar
                             img={value.img}
@@ -228,7 +228,7 @@ const Table = ({
                       key === "totalOrder"
                     ) {
                       return (
-                        <td className="py-[8px] text-start flex-1">
+                        <td key={key} className="py-[8px] text-start flex-1">
                         <div className="text-[14px] leading-[21px] font-[500]">
                           <p className="text-darkGray">{value.quantity}</p>
                           <p className="text-mediumGray">{value.date}</p>
@@ -237,7 +237,7 @@ const Table = ({
                       );
                     } else {
                       return (
-                        <td className="py-[8px] text-start flex-1">{value}</td>
+                        <td key={key} className="py-[8px] text-start flex-1">{value}</td>
                       );
                     }
                     // <p>yes</p> : <p>no</p>

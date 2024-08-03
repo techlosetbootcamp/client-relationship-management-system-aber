@@ -40,6 +40,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
           <div className="flex flex-col gap-[15px] w-full">
             <InputField
               placeholder="New Password"
+              value={password}
               width="w-full"
               height="h-[45px]"
               rounded="rounded-[8px]"
@@ -47,6 +48,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
             />
             <InputField
               placeholder="Confirm Password"
+              value={confirmPassword}
               width="w-full"
               height="h-[45px]"
               rounded="rounded-[8px]"

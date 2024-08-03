@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const session = useSession();
   
   console.log(session);
@@ -38,4 +38,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

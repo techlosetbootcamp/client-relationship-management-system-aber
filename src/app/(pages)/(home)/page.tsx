@@ -71,6 +71,7 @@ export default function Home() {
         <div className="h-[38px] w-[300px] rounded-[4px] xs:hidden md:flex self-center">
           <InputField
             placeholder="Type Here"
+            value=""
             height={"h-full"}
             width=" w-[201px]"
             rounded="rounded-[0px]"

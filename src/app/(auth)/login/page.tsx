@@ -59,6 +59,7 @@ const Page = () => {
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
             placeholder="Enter Your Email"
+            value={email}
             width="w-full"
             height="h-[45px]"
             rounded="rounded-[8px]"
@@ -66,6 +67,7 @@ const Page = () => {
           />
           <InputField
             placeholder="Enter Your Password"
+            value={password}
             width="w-full"
             height="h-[45px]"
             rounded="rounded-[8px]"
