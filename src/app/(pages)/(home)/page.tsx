@@ -1,4 +1,4 @@
-"use client";    //fix it later on
+"use client"; //fix it later on
 import Avatar from "@/components/avatar/Avatar";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
@@ -53,16 +53,18 @@ export default function Home() {
         <div className="flex gap-[22px]  items-center">
           <Avatar
             img={avatarImg}
-            size="lg:h-[80.1px] lg:w-[80.1px] xl:h-[89px] xl:w-[89px] rounded-full"
+            height="xs:h-[61px] lg:h-[80.1px] xl:h-[89px]"
+            width="xs:w-[61px] lg:w-[80.1px] xl:w-[89px]"
+            radius="rounded-full"
             background=""
           />
 
           <div className="py-[14.5px]">
-            <p className="text-[24px] leading-[36px] text-darkGray font-albertSans font-[700]">
+            <p className="xs:text-[16px] xs:leading-[24px] lg:text-[21px] xl:leading-[32px] xl:leading-[36px] text-darkGray font-albertSans font-[700]">
               Welcome Back,&nbsp;
               <span className="text-primaryPurple">Sophia Chester</span>
             </p>
-            <p className="text-[15px] text-mediumGray leading-[22.5px] font-barlow font-semibold">
+            <p className="xs:text-[13px] xl:leading-[19.5px] lg:text-[13.5px] lg:leading-[20.25px] xl:text-[15px] xl:leading-[22.5px] font-barlow font-semibold text-mediumGray">
               Here are your monthly store updates.
             </p>
           </div>
@@ -75,7 +77,7 @@ export default function Home() {
             height={"h-full"}
             width=" w-[201px]"
             rounded="rounded-[0px]"
-            onChange={()=>{}}
+            onChange={() => {}}
           />
           <Button
             text={"Search"}
@@ -95,7 +97,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex sm:gap-[20.55px] md:gap-[17.18px] xl:gap-[21px] lg:flex-row xs:flex-col w-full justify-between box-border ">
+      <div className="flex xs:gap-[20.55px] md:gap-[17.18px] xl:gap-[21px] lg:flex-row xs:flex-col w-full justify-between box-border ">
         <div className="flex flex-col gap-[20px]">
           <div className="w-full box-border ">
             <div className="flex md:flex-row xs:flex-col gap-[21px] w-full flex-1 ">
@@ -105,7 +107,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full flex sm:gap-[17.18px] xl:gap-[21px] overflow-hidden">
+          <div className="w-full flex xs:gap-[17.18px] xl:gap-[21px] overflow-hidden">
             <GraphCard
               btnText="3.4%"
               color="text-secondaryGreen"
@@ -145,7 +147,9 @@ export default function Home() {
                 >
                   <Avatar
                     img={item.img}
-                    size="lg:h-[55px] lg:w-[55px]  xl:h-[67px] xl:w-[67px] rounded-[5px]"
+                    height="xs:h-[55px] xl:h-[67px]"
+                    width="xs:w-[55px] xl:w-[67px]"
+                    radius="rounded-[5px]"
                     background=""
                   />
 
@@ -168,24 +172,23 @@ export default function Home() {
           </div>
         </CardWrapper>
       </div>
-      <div className="flex xs:flex-col lg:flex-row sm:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px] ">
+      <div className="flex xs:flex-col lg:flex-row xs:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px] ">
         <Table
-        heading="New Customers"
-        background="bg-white"
+          heading="New Customers"
+          background="bg-white"
           width="lg:w-[606px] xl:w-[741px]"
           height="lg:h-[412px] xl:h-[500px]"
-          pagination = {true}
+          pagination={true}
           divider={true}
           checkbox={false}
           bgHeader="bg-lightPurple"
           bgRows="bg-white"
           tableHeading={DashboardTableHeadings}
           tableData={DashboardTableData}
-
         />
 
         <CardWrapper
-          height="sm:h-[409px] xl:h-[500px]"
+          height="xs:h-[409px] xl:h-[500px]"
           width="lg:w-[233px] xl:w-[285px] "
           flex="flex-col flex-1"
         >
@@ -193,8 +196,14 @@ export default function Home() {
             City Order Statistics
           </p>
           <div className="border border-borderGray" />
-          <div className="border h-full">
-          <Map hover={true} fill={true} zoom={4} longitude={38.0311988} latitude={-102.1390331}/>
+          <div className="border-2 border-primaryPurple xs:h-[329px] lg:h-full">
+            <Map
+              hover={true}
+              fill={true}
+              zoom={4}
+              longitude={38.0311988}
+              latitude={-102.1390331}
+            />
           </div>
         </CardWrapper>
       </div>

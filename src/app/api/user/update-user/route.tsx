@@ -36,10 +36,13 @@ export const POST = async (req: Request) => {
       },
     });
 
-    return NextResponse.json({
-      message: "Updated User successfully",
-      updatedUser,
-    }, {status:201});
+    return NextResponse.json(
+      {
+        message: "Updated User successfully",
+        updatedUser,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.log(error);
   }

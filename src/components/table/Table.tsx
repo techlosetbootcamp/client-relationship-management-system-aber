@@ -6,95 +6,7 @@ import { TableProps } from "@/types/Types";
 import Button from "@/components/button/Button";
 import Pagination from "../pagination/Pagination";
 
-// const tableHeading = [
-//   {
-//     heading: "Date",
-//   },
-//   {
-//     heading: "Customer",
-//   },
-//   {
-//     heading: "Status",
-//   },
-//   {
-//     heading: "Total",
-//   },
-// ];
 
-// const tableData = [
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-//   {
-//     date: "31 july 2023",
-//     customer: {
-//       img: img,
-//       customerName: "Eric Slator",
-//     },
-//     status: {
-//       type: "Button",
-//       btnText: "Pending",
-//     },
-//     total: "$999.00",
-//   },
-// ];
 
 const Table = ({
   width,
@@ -110,17 +22,15 @@ const Table = ({
   tableData,
 }: TableProps) => {
   return (
-    <CardWrapper width={width} height={height} flex={`flex-col ${background}`}>
-      <div className={`flex justify-between w-full font-barlow`}>
+    <CardWrapper width={width} height={height} flex={`flex-col overflow-x-auto ${background}`}>
+      <div className={`flex justify-between w-full font-barlow `}>
         <p className="text-[16px] font-[600] text-darkGray">{heading}</p>
-        {pagination && 
-        <Pagination/>
-        }
+        {pagination && <Pagination />}
       </div>
 
       {divider && <div className="border border-borderGray w-full" />}
 
-      <div>
+      <div className="">
         <table className="w-full table-auto  font-barlow">
           <thead className="w-full h-[47px] inline-table  items-center justify-center  py-[0px] text-[14px] leading-[21px] font-semibold text-darkGray ">
             <tr
@@ -148,7 +58,6 @@ const Table = ({
                   key={i}
                   className={` ${bgRows} items-center flex gap-[24px] px-[8px] rounded-[5px]`}
                 >
-                  
                   {checkbox && <input type="checkbox" name="" id="" />}
                   {/* {
                     typeof(item.total)==='object'? 
@@ -157,7 +66,7 @@ const Table = ({
                   } */}
 
                   {Object.entries(item).map(([key, value]) => {
-                    console.log("key", key, "value", value, typeof value);
+             
                     if (key === "status" && typeof value !== "object") {
                       return (
                         <td key={key} className="py-[8px] text-start flex-1">
@@ -188,56 +97,68 @@ const Table = ({
                       );
                     } else if (
                       typeof value === "object" &&
-                      (key === "customer" || key==="author")
+                      (key === "customer" || key === "author")
                     ) {
                       return (
-                        <td key={key} className="py-[8px] text-start  flex items-center gap-[8px] flex-1">
+                        <td
+                          key={key}
+                          className="py-[8px] text-start  flex items-center gap-[8px] flex-1"
+                        >
                           <Avatar
                             img={value.img}
-                            size="h-[31px] w-[31px] rounded-full"
+                            height="h-[31px]"
+                            width="w-[31px]"
+                            radius="rounded-full"
                             background=""
                           />
                           <p>{value.customerName}</p>
                         </td>
                       );
-                    } else if (typeof(value) === "object" && (key === "product" || key==="documentName")) {
+                    } else if (
+                      typeof value === "object" &&
+                      (key === "product" || key === "documentName")
+                    ) {
                       return (
                         <td key={key} className="py-[8px] text-start flex-1">
-                        <div className="flex gap-[8px]">
-                          <Avatar
-                            img={value.img}
-                            size="lg:h-[32px] lg:w-[32px]  xl:h-[32px] xl:w-[32px] rounded-[5px]"
-                            background=""
-                          />
+                          <div className="flex gap-[8px]">
+                            <Avatar
+                              height="lg:h-[32px] xl:h-[32px]"
+                              width="lg:w-[32px] xl:w-[32px]"
+                              radius="rounded-[5px]"
+                              img={value.img}
+                              background=""
+                            />
 
-                          <div className="flex items-center justify-between flex-1">
-                            <div className="flex flex-col">
-                              <p className="text-blue  font-semibold lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-albertSans">
-                                {value.productName}
-                              </p>
-                              <p className="text-mediumGray lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-barlow">
-                                {value.productCategory}
-                              </p>
+                            <div className="flex items-center justify-between flex-1">
+                              <div className="flex flex-col">
+                                <p className="text-blue  font-semibold lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-albertSans">
+                                  {value.productName}
+                                </p>
+                                <p className="text-mediumGray lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-barlow">
+                                  {value.productCategory}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
                         </td>
                       );
                     } else if (
-                      typeof(value) === "object" &&
+                      typeof value === "object" &&
                       key === "totalOrder"
                     ) {
                       return (
                         <td key={key} className="py-[8px] text-start flex-1">
-                        <div className="text-[14px] leading-[21px] font-[500]">
-                          <p className="text-darkGray">{value.quantity}</p>
-                          <p className="text-mediumGray">{value.date}</p>
-                        </div>
+                          <div className="text-[14px] leading-[21px] font-[500]">
+                            <p className="text-darkGray">{value.quantity}</p>
+                            <p className="text-mediumGray">{value.date}</p>
+                          </div>
                         </td>
                       );
                     } else {
                       return (
-                        <td key={key} className="py-[8px] text-start flex-1">{value}</td>
+                        <td key={key} className="py-[8px] text-start flex-1">
+                          {value}
+                        </td>
                       );
                     }
                     // <p>yes</p> : <p>no</p>

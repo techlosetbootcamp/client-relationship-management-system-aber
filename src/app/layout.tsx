@@ -1,7 +1,8 @@
 import { albertSans, barlow } from "@/assets/fonts/Fonts";
 import "./globals.css";
 import { Metadata } from "next";
-import AuthProvider from "@/components/authProvider/AuthProvider";
+import AuthProvider from "@/providers/authProvider/AuthProvider";
+import ReduxProvider from "@/providers/reduxProvider.tsx/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "Client Relationship Management System",
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${albertSans.variable} ${barlow.variable}`}>
         <AuthProvider>
-        {children}
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
         </AuthProvider>
       </body>
     </html>

@@ -29,7 +29,7 @@ export default function RootLayout({
             />
           </div>
           <div className="flex sticky box-border flex-col gap-[60px] w-full">
-            <div className=" gap-[29px] sm:pr-[45px] sm:pl-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex">
+            <div className="border-2 border-secondaryGreen gap-[29px]  sm:px-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex">
               <DesktopSidebar />
 
               {children}

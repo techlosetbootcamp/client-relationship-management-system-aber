@@ -10,17 +10,29 @@ const prisma = new PrismaClient();
 export const POST = async (req: Request) => {
   const formdata = await req.formData();
 
-  const email = formdata.get("email") as string;
+  console.log("in change picture working", formdata);
+
+  const userId = formdata.get("userId") as string;
   const image = formdata.get("image") as File;
-  console.log("in change-photo api", email, image);
+  console.log("in change-photo api", userId, image);
 
   try {
     const response: any = await ImageUpload(image);
     console.log("response in change password", response);
 
-    const user = await prisma.user.update({
+    const user = await prisma.user.findUnique({
       where: {
-        email: email,
+        id: userId,
+      },
+    });
+
+    if (user && user.public_id) {
+      await cloudinary.uploader.destroy(user.public_id);
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: userId,
       },
       data: {
         image: response?.secure_url,

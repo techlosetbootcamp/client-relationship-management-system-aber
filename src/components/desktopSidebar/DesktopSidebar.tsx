@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import logo from "@/assets/images/logo.svg";
 import Image from "next/image";
@@ -10,13 +10,13 @@ import Img from "@/assets/images/Icon1";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
-const SignOutHandler = async() =>{
-  console.log("SIgnput Button is clikced")
+const SignOutHandler = async () => {
+  console.log("SIgnput Button is clikced");
   await signOut({
-    redirect:true,
-    callbackUrl: '/login'
-  })
-}
+    redirect: true,
+    callbackUrl: "/login",
+  });
+};
 
 const DesktopSidebar = () => {
   const pathname = usePathname();
@@ -36,7 +36,13 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(0, 6).map((item) => {
                 return (
-                  <Link key={item.text} href={item.path} className={`${pathname===item.path ? "active" : ""}  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}>
+                  <Link
+                    key={item.text}
+                    href={item.path}
+                    className={`${
+                      pathname === item.path ? "active" : ""
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
+                  >
                     <div
                       key={item.text}
                       className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer"
@@ -62,14 +68,20 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(6, 8).map((item) => {
                 return (
-                  <Link key={item.text} href={item.path} className={`${pathname===item.path ? "active" : ""}  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}>
-                  <div
+                  <Link
                     key={item.text}
-                    className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                    href={item.path}
+                    className={`${
+                      pathname === item.path ? "active" : ""
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
                   >
-                    <div className="flex items-center">{item.icon}</div>
-                    <div className="font-barlow">{item.text}</div>
-                  </div>
+                    <div
+                      key={item.text}
+                      className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                    >
+                      <div className="flex items-center">{item.icon}</div>
+                      <div className="font-barlow">{item.text}</div>
+                    </div>
                   </Link>
                 );
               })}

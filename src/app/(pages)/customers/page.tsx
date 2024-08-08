@@ -39,31 +39,33 @@ const customerData = [
 
 const Page = () => {
   return (
-    <div className="flex flex-col gap-[22px] ml-[12px] w-full">
+    <div className="flex flex-col boder-2 border-primaryPurple gap-[22px] xl:ml-[12px] w-full">
       <Header text="Customers" />
 
-      <div className="flex justify-between justify-center w-full border-2">
+      <div className="grid sm:grid-cols-2  md:grid-cols-4 gap-[20px] border-2">
         {customerData.map((item, i) => {
           return (
             // reverse
             <CardWrapper
               key={i}
-              height="h-[128px]"
-              width="w-[241px]"
+              height="lg:h-[106px] xl:h-[128px]"
+              width="lg:min-w-[200px] xl:min-w-[241px]"
               flex="flex-col"
             >
-              <div className="w-full h-full flex items-center gap-[12px] ">
+              <div className="w-full h-full flex items-center xs:gap-[12px]  sm:gap-[8px] lg:gap-[10px] xl:gap-[12px] ">
                 <Avatar
                   img={<Img fill={item.fill} hover="" />}
-                  size="h-[42px] w-[42px] rounded-full"
+                  height="xs:h-[42px] sm:h-[31px] lg:h-[35px] xl:h-[42px]"
+                  width=" xs:w-[42px] sm:w-[31px] lg:w-[35px] xl:w-[42px]"
+                  radius="rounded-full"
                   background={item.background}
                 />
 
                 <div className="flex flex-col gap-[8px]">
-                  <p className="text-[15px] text-mediumGray font-semibold leading-[22.5px] font-barlow">
+                  <p className="xs:text-[12px] xs:leading-[18.6px] xl:text-[15px] xl:leading-[22.5px] font-barlow text-mediumGray font-semibold ">
                     {item.text1}
                   </p>
-                  <p className="text-[24px] text-darkGray font-bold leading-[36px] font-albertSans">
+                  <p className="xs:text-[20px] xs:leading-[30px] xl:text-[24px] xl:leading-[36px] font-albertSans text-darkGray font-bold">
                     {item.text2}
                   </p>
                 </div>
@@ -75,7 +77,7 @@ const Page = () => {
 
       <DeviceUsers />
 
-      <CustomerDemographic />
+      {/* <CustomerDemographic />
 
       <Table
         height="h-[744px]"
@@ -89,7 +91,7 @@ const Page = () => {
         checkbox={true}
         tableHeading={CustomerTableHeadings}
         tableData={CustomerTableData}
-      />
+      /> */}
     </div>
   );
 };

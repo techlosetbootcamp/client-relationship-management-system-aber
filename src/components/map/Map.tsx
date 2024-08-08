@@ -18,7 +18,6 @@ import "leaflet/dist/leaflet.css";
 
 import { statesData } from "@/constants/TempData";
 import { color } from "chart.js/helpers";
-import ReactLeafletTextPath from "react-leaflet-textpath";
 import { LatLngExpression } from "leaflet";
 const calculateCentroid = (coords: string | any[]) => {
   let centroidX = 0,

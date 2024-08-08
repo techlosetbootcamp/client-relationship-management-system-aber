@@ -2,6 +2,7 @@ import { resetPasswordTemplate } from "@/constants/EmailTemplates";
 import SendEmail from "@/helpers/SendEmail";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { clientURL } from "@/helpers/clientURL";
 
 const prisma = new PrismaClient();
 
@@ -29,7 +30,7 @@ export const POST = async (req: Request) => {
     }
     console.log("above user exist");
     const token = process.env.NEXTAUTH_SECRET + userExist.id;
-    const resetUrl = `http://localhost:3000/reset-password/${userExist.id}/?${token}`;
+    const resetUrl = `${clientURL}/reset-password/${userExist.id}/?${token}`;
     const emailTemplate = resetPasswordTemplate(resetUrl);
     SendEmail(emailTemplate);
 

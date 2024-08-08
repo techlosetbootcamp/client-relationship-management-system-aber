@@ -90,7 +90,8 @@ const authOptions: NextAuthOptions = {
       if (user) {
         return {
           ...token,
-          id: user.id,
+          id: user?.id,
+         
         };
       }
       if (trigger === "update" && session) {
@@ -117,6 +118,7 @@ const authOptions: NextAuthOptions = {
           name: token.name,
           email: token.email,
           image: token.picture,
+          public_id : token.public_id
         },
       };
     },

@@ -14,11 +14,11 @@ export const Header = ({ text }: HeaderProps) => {
   console.log(startDate, startDay, endDay, range);
   // const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex justify-between py-[41px]">
-      <p className="text-[32px] leading-[48px] text-darkGray font-bold font-albertSans">
+    <div className="flex md:flex-row xs:flex-col xs:flex-col-reverse xs:gap-[26.5px] md:justify-between py-[41px] border-2 border-secondaryRed w-full">
+      <p className="xs:text-[26px] xs:leading-[40px] xl:text-[32px] xl:leading-[48px] text-darkGray font-bold font-albertSans">
         {text}
       </p>
-      <div className="flex border items-center gap-[16px]">
+      <div className="flex border items-center gap-[16px] justify-between">
         <div>
           <Calendar />
         </div>
@@ -26,10 +26,12 @@ export const Header = ({ text }: HeaderProps) => {
         <div className="flex gap-[8px] items-center">
           <Avatar
             img={avatarImg}
-            size="h-[53px] w-[53px] rounded-full"
+            height="h-[53px]"
+            width="w-[53px]"
+            radius="rounded-full"
             background=""
           />
-          <p className="text-[16px] leading-[24px] font-bold text-darkGray font-albertSans">
+          <p className="xs:text-[13px] xs:leading-[20px] xl:text-[16px] xl:leading-[24px] font-bold text-darkGray font-albertSans">
             Sophia Chester
           </p>
         </div>

@@ -35,7 +35,11 @@ export const Visitors = () => {
       <div className="border border-borderGray" />
 
       <div className="flex items-center gap-[8px]">
-        <Avatar img={img} background="" size="h-[24px] w-[24px]" />
+        <Avatar img={img} background="" 
+        height="h-[24px]"
+        width=" w-[24px]"
+        radius=""
+        />
 
         <div className="">
           <p className="font-[600] text-[14px] leading-[21px] font-albertSans">Awesome!</p>

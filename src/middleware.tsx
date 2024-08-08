@@ -13,8 +13,8 @@ const apiRoutes = [
   "/api/users",
   "/api/auth/signin",
   // "/api/auth/sign-up",
-  "/api/auth/forget-password",
-  "/api/auth/reset-password",
+  // "/api/auth/forget-password",
+  // "/api/auth/reset-password",
 ];
 
 export function middleware(request: NextRequest) {

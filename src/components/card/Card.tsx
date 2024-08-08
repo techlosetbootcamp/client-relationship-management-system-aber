@@ -44,8 +44,8 @@ const data = {
 
 const Card = () => {
   return (
-    <div className="flex md:flex-col sm:gap-[30px] md:gap-[8px] justify-center items-center text-white lg:w-[124px] xl:w-[160px] lg:h-[196px] xl:h-[240px] rounded-[10.5px] py-[24px] px-[12px] bg-gradient-to-b from-[#9A55FF] to-[57.79%] to-[#D355FF]">
-      <div className="lg:h-[83px] xl:h-[143px] sm:h-[130px] sm:w-[130px] flex justify-center items-center ">
+    <div className="flex md:flex-col xs:gap-[30px] md:gap-[8px] justify-center items-center text-white lg:w-[124px] xl:w-[160px] lg:h-[196px] xl:h-[240px] rounded-[10.5px] py-[24px] px-[12px] bg-gradient-to-b from-[#9A55FF] to-[57.79%] to-[#D355FF]">
+      <div className="lg:h-[83px] xl:h-[143px] xs:h-[130px] xs:w-[130px] flex justify-center items-center ">
         <DoughnutChart
           data={data}
           text="68%"

@@ -1,53 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import logo from "@/assets/images/logo.svg";
 import googleLogo from "@/assets/images/google.svg";
 import Image from "next/image";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
-import { signIn, useSession } from "next-auth/react";
-import { getServerSession } from "next-auth";
-// import { useRouter } from 'next/router'
-import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
-
-// const onSignUp = async() =>{
-//   // const response = await axios
-// }
-
-const loginWithGoogle = async () => {
-  console.log("google button is clicked");
-  await signIn("google", {
-    redirect: true,
-    callbackUrl: "/",
-  });
-};
+import useLogin from "@/hooks/useLogin";
 
 const Page = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const onLogin = async () => {
-    console.log(email, password, "Button is clicked");
-
-    await signIn("credentials", {
-      email: email,
-      password: password,
-      // email: "test1@test.com",
-      // password: "123456",
-      redirect: true,
-      callbackUrl: "/",
-    });
-  };
-
-  // const router = useRouter()
-  // const {data} = useSession();
-  // console.log("session data",data)
-  // if(data){
-  //   // return redirect("/")
-  //   router2.push("/")
-  //   return null
-  // }
+  const { email, setEmail, password, setPassword, onLogin, loginWithGoogle } =
+    useLogin();
 
   return (
     <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">

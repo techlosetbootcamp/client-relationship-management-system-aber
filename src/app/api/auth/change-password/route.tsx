@@ -6,15 +6,15 @@ import { useSession } from "next-auth/react";
 const prisma = new PrismaClient();
 
 export const POST = async (req: Request) => {
-  const { currentPassword, newPassword, confirmNewPassword, email } =
+  const { currentPassword, newPassword, confirmNewPassword, userId } =
     await req.json();
 
   console.log(
-    "in reset-password api",
+    "in change-password api",
     currentPassword,
     newPassword,
     confirmNewPassword,
-    email
+    userId
   );
 
   if (!currentPassword || !newPassword || !confirmNewPassword) {
@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
   try {
     const existingUser = await prisma.user.findUnique({
       where: {
-        email: email,
+        id: userId,
       },
     });
 
@@ -60,7 +60,7 @@ export const POST = async (req: Request) => {
 
     const updatedUser = await prisma.user.update({
       where: {
-        email: email,
+        id: userId,
       },
       data: {
         password: updatedPassword,

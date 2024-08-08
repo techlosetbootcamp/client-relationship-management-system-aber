@@ -1,65 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import logo from "@/assets/images/logo.svg";
-import googleLogo from "@/assets/images/google.svg";
-import Image from "next/image";
+
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
-import { signIn, useSession } from "next-auth/react";
-import { getServerSession } from "next-auth";
-// import { useRouter } from 'next/router'
-import { redirect, useRouter } from "next/navigation";
-import axios from "axios";
-import Link from "next/link";
 
-// const onSignUp = async() =>{
-//   // const response = await axios
-// }
+import useChangePassword from "@/hooks/useChangePassword";
 
 const Page = () => {
-  const session = useSession();
-  const email = session.data?.user?.email;
-
-  const [currentPassword, setCurrentPassword] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
-  const router = useRouter();
-
-  const onsubmit = async () => {
-    console.log(
-      "button is clicked",
-      currentPassword,
-      newPassword,
-      confirmNewPassword
-    );
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/change-password",
-      { currentPassword, newPassword, confirmNewPassword, email }
-    );
-    if (response) {
-      router.push("/");
-    }
-    console.log("In change password page", response);
-    // if (response.status === 201) {
-    //   router.push("/login");
-    // }
-
-    // await signIn("credentials", {
-    //   email: "test1@test.com",
-    //   password: "123456",
-    //   redirect: true,
-    //   callbackUrl: "/",
-    // });
-  };
-
-  // const router = useRouter()
-  // const {data} = useSession();
-  // console.log("session data",data)
-  // if(data){
-  //   // return redirect("/")
-  //   router2.push("/")
-  //   return null
-  // }
+  const {
+    currentPassword,
+    setCurrentPassword,
+    newPassword,
+    setNewPassword,
+    confirmNewPassword,
+    setConfirmNewPassword,
+    onsubmit,
+  } = useChangePassword();
 
   return (
     <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">

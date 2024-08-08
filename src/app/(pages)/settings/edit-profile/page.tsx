@@ -2,90 +2,41 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "@/components/button/Button";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
-import { useSession } from "next-auth/react";
+
 import Avatar from "@/components/avatar/Avatar";
 import userAvatar from "@/assets/images/userAvatar.png";
 import InputField from "@/components/inputField/InputField";
-import axios from "axios";
+
+import useEditProfile from "@/hooks/useEditProfile";
 
 const Page = () => {
-  const session = useSession();
-  console.log(session);
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    handleFileChange,
+    handleButtonClick,
+    updateProfile,
+    fileInputRef,
+    session,
+  } = useEditProfile();
 
-  const [name, setName] = useState(session?.data?.user?.name);
-  const [email, setEmail] = useState(session?.data?.user?.email);
-  const [image, setImage] = useState(session?.data?.user?.email);
-
-  const updateProfile = async () => {
-    console.log("I am clicked");
-    // const response =""
-    const response = await axios.post(
-      "http://localhost:3000/api/user/update-user",
-      {
-        id: session.data?.user?.id,
-        currentEmail: session.data?.user?.email,
-        newEmail: email,
-        name,
-      }
-    );
-    console.log("response in update profile", response);
-    session.update({
-      name: response?.data?.updatedUser?.name,
-      email: response?.data?.updatedUser?.email,
-    });
-    console.log("Your profile has been updated");
-  };
-  useEffect(() => {
-    if (session?.data?.user) {
-      setName(session?.data?.user?.name ?? "");
-      setEmail(session?.data?.user?.email ?? "");
-    }
-  }, [session]);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleButtonClick = () => {
-    console.log("clicked");
-    fileInputRef?.current?.click();
-  };
-
-  const handleFileChange = async (event: any) => {
-    const file = event.target.files[0];
-    if (file && email) {
-      // Handle the selected file here
-      console.log(file);
-      setImage(file);
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("email", email);
-      const imageResponse = await axios.post(
-        "http://localhost:3000/api/user/update-profile-image",
-        formData
-      );
-
-      session.update({ image: imageResponse?.data?.response?.secure_url });
-
-      console.log(
-        "change picture response",
-        imageResponse,
-        "session after change",
-        session
-      );
-    }
-  };
   return (
-    <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] px-[15%]">
+    <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] md:px-[10%] lg:px-[15%]">
       <CardWrapper>
         <div className="flex  justify-between w-full">
-          <div className="flex items-center gap-[16px]">
+          <div className="flex items-center xs:gap-[8px] md:gap-[16px]">
             <div className="w-fit">
               <Avatar
-                size="h-[64px] w-[64px] rounded-full"
-                background="bg-white"
+                height="xs:h-[50px] md:h-[64px]"
+                width="xs:w-[50px] md:w-[64px]"
+                radius="rounded-full"
+                background=""
                 img={session.data?.user?.image ?? userAvatar}
               />
             </div>
-            <p className="font-[600] text-[18px]">
+            <p className="font-[600] xs:text-[15px] md:text-[18px]">
               {session?.data?.user?.name}
             </p>
           </div>
@@ -96,10 +47,10 @@ const Page = () => {
               color="text-white"
               rounded="rounded-[8px]"
               fontWeight="font-[600]"
-              fontSize="text-[16px]"
+              fontSize="xs:text-[14px] md:text-[16px]"
               width="w-fit"
-              px="px-[8px]"
-              py="py-[14px]"
+              px="xs:px-[5px] md:px-[8px]"
+              py="xs:py-[10px] md:py-[14px]"
               lineHeight="leading-[18px]"
               gap=""
               img={""}
@@ -134,10 +85,10 @@ const Page = () => {
           color="text-white"
           rounded="rounded-[8px]"
           fontWeight="font-[600]"
-          fontSize="text-[16px]"
+          fontSize="xs:text-[14px] md:text-[16px]"
           width="w-fit"
-          px="px-[8px]"
-          py="py-[14px]"
+          px="xs:px-[5px] md:px-[8px]"
+          py="xs:py-[10px] md:py-[14px]"
           lineHeight="leading-[18px]"
           gap=""
           img={""}

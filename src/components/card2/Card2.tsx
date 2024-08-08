@@ -6,9 +6,7 @@ import Avatar from "../avatar/Avatar";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import BarChart from "@/charts/barChart/BarChart";
 
-
-
-const data={
+const data = {
   labels: ["May", "Jun", "Jul"],
   datasets: [
     {
@@ -20,18 +18,23 @@ const data={
       borderWidth: 1,
     },
   ],
-}
-
-
-
+};
 
 const Card2 = () => {
   return (
-    <CardWrapper width="xl:w-[561px] lg:w-[459px] " height="xl:h-[240px] lg:h-[196px]" flex=" sm:flex-col md:flex-row md:flex-1">
-      <div className="md:w-[45%] flex flex-col sm:gap-[13.91px] xl:gap-[17px]">
-        <p className="font-[600] md:text-[13px] md:leading-[19.6px] xl:text-[16px] xl:leading-[24px] font-barlow">Monthly Income</p>
+    <CardWrapper
+      width="xl:w-[561px] lg:w-[459px] "
+      height="xl:h-[240px] lg:h-[196px]"
+      flex=" xs:flex-col md:flex-row md:flex-1"
+    >
+      <div className="md:w-[45%] flex flex-col xs:gap-[13.91px] xl:gap-[17px]">
+        <p className="font-[600] md:text-[13px] md:leading-[19.6px] xl:text-[16px] xl:leading-[24px] font-barlow">
+          Monthly Income
+        </p>
         <div className="flex justify-between">
-          <p className="font-bold md:text-[19.6px] xl:text-[24px] md:leading-[24.5px] xl:leading-[36px] font-albertSans">$ 6,567.00</p>
+          <p className="font-bold md:text-[19.6px] xl:text-[24px] md:leading-[24.5px] xl:leading-[36px] font-albertSans">
+            $ 6,567.00
+          </p>
           <div>
             <Button
               text={"5.6%"}
@@ -55,10 +58,12 @@ const Card2 = () => {
         </p>
         <div className="border border-divider w-full" />
 
-        <div className="flex sm:gap-[9.82px] xl:gap-[12px] items-center">
+        <div className="flex xs:gap-[9.82px] xl:gap-[12px] items-center">
           <Avatar
-            img={<Img2 fill="fill-white" hover=""/>}
-            size="sm:h-[23.32px] xl:h-[28.5px] sm:w-[23.32px] xl:w-[28.5px] rounded-full"
+            img={<Img2 fill="fill-white" hover="" />}
+            height="xs:h-[23.32px] xl:h-[28.5px]"
+            width="xs:w-[23.32px] xl:w-[28.5px]"
+            radius="rounded-full"
             background="bg-primaryPurple"
           />
           <div>
@@ -70,10 +75,9 @@ const Card2 = () => {
             </p>
           </div>
         </div>
-
       </div>
       <div className="md:w-[55%] h-full flex items-center">
-        <BarChart axis="y" data={data}/>
+        <BarChart axis="y" data={data} />
       </div>
     </CardWrapper>
   );
