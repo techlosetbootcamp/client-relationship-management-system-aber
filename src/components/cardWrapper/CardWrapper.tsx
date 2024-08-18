@@ -1,12 +1,29 @@
-import React from 'react'
-
+import React from "react";
 
 //TRY TO ADD HEADING AND BORDER AFTER HEADING IN THIS. INCLUDE MAP AS WELL
-export const CardWrapper = (props: any) => {
-    
+
+type CardWrapperProps = {
+  height: string;
+  width: string;
+  flexDirection: string;
+  children: React.ReactNode;
+};
+
+// export const CardWrapper = (props: any) => {
+export const CardWrapper = ({
+  height,
+  width,
+  flexDirection,
+  children,
+}: CardWrapperProps) => {
+  //  py-[${props.reverse ? "16px" : "24px"}] px-[${
+  //   props.reverse ? "24px" : "16px"
+  // }]
   return (
-    <div className={`bg-white rounded-[10.5px] border-[0.75px] border-borderGray py-[${props.reverse ? "16px" : "24px"}] px-[${props.reverse ? "24px" : "16px"}] flex sm:gap-[9.82px] xl:gap-[12px] ${props.flex} ${props.width} ${props.height}`}>
-        {props.children}
+    <div
+      className={`bg-white rounded-[10.5px] border-[0.75px] border-borderGray  flex xs:gap-[9.82px] xl:gap-[12px] ${flexDirection} ${width} ${height} py-[24px] px-[16px]`}
+    >
+      {children}
     </div>
-  )
-}
+  );
+};

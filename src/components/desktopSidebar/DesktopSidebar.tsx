@@ -34,7 +34,7 @@ const DesktopSidebar = () => {
               GENERAL
             </p>
             <div className="flex flex-col gap-[16px] ">
-              {NavLinks.slice(0, 6).map((item) => {
+              {NavLinks.slice(0, 7).map((item) => {
                 return (
                   <Link
                     key={item.text}
@@ -66,7 +66,7 @@ const DesktopSidebar = () => {
               SUPPORT
             </p>
             <div className="flex flex-col gap-[16px] ">
-              {NavLinks.slice(6, 8).map((item) => {
+              {NavLinks.slice(7, 9).map((item) => {
                 return (
                   <Link
                     key={item.text}
@@ -89,7 +89,7 @@ const DesktopSidebar = () => {
           </div>
 
           <div className="">
-            {NavLinks.slice(8, 9).map((item) => {
+            {NavLinks.slice(9, 10).map((item) => {
               return (
                 <div
                   key={item.text}

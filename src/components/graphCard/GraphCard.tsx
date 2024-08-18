@@ -6,6 +6,7 @@ import Image, { StaticImageData } from "next/image";
 import Avatar from "../avatar/Avatar";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import LineChart from "@/charts/lineChart/LineChart";
+import StatusTag from "../statusTag/StatusTag";
 
 type GraphCardProps = {
   btnText: string;
@@ -31,7 +32,7 @@ const GraphCard = ({ btnText, img, color, background }: GraphCardProps) => {
     <CardWrapper
       width="xs:w-[190px] xs:flex-1 xl:w-[233px]"
       height="xs:h-[196px] md:h-[240px] lg:h-[196px] xl:h-[240px]"
-      flex="flex-col"
+      flexDirection="flex-col"
     >
       <div className="">
         <Avatar
@@ -51,20 +52,13 @@ const GraphCard = ({ btnText, img, color, background }: GraphCardProps) => {
           $ 3,393.00
         </p>
         <div>
-          <Button
+          <StatusTag
             text={btnText}
             fontSize="text-[10.5px]"
             img={img}
             background={background}
             color={color}
-            width="w-fit"
-            gap="gap-[3px]"
-            fontWeight="font-bold"
-            rounded="rounded-[15.75px]"
             lineHeight="leading-[15.75px]"
-            py="py-[0.75px]"
-            px="px-[6px]"
-            border=""
           />
         </div>
       </div>

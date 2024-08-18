@@ -24,38 +24,70 @@ const salesStats = [
   },
 ];
 
-
-const salesStatsDataset =  [
+const salesStatsDataset = [
   {
     label: "My First Dataset",
-    data: [0,4, 8, 12, 16, 20,24],
+    data: [
+      { x: new Date(2024, 7, 1), y: 0 },
+      { x: new Date(2024, 7, 2), y: 4 },
+      { x: new Date(2024, 7, 3), y: 8 },
+      { x: new Date(2024, 7, 4), y: 12 },
+      { x: new Date(2024, 7, 5), y: 16 },
+      { x: new Date(2024, 7, 6), y: 20 },
+      { x: new Date(2024, 7, 7), y: 24 },
+    ],
     fill: false,
     borderColor: "rgb(75, 192, 192)",
     tension: 0.1,
   },
   {
     label: "My First Dataset",
-    data: [0,6, 12, 18, 24, 30, 36],
+    data: [
+      { x: new Date(2024, 7, 1), y: 0 },
+      { x: new Date(2024, 7, 2), y: 6 },
+      { x: new Date(2024, 7, 3), y: 12 },
+      { x: new Date(2024, 7, 4), y: 18 },
+      { x: new Date(2024, 7, 5), y: 24 },
+      { x: new Date(2024, 7, 6), y: 30 },
+      { x: new Date(2024, 7, 7), y: 36 },
+    ],
+
     fill: false,
     borderColor: "rgb(112, 75, 192)",
     tension: 0.1,
   },
   {
     label: "My First Dataset",
-    data: [0,5, 10, 15, 20, 25, 30],
+    data: [
+      { x: new Date(2024, 7, 1), y: 0 },
+      { x: new Date(2024, 7, 2), y: 1 },
+      { x: new Date(2024, 7, 3), y: 10 },
+      { x: new Date(2024, 7, 4), y: 15 },
+      { x: new Date(2024, 7, 5), y: 20 },
+      { x: new Date(2024, 7, 6), y: 25 },
+      { x: new Date(2024, 7, 7), y: 30 },
+    ],
+    // data: [0, 5, 10, 15, 20, 25, 30],
     fill: false,
     borderColor: "rgb(192, 77, 75)",
     tension: 0.1,
   },
+];
 
-]
-
-const salesStatsLabels = ["1Jul", "2Jul","3Jul","4Jul","5Jul","6Jul","7Jul"]
+const salesStatsLabels = [
+  "1Jul",
+  "2Jul",
+  "3Jul",
+  "4Jul",
+  "5Jul",
+  "6Jul",
+  "7Jul",
+];
 
 export const WeeklySalesStats = () => {
   // height-397 for overview page and height-387 for analytics page
   return (
-    <CardWrapper width="w-full" height="min-h-[387px]" flex="flex-col flex-1">
+    <CardWrapper width="w-full" height="min-h-[387px]" flexDirection="flex-col flex-1">
       <p className="text-[16px] leading-[24px] text-darkGray font-barlow font-semibold">
         Sales Statistic
       </p>
@@ -87,7 +119,11 @@ export const WeeklySalesStats = () => {
       </div> */}
 
       <div className="w-full border h-full">
-        <LineChart datasets={salesStatsDataset} labels={salesStatsLabels} display={true}/>
+        <LineChart
+          datasets={salesStatsDataset}
+          labels={salesStatsLabels}
+          display={true}
+        />
       </div>
     </CardWrapper>
   );

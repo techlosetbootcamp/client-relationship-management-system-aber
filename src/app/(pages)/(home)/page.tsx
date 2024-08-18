@@ -1,4 +1,4 @@
-"use client"; //fix it later on
+
 import Avatar from "@/components/avatar/Avatar";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
@@ -15,6 +15,7 @@ import img from "@/assets/images/ArrowUp.svg";
 import dynamic from "next/dynamic";
 import { DashboardTableHeadings } from "@/constants/TableHeadings";
 import { DashboardTableData } from "@/constants/TableData";
+import SearchInput from "@/components/searchInput/SearchInput";
 const Map = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
 });
@@ -69,31 +70,10 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className="md:flex xs:hidden items-center" >
 
-        <div className="h-[38px] w-[300px] rounded-[4px] xs:hidden md:flex self-center">
-          <InputField
-            placeholder="Type Here"
-            value=""
-            height={"h-full"}
-            width=" w-[201px]"
-            rounded="rounded-[0px]"
-            onChange={() => {}}
-          />
-          <Button
-            text={"Search"}
-            fontSize="text-[16px]"
-            fontWeight="font-semibold"
-            color="text-white"
-            background="bg-primaryPurple"
-            img={iconImg}
-            width="w-[99px]"
-            rounded="none"
-            gap="gap-[8px]"
-            py="py-[6px]"
-            px="px-[12px]"
-            lineHeight="leading-[24px]"
-            border=""
-          />
+
+        <SearchInput/>
         </div>
       </div>
 
@@ -132,7 +112,7 @@ export default function Home() {
         <CardWrapper
           height="lg:h-[409px] xl:h-[500px]"
           width="lg:w-[233px] xl:w-[285px] "
-          flex="flex-col  flex-1"
+          flexDirection="flex-col  flex-1"
         >
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             Best Selling Products
@@ -183,6 +163,8 @@ export default function Home() {
           checkbox={false}
           bgHeader="bg-lightPurple"
           bgRows="bg-white"
+          action={false}
+          rowBorder={false}
           tableHeading={DashboardTableHeadings}
           tableData={DashboardTableData}
         />
@@ -190,7 +172,7 @@ export default function Home() {
         <CardWrapper
           height="xs:h-[409px] xl:h-[500px]"
           width="lg:w-[233px] xl:w-[285px] "
-          flex="flex-col flex-1"
+          flexDirection="flex-col flex-1"
         >
           <p className="text-[16px] leading-[24px] font-semibold text-darkGray font-barlow">
             City Order Statistics

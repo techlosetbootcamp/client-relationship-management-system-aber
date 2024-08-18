@@ -39,7 +39,7 @@ const customerData = [
 
 const Page = () => {
   return (
-    <div className="flex flex-col boder-2 border-primaryPurple gap-[22px] xl:ml-[12px] w-full">
+    <div className="flex flex-col border-2 border-primaryPurple gap-[22px] xl:ml-[12px] w-full">
       <Header text="Customers" />
 
       <div className="grid sm:grid-cols-2  md:grid-cols-4 gap-[20px] border-2">
@@ -50,7 +50,7 @@ const Page = () => {
               key={i}
               height="lg:h-[106px] xl:h-[128px]"
               width="lg:min-w-[200px] xl:min-w-[241px]"
-              flex="flex-col"
+              flexDirection="flex-col"
             >
               <div className="w-full h-full flex items-center xs:gap-[12px]  sm:gap-[8px] lg:gap-[10px] xl:gap-[12px] ">
                 <Avatar
@@ -77,7 +77,7 @@ const Page = () => {
 
       <DeviceUsers />
 
-      {/* <CustomerDemographic />
+      <CustomerDemographic />
 
       <Table
         height="h-[744px]"
@@ -87,11 +87,13 @@ const Page = () => {
         divider={false}
         background="!bg-transparent !border-0"
         bgHeader="bg-transparent"
-        bgRows="bg-white border border-borderGray"
+        bgRows="bg-white rounded-[5px]"
         checkbox={true}
+        action={false}
         tableHeading={CustomerTableHeadings}
         tableData={CustomerTableData}
-      /> */}
+        rowBorder ={true}
+      />
     </div>
   );
 };

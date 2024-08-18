@@ -19,11 +19,60 @@ datasource db {
 // }
 
 model User {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  email     String @unique
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
   name      String
   password  String
-  image     String? 
+  image     String?
   public_id String?
+  documents Document[]
   // role     UserRole @default(USER)
+}
+
+// model Document {
+//   id       String @id @default(auto()) @map("_id") @db.ObjectId
+//   title    String
+//   type     String
+//   version  String
+//   status   String
+//   fileURL  String
+//   author   User   @relation(fields: [authorId], references: [id])
+//   authorId String @db.ObjectId
+
+// }
+
+model Document {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  fileName  String
+  // document DocumentFile // Embedded object
+  type      String
+  version   String
+  status    String
+  fileURL   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  author    Author // Embedded object
+  CreatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// type DocumentFile {
+//   img       String
+//   title     String
+//   CreatedAt DateTime @default(now())
+// }
+
+type Author {
+  img        String
+  authorName String
+}
+
+model Product {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  productName String
+  quantity    String
+  image       String?
+  public_id   String?
+  price       String
+  category    String
 }

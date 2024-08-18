@@ -24,6 +24,8 @@ const Page = () => {
             bgRows="bg-white"
             background="bg-white"
             checkbox={false}
+            rowBorder={false}
+            action={false}
             tableHeading={OrderOverviewTableHeadings}
             tableData={OrderViewTableData}
 

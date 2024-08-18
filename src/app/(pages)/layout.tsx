@@ -1,9 +1,13 @@
+// "use client"
 import { albertSans, barlow } from "@/assets/fonts/Fonts";
 import "../globals.css";
 import DesktopSidebar from "@/components/desktopSidebar/DesktopSidebar";
 import DesktopFooter from "@/components/desktopFooter/DesktopFooter";
 import Image from "next/image";
 import img from "@/assets/images/bg.png";
+import CalendarContextProvider from "@/providers/calendarContextProvider/CalendarContextProvider";
+
+
 
 // export const metadata = {
 //   title: 'Next.js',
@@ -31,8 +35,7 @@ export default function RootLayout({
           <div className="flex sticky box-border flex-col gap-[60px] w-full">
             <div className="border-2 border-secondaryGreen gap-[29px]  sm:px-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex">
               <DesktopSidebar />
-
-              {children}
+              <CalendarContextProvider>{children}</CalendarContextProvider>
             </div>
 
             <div>

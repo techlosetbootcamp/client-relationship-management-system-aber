@@ -5,6 +5,7 @@ import Img2 from "@/assets/images/Icon6";
 import Avatar from "../avatar/Avatar";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import BarChart from "@/charts/barChart/BarChart";
+import StatusTag from "../statusTag/StatusTag";
 
 const data = {
   labels: ["May", "Jun", "Jul"],
@@ -25,7 +26,7 @@ const Card2 = () => {
     <CardWrapper
       width="xl:w-[561px] lg:w-[459px] "
       height="xl:h-[240px] lg:h-[196px]"
-      flex=" xs:flex-col md:flex-row md:flex-1"
+      flexDirection=" xs:flex-col md:flex-row md:flex-1"
     >
       <div className="md:w-[45%] flex flex-col xs:gap-[13.91px] xl:gap-[17px]">
         <p className="font-[600] md:text-[13px] md:leading-[19.6px] xl:text-[16px] xl:leading-[24px] font-barlow">
@@ -36,20 +37,13 @@ const Card2 = () => {
             $ 6,567.00
           </p>
           <div>
-            <Button
+            <StatusTag
               text={"5.6%"}
               fontSize="text-[10.5px]"
               img={img}
               background={"bg-lightGreen"}
               color={"text-secondaryGreen"}
-              width="w-fit"
-              gap="gap-[3px]"
-              fontWeight="font-bold"
-              rounded="rounded-[15.75px]"
               lineHeight="leading-[15.75px]"
-              py="py-[0.75px]"
-              px="px-[6px]"
-              border=""
             />
           </div>
         </div>

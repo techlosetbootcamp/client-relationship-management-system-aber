@@ -15,7 +15,7 @@ export const DashboardTableHeadings = [
 
 export const CustomerTableHeadings = [
   {
-    heading: "Custtomer Name",
+    heading: "Customer Name",
   },
   {
     heading: "Email",
@@ -63,7 +63,7 @@ export const OrderOverviewTableHeadings = [
     {
       heading: "Status",
     },
-    // {
-    //   heading: "Actions",
-    // },
+    {
+      heading: "Actions",
+    },
   ];

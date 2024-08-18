@@ -60,21 +60,27 @@ const Page = () => {
           </div>
         </CardWrapper>
 
-        <CardWrapper width="w-[745px]" height="h-[428px]" flex="flex-col flex-1">
+        <CardWrapper
+          width="w-[745px]"
+          height="h-[428px]"
+          flex="flex-col flex-1"
+        >
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Sales Per Week
           </p>
           <div className="border border-borderGray" />
           <div className="h-[284px] border-2 ">
-
-          <WeeklyScheduleMatrix/>
-        
+            <WeeklyScheduleMatrix />
           </div>
         </CardWrapper>
       </div>
 
       <div className="flex gap-[25px]">
-        <CardWrapper width="w-[607px]" height="h-[324px]" flex="flex-col flex-1">
+        <CardWrapper
+          width="w-[607px]"
+          height="h-[324px]"
+          flex="flex-col flex-1"
+        >
           <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
             Sales Per Country
           </p>

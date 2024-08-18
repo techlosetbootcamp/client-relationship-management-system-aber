@@ -24,7 +24,7 @@ const Page = () => {
 
   return (
     <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] md:px-[10%] lg:px-[15%]">
-      <CardWrapper>
+      <CardWrapper width="w-full" height="" flexDirection="flex-row">
         <div className="flex  justify-between w-full">
           <div className="flex items-center xs:gap-[8px] md:gap-[16px]">
             <div className="w-fit">
@@ -48,19 +48,20 @@ const Page = () => {
               rounded="rounded-[8px]"
               fontWeight="font-[600]"
               fontSize="xs:text-[14px] md:text-[16px]"
-              width="w-fit"
               px="xs:px-[5px] md:px-[8px]"
               py="xs:py-[10px] md:py-[14px]"
               lineHeight="leading-[18px]"
               gap=""
               img={""}
               border=""
+              Icon={null}
             />
           </div>
         </div>
       </CardWrapper>
 
       <InputField
+        type="text"
         placeholder="Username"
         value={name ?? ""}
         width="w-full"
@@ -70,6 +71,7 @@ const Page = () => {
       />
 
       <InputField
+        type="email"
         placeholder="Email"
         value={email ?? ""}
         width="w-full"
@@ -86,13 +88,13 @@ const Page = () => {
           rounded="rounded-[8px]"
           fontWeight="font-[600]"
           fontSize="xs:text-[14px] md:text-[16px]"
-          width="w-fit"
           px="xs:px-[5px] md:px-[8px]"
           py="xs:py-[10px] md:py-[14px]"
           lineHeight="leading-[18px]"
           gap=""
           img={""}
           border=""
+          Icon={null}
         />
       </div>
 

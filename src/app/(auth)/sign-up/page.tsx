@@ -33,6 +33,7 @@ const Page = () => {
         {/* <form action="" className="w-full"> */}
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
+          type="text"
             placeholder="Username"
             value={username}
             width="w-full"
@@ -42,6 +43,7 @@ const Page = () => {
           />
 
           <InputField
+          type="email"
             placeholder="Email"
             value={email}
             width="w-full"
@@ -50,6 +52,7 @@ const Page = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
+          type="password"
             placeholder="Password"
             value={password}
             width="w-full"
@@ -59,6 +62,7 @@ const Page = () => {
           />
 
           <InputField
+          type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             width="w-full"
@@ -72,7 +76,7 @@ const Page = () => {
               <Button
                 text="Sign up"
                 background="bg-primaryPurple"
-                width="w-full"
+                // width="w-full"
                 py="py-[8px]"
                 rounded="rounded-[8px]"
                 color="text-white"
@@ -110,7 +114,7 @@ const Page = () => {
           <Button
             text="Continue with Google"
             background="white"
-            width="w-full"
+            // width="w-full"
             py="py-[8px]"
             rounded="rounded-[8px]"
             color="text-darkGray"

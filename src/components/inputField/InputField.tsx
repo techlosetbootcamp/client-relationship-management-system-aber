@@ -6,8 +6,8 @@ type InputProps = {
   width: string;
   rounded: string;
   placeholder: string;
-  value:string ;
-
+  value?: string ;
+  type: string;
   onChange: (e: any) => void;
 };
 
@@ -17,18 +17,19 @@ const InputField = ({
   width,
   rounded,
   placeholder,
+  type,
   value,
   onChange,
+ 
 }: InputProps) => {
   return (
-    <div>
-      <input
-        placeholder={placeholder}
-        value={value}
-        className={`${height} ${width} ${rounded} bg-white border border-lightestGray px-[12px] py-[6px] placeholder:font-albertSans`}
-        onChange={onChange}
-      />
-    </div>
+    <input
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      className={`${height} ${width} ${rounded} bg-white border border-lightestGray px-[12px] py-[6px] placeholder:font-albertSans`}
+      onChange={onChange}
+    />
   );
 };
 

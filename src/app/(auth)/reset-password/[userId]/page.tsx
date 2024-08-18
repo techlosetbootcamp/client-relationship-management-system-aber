@@ -25,6 +25,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
 
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
+          type="password"
             placeholder="New Password"
             value={password}
             width="w-full"
@@ -33,6 +34,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <InputField
+          type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             width="w-full"
@@ -45,7 +47,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
             <Button
               text="Send Code"
               background="bg-primaryPurple"
-              width="w-full"
+              // width="w-full"
               py="py-[8px]"
               rounded="rounded-[8px]"
               color="text-white"

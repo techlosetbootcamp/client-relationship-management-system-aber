@@ -8,6 +8,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Image from "next/image";
 import useCalendar from "@/hooks/useCalendar";
+import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
 
 // type SelectionRange = {
 //   startDate: Date;
@@ -16,18 +17,13 @@ import useCalendar from "@/hooks/useCalendar";
 // };
 
 const Calendar = () => {
-  const { range, setRange, startDate, startDay, endDay, month, year } =
-    useCalendar();
+  // const { range, setRange, startDate, startDay, endDay, month, year } =
+  //   useCalendar();
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("range", range, format(range[0].startDate, "PP"));
-  // const start = format(range[0].startDate, "PP");
-  // const end = format(range[0].endDate, "PP");
-  // const startDay = format(range[0].startDate, "dd");
-  // const endDay = format(range[0].endDate, "dd");
-  // const month = format(range[0].endDate, "MMM");
-  // const year = format(range[0].endDate, "yyyy");
-  // console.log(startDay, endDay, month, year);
+  const obj = useCalendarContext();
+  // console.log("range", obj?.range, format(obj?.range[0].startDate, "PP"));
+  console.log("calendar provider", obj);
 
   return (
     <div>
@@ -35,12 +31,12 @@ const Calendar = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="z-10 h-[38px] bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
       >
-        {startDay != endDay ? (
+        {obj?.startDay != obj?.endDay ? (
           <p>
-            {startDay} - {endDay} {month}, {year}
+            {obj?.startDay} - {obj?.endDay} {obj?.month}, {obj?.year}
           </p>
         ) : (
-          <p>{startDate}</p>
+          <p>{obj?.startDate}</p>
         )}
 
         <Image src={dropDown} alt="" />
@@ -55,7 +51,7 @@ const Calendar = () => {
           onChange={(item) => {
             const selection = item.selection;
             if (selection) {
-              setRange([
+              obj?.setRange([
                 {
                   startDate: selection.startDate || new Date(),
                   endDate: selection.endDate || new Date(),
@@ -66,7 +62,7 @@ const Calendar = () => {
           }}
           //   editableDateInputs={true}
           moveRangeOnFirstSelection={false}
-          ranges={range}
+          ranges={obj?.range}
           months={1}
           // direction='horizontal'
           className="rounded-lg shadow-lg"
@@ -79,6 +75,14 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+// const start = format(range[0].startDate, "PP");
+// const end = format(range[0].endDate, "PP");
+// const startDay = format(range[0].startDate, "dd");
+// const endDay = format(range[0].endDate, "dd");
+// const month = format(range[0].endDate, "MMM");
+// const year = format(range[0].endDate, "yyyy");
+// console.log(startDay, endDay, month, year);
 // import { addDays } from 'date-fns'
 // import {format} from 'date-fns'
 // import "date-fns"

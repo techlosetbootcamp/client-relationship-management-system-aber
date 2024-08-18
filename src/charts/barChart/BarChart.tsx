@@ -8,20 +8,37 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
+  TimeScale
 } from "chart.js";
+import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
 
 
-ChartJs.register(Tooltip, CategoryScale, LinearScale, BarElement);
+ChartJs.register(Tooltip, CategoryScale, LinearScale, BarElement,TimeScale);
 
 type AxisProps = {
   axis: string;
 };
 
 const BarChart = ({ axis,data }: any) => {
+  const obj = useCalendarContext()
 
   return (
     <Bar
       options={{
+
+        /////////FIX IT///////////////
+        scales: {
+          x: {
+            type:"time",
+            time:{
+              unit:"day"
+            },
+            min:obj?.formattedStartDate,
+            max:obj?.formattedEndDate,
+          },
+        },
+            
+         
         indexAxis: axis,
         responsive: true,
         maintainAspectRatio: false,

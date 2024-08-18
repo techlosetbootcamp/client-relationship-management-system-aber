@@ -7,11 +7,20 @@ import img from "@/assets/images/badgeIcon.svg";
 
 
 const data = {
-  labels: ["1Jul", "2Jul", "3Jul", "4Jul", "5Jul", "6Jul", "7Jul"],
+  // labels: ["1Jul", "2Jul", "3Jul", "4Jul", "5Jul", "6Jul", "7Jul"],
   datasets: [
     {
       label: "Dataset",
-      data: [6000, 8000, 4000, 9000, 3000,17000,16000],
+      data: [
+        { x: new Date(2024, 7, 1), y: 6000 },
+        { x: new Date(2024, 7, 2), y: 8000 },
+        { x: new Date(2024, 7, 3), y: 4000 },
+        { x: new Date(2024, 7, 4), y: 9000 },
+        { x: new Date(2024, 7, 5), y: 3000 },
+        { x: new Date(2024, 7, 6), y: 17000 },
+        { x: new Date(2024, 7, 7), y: 16000 },
+      ],
+      // data: [6000, 8000, 4000, 9000, 3000,17000,16000],
 
       backgroundColor: ["#C9F19C"],
 
@@ -23,7 +32,7 @@ const data = {
 
 export const Visitors = () => {
   return (
-    <CardWrapper width="w-[392px]" height="h-[385.5px]" flex="flex-col">
+    <CardWrapper width="w-[392px]" height="h-[385.5px]" flexDirection="flex-col">
       <p className="font-barlow font-[600] text-[16px] leading-[24px] text-darkGray">
         Visitors
       </p>
