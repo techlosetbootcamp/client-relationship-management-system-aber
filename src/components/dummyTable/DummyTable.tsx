@@ -1,5 +1,5 @@
 import React from "react";
-import "./rough.css"
+import "../../styles/tableStyle.css"
 
 const DummyTable = () => {
   return (

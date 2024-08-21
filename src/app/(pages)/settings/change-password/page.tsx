@@ -27,6 +27,7 @@ const Page = () => {
         <p className="text-[28px] font-[700]">Change Password</p>
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
+            type="password"
             placeholder="Current Password"
             value={currentPassword}
             width="w-full"
@@ -36,6 +37,7 @@ const Page = () => {
           />
 
           <InputField
+            type="password"
             placeholder="New Password"
             value={newPassword}
             width="w-full"
@@ -45,6 +47,7 @@ const Page = () => {
           />
 
           <InputField
+            type="password"
             placeholder="Confirm New Password"
             value={confirmNewPassword}
             width="w-full"

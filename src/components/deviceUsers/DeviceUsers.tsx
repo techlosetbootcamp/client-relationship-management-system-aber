@@ -4,7 +4,7 @@ import React from "react";
 
 export const DeviceUsers = () => {
   return (
-    <CardWrapper height="h-[146px]">
+    <CardWrapper height="h-[146px]" width="" flexDirection="">
       <div className="flex items-center w-full">
         <SingleBarChart/>
       </div>

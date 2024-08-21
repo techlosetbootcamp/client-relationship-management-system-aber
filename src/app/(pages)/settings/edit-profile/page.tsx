@@ -53,6 +53,7 @@ const Page = () => {
               lineHeight="leading-[18px]"
               gap=""
               img={""}
+              width=""
               border=""
               Icon={null}
             />
@@ -94,6 +95,7 @@ const Page = () => {
           gap=""
           img={""}
           border=""
+          width=""
           Icon={null}
         />
       </div>

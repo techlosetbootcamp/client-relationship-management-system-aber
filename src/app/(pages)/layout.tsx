@@ -20,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // style={{border: "5px solid orange"}}
-    <html lang="en">
-      <body className={`${albertSans.variable} ${barlow.variable}`}>
+    // // style={{border: "5px solid orange"}}
+    // <html lang="en">
+    //   <body className={`${albertSans.variable} ${barlow.variable}`}>
         <div className="relative bg-[#F8F9FA] h-auto box-border">
           <div className="absolute bottom-2 w-full left-0">
             <Image
@@ -43,7 +43,7 @@ export default function RootLayout({
             </div>
           </div>
         </div>
-      </body>
-    </html>
+    //   </body>
+    // </html>
   );
 }

@@ -1,7 +1,6 @@
-import { axiosInstance } from "@/helpers/axiosInstance";
 import { ForgetPassword } from "@/redux/slices/auth.slice";
 import { AppDispatch } from "@/redux/store";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const useForgetPassword = () => {

@@ -14,6 +14,7 @@ type SignUpArgs = {
     password: string;
     confirmPassword: string;
   };
+  callback : (data:any) =>void
 };
 
 type ForgetPasswordArgs = {
@@ -46,6 +47,7 @@ export const SignUp = createAsyncThunk<[], SignUpArgs>(
   async (data) => {
     console.log("async signup data", data);
     const response = await axiosInstance.post("/auth/sign-up", data?.payload);
+    data?.callback && data.callback(response);
     console.log("signup response", response.data.status);
     return response.data;
   }

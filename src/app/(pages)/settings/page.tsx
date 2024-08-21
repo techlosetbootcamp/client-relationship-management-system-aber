@@ -12,7 +12,7 @@ const Page = () => {
         Settings
       </p>
       <Link href={`/settings/edit-profile`}>
-        <CardWrapper>
+        <CardWrapper height="" width="w-full" flexDirection="flex-row">
           <div className="flex justify-between w-full">
             <p className="font-[600] text-[18px]">Edit Profile</p>
             <CgProfile size={25} />
@@ -21,7 +21,7 @@ const Page = () => {
       </Link>
 
       <Link href={`/settings/change-password/`}>
-        <CardWrapper>
+      <CardWrapper height="" width="w-full" flexDirection="flex-row">
           <div className="flex justify-between w-full">
             <p className="font-[600] text-[18px]">Change Password</p>
             <RiLockPasswordLine size={25} />

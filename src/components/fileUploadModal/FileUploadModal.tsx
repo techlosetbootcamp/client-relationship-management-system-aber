@@ -86,7 +86,10 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
       console.log("no file");
     }
 
-    const response = await axiosInstance.post("/user/upload-file", formData);
+    const response = await axiosInstance.post(
+      "/documents/add-document",
+      formData
+    );
     console.log("upload-file response", response);
   };
 
@@ -175,8 +178,8 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
             px="px-[12px]"
             py="py-[6px]"
             img={""}
+            width=""
             Icon={MdOutlineAddBox}
-           
           />
         </div>
       </div>

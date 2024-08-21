@@ -76,7 +76,7 @@ const Page = () => {
               <Button
                 text="Sign up"
                 background="bg-primaryPurple"
-                // width="w-full"
+                width="w-full"
                 py="py-[8px]"
                 rounded="rounded-[8px]"
                 color="text-white"
@@ -114,7 +114,7 @@ const Page = () => {
           <Button
             text="Continue with Google"
             background="white"
-            // width="w-full"
+            width="w-full"
             py="py-[8px]"
             rounded="rounded-[8px]"
             color="text-darkGray"

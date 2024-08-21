@@ -1,11 +1,11 @@
 import img from "@/assets/images/avatar.png";
-import productImg from "@/assets/images/productImg.svg"
+import productImg from "@/assets/images/productImg.svg";
 export const DashboardTableData = [
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Jacob Swanson",
+      name: "Jacob Swanson",
     },
 
     status: "Success",
@@ -13,9 +13,9 @@ export const DashboardTableData = [
   },
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Amelia Johnson",
+      name: "Amelia Johnson",
     },
 
     status: "Success",
@@ -23,18 +23,18 @@ export const DashboardTableData = [
   },
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Eric Slator",
+      name: "Eric Slator",
     },
     status: "Success",
     total: "$999.00",
   },
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Aaron Chadwick",
+      name: "Aaron Chadwick",
     },
 
     status: "Success",
@@ -42,9 +42,9 @@ export const DashboardTableData = [
   },
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Jessica Sloan",
+      name: "Jessica Sloan",
     },
 
     status: "Pending",
@@ -52,9 +52,9 @@ export const DashboardTableData = [
   },
   {
     date: "31 july 2023",
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Mary Grover",
+      name: "Mary Grover",
     },
 
     status: "Success",
@@ -64,189 +64,212 @@ export const DashboardTableData = [
 
 export const CustomerTableData = [
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Jacob Swanson",
+      name: "Jacob Swanson",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
   },
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Amelia Johnson",
+      name: "Amelia Johnson",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
   },
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Eric Slator",
+      name: "Eric Slator",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
   },
-  
+
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Aaron Chadwick",
+      name: "Aaron Chadwick",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
-  },
-  {
-    customer: {
-      img: img,
-      customerName: "Jessica Sloan",
-    },
-    email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
   },
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Mary Grover",
+      name: "Jessica Sloan",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
   },
   {
-    customer: {
+    imgObject: {
       img: img,
-      customerName: "Jacob Swanson",
+      name: "Mary Grover",
     },
     email: "abc@gmail.com",
-    phone : "123-456-789",
-    address : "Pheonix, USA",
-    status : "Online"
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
+  },
+  {
+    imgObject: {
+      img: img,
+      name: "Jacob Swanson",
+    },
+    email: "abc@gmail.com",
+    phone: "123-456-789",
+    address: "Pheonix, USA",
+    status: "Online",
+  },
+];
+
+export const OrderViewTableData = [
+  {
+    grpObject: {
+      img: productImg,
+      name: "Ceramic Bowl",
+      subValue: "HomeGoods",
+    },
+    totalOrder: {
+      quantity: "200 pcs",
+      date: "July 2, 2023",
+    },
+    status: "Available",
+    price: "$29.00",
+  },
+  {
+    grpObject: {
+      img: productImg,
+      name: "Ceramic Bowl",
+      subValue: "HomeGoods",
+    },
+    totalOrder: {
+      quantity: "200 pcs",
+      date: "July 2, 2023",
+    },
+    status: "Available",
+    price: "$29.00",
+  },
+  {
+    grpObject: {
+      img: productImg,
+      name: "Ceramic Bowl",
+      subValue: "HomeGoods",
+    },
+    totalOrder: {
+      quantity: "200 pcs",
+      date: "July 2, 2023",
+    },
+    status: "Available",
+    price: "$29.00",
+  },
+  {
+    grpObject: {
+      img: productImg,
+      name: "Ceramic Bowl",
+      subValue: "HomeGoods",
+    },
+    totalOrder: {
+      quantity: "200 pcs",
+      date: "July 2, 2023",
+    },
+    status: "Available",
+    price: "$29.00",
+  },
+];
+
+export const DocumentsTableData = [
+  {
+    grpObject: {
+      img: productImg,
+      name: "Product Requirements",
+      subValue: "Uploaded 29 July,2023",
+    },
+    type: "PDF",
+    imgObject: {
+      img: img,
+      name: "Jacob Swanson",
+    },
+    version: "1",
+    status: "Active",
+  },
+  {
+    grpObject: {
+      img: productImg,
+      name: "Product Requirements",
+      subValue: "Uploaded 29 July,2023",
+    },
+    type: "PDF",
+    imgObject: {
+      img: img,
+      name: "Jacob Swanson",
+    },
+    version: "1",
+    status: "Active",
+  },
+  {
+    grpObject: {
+      img: productImg,
+      name: "Product Requirements",
+      subValue: "Uploaded 29 July,2023",
+    },
+    type: "PDF",
+    imgObject: {
+      img: img,
+      name: "Jacob Swanson",
+    },
+    version: "1",
+    status: "Active",
+  },
+];
+
+export const ProductsTableData = [
+  {
+    imgObject: {
+      img: productImg,
+      name: "Ceramic Bowl",
+    },
+    quantity: 10,
+    price: "$100",
+    category: "HomeGoods",
+  },
+  {
+    imgObject: {
+      img: productImg,
+      name: "Ceramic Bowl 2",
+    },
+    quantity: 10,
+    price: "$100",
+    category: "HomeGoods",
+  },
+  {
+    imgObject: {
+      img: productImg,
+      name: "Ceramic Bowl 3",
+    },
+    quantity: 10,
+    price: "$100",
+    category: "HomeGoods",
   },
 ];
 
 
-export const OrderViewTableData = [
-  {
-    product : {
-      img: productImg,
-      productName: "Ceramic Bowl",
-      productCategory:"HomeGoods"
-  
-    },
-    totalOrder : {
-      quantity : "200 pcs",
-      date : "July 2, 2023"
 
-    },
-    status : "Available",
-    price : "$29.00"
 
-  },
-  {
-    product : {
-      img: productImg,
-      productName: "Ceramic Bowl",
-      productCategory:"HomeGoods"
-  
-    },
-    totalOrder : {
-      quantity : "200 pcs",
-      date : "July 2, 2023"
 
-    },
-    status : "Available",
-    price : "$29.00"
 
-  },
-  {
-    product : {
-      img: productImg,
-      productName: "Ceramic Bowl",
-      productCategory:"HomeGoods"
-  
-    },
-    totalOrder : {
-      quantity : "200 pcs",
-      date : "July 2, 2023"
 
-    },
-    status : "Available",
-    price : "$29.00"
-
-  },
-  {
-    product : {
-      img: productImg,
-      productName: "Ceramic Bowl",
-      productCategory:"HomeGoods"
-  
-    },
-    totalOrder : {
-      quantity : "200 pcs",
-      date : "July 2, 2023"
-
-    },
-    status : "Available",
-    price : "$29.00"
-
-  },
-
-]
-
-export const DocumentsTableData = [
-  {
-    documentName : {
-      img: productImg,
-      productName: "Product Requirements",
-      productCategory:"Uploaded 29 July,2023"  
-    },
-    type : "PDF",
-    author: {
-      img: img,
-      customerName: "Jacob Swanson",
-    },
-    version : "1",
-    status : "Active"
-  },
-  {
-    documentName : {
-      img: productImg,
-      productName: "Product Requirements",
-      productCategory:"Uploaded 29 July,2023"  
-    },
-    type : "PDF",
-    author: {
-      img: img,
-      customerName: "Jacob Swanson",
-    },
-    version : "1",
-    status : "Active"
-  },
-  {
-    documentName : {
-      img: productImg,
-      productName: "Product Requirements",
-      productCategory:"Uploaded 29 July,2023"  
-    },
-    type : "PDF",
-    author: {
-      img: img,
-      customerName: "Jacob Swanson",
-    },
-    version : "1",
-    status : "Active"
-  },
-
-]
+/////////////////TRIOBJECT (triDataObject) where we have a name and an image ////////////////////

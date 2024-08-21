@@ -27,7 +27,7 @@ const CategoryValues = [
     text: "Wood Co.",
   },
 ];
-
+ 
 const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
   const [productName, setProductName] = useState<string>("");
   const [quantity, setQuantity] = useState<string>("");
@@ -60,10 +60,9 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
       formData.append("quantity", quantity);
       formData.append("category", category);
       formData.append("image", selectedFile);
-      const response = await axiosInstance.post("/user/add-product", formData);
+      const response = await axiosInstance.post("/products/add-product", formData);
       console.log("upload-file response", response);
     }
-
   };
 
   return (
@@ -166,8 +165,8 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
             px="px-[12px]"
             py="py-[6px]"
             img={""}
+            width=""
             Icon={MdOutlineAddBox}
-        
           />
         </div>
       </CardWrapper>

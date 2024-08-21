@@ -1,0 +1,51 @@
+td:first-child,
+th:first-child {
+    border-radius: 5px 0 0 5px;
+    background-color: transparent;
+    overflow: hidden;
+
+}
+
+
+
+th {
+    border: none;
+}
+
+td {
+    white-space: nowrap;
+}
+
+
+
+
+th:last-child,
+td:last-child {
+    border-radius: 0 5px 5px 0;
+    background-color: inherit;
+    overflow: hidden;
+
+
+}
+
+
+.rowBorder {
+
+    td {
+        border-bottom: 1px solid #0000001f;
+        border-top: 1px solid #0000001f;
+    }
+
+    td:first-child {
+
+        border-left: 1px solid #0000001f;
+
+    }
+
+    td:last-child {
+
+        border-right: 1px solid #0000001f;
+
+    }
+
+}

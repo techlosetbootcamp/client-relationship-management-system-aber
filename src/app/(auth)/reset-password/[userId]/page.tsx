@@ -47,7 +47,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
             <Button
               text="Send Code"
               background="bg-primaryPurple"
-              // width="w-full"
+              width="w-full"
               py="py-[8px]"
               rounded="rounded-[8px]"
               color="text-white"

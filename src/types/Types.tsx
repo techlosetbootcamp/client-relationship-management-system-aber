@@ -2,15 +2,15 @@ import { StaticImageData } from "next/image";
 import { ReactNode } from "react";
 import { IconBaseProps, IconType } from "react-icons/lib";
 
-type customer = {
+type imgObject = {
   img: string | StaticImageData;
-  customerName: string;
+  name: string;
 };
 
-type product = {
+type grpObject = {
   img: string;
-  productName: string;
-  productCategory: string;
+  name: string;
+  subValue: string;
 };
 
 type order = {
@@ -23,7 +23,7 @@ type tableHeading = {
 };
 
 type orderViewTableData = {
-  product: product;
+  grpObject: grpObject;
   totalOrder: order;
   status: string;
   price: string;
@@ -31,26 +31,33 @@ type orderViewTableData = {
 
 ///////MAKE CHANGES LATER
 type documentsTableData = {
-  documentName: product;
+  grpObject: grpObject;
   type: string;
-  author: customer;
+  imgObject: imgObject;
   version: string;
   status: string;
 };
 
 type dashboardtableData = {
   date: string;
-  customer: customer;
+  imgObject: imgObject;
   status: string;
   total: string;
 };
 
 type customertableData = {
-  customer: customer;
+  imgObject: imgObject;
   email: string;
   phone: string;
   address: string;
   status: string;
+};
+
+type productTableData = {
+  imgObject: imgObject;
+  quantity: number;
+  price: string;
+  category: string;
 };
 
 export type TableProps = {
@@ -64,13 +71,14 @@ export type TableProps = {
   bgHeader: string;
   bgRows: string;
   action: boolean;
-  rowBorder : boolean;
+  rowBorder: boolean;
   tableHeading: tableHeading[];
   tableData:
     | dashboardtableData[]
     | customertableData[]
     | orderViewTableData[]
-    | documentsTableData[];
+    | documentsTableData[]
+    | productTableData[];
 };
 
 export type IconProps = {
@@ -92,6 +100,7 @@ export type ButtonProps = {
   py: string;
   lineHeight: string;
   border: string;
+  width: string;
 };
 
 export type StatusTagProps = {

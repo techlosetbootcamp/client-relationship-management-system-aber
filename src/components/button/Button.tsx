@@ -5,7 +5,7 @@ import React from "react";
 const Button = ({
   background,
   img,
-
+  width,
   rounded,
   gap,
   color,
@@ -20,7 +20,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`${background} ${border} ${rounded} ${gap} ${px} ${py}  flex items-center justify-center`}
+      className={`${background} ${border} ${rounded} ${gap} ${px} ${py} ${width}  flex items-center justify-center`}
     >
       {img && <Image src={img} alt="icon" />}
       {Icon && <Icon color="white" size={25} />}

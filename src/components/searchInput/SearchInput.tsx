@@ -30,6 +30,7 @@ const SearchInput = () => {
         px="px-[12px]"
         lineHeight="leading-[24px]"
         border=""
+        width=""
         Icon={null}
       />
     </div>

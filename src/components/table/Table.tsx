@@ -307,8 +307,7 @@
 
 // export default Table;
 
-
-'use client'
+"use client";
 import Avatar from "@/components/avatar/Avatar";
 import React from "react";
 import img from "@/assets/images/avatar.png";
@@ -322,7 +321,7 @@ import Tabs from "../tabs/Tabs";
 import { MdOutlineAddBox } from "react-icons/md";
 import { MdOutlineFileUpload } from "react-icons/md";
 import StatusTag from "../statusTag/StatusTag";
-import "../dummyTable/rough.css"
+import "../../styles/tableStyle.css";
 
 const Table = ({
   width,
@@ -337,23 +336,11 @@ const Table = ({
   tableHeading,
   tableData,
   action,
-  rowBorder
+  rowBorder,
 }: TableProps) => {
+  // ImgObject and grpObject might become common
   return (
     <>
-        {/* <style jsx>{`
-        td:first-child,
-        th:first-child {
-          border-radius: 10px 0 0 10px;
-          background-color: inherit; 
-        }
-
-        th:last-child,
-        td:last-child {
-          border-radius: 0 10px 10px 0;
-          background-color: inherit; 
-        }
-      `}</style> */}
       <CardWrapper
         width={width}
         height={height}
@@ -382,6 +369,7 @@ const Table = ({
                 px="px-[8px]"
                 py="py-[4px]"
                 img={""}
+                width=""
                 Icon={null}
               />
               <Button
@@ -397,6 +385,7 @@ const Table = ({
                 px="px-[8px]"
                 py="py-[4px]"
                 img={""}
+                width=""
                 Icon={null}
               />
             </div>
@@ -406,8 +395,7 @@ const Table = ({
         {divider && <div className="border border-borderGray w-full" />}
 
         <div className={`overflow-x-auto`}>
-    
-          <table className="w-full table-auto rounded-[8px] font-barlow border-separate border-spacing-y-[12px]" >
+          <table className="w-full table-auto rounded-[8px] font-barlow border-separate border-spacing-y-[12px]">
             <thead className={`h-[47px] ${bgHeader} relative w-full`}>
               {/* <div
                 className={`absolute inset-0 ${bgHeader} rounded-[5px] h-[47px] z-0 `}
@@ -420,10 +408,7 @@ const Table = ({
                 )}
                 {tableHeading.map((item, i) => {
                   return (
-                    <th
-                      key={i}
-                      className="text-start px-[12px]  h-[47px]"
-                    >
+                    <th key={i} className="text-start px-[12px]  h-[47px]">
                       {item.heading}
                     </th>
                   );
@@ -439,11 +424,13 @@ const Table = ({
                 <td className=" px-[12px] ">jkl</td>
               </tr> */}
 
-              {tableData.map((item, i) => {
+              {tableData?.map((item, i) => {
                 return (
                   <tr
                     key={i}
-                    className={`${bgRows} w-full ${rowBorder ? "rowBorder" : ""}`}
+                    className={`${bgRows} w-full ${
+                      rowBorder ? "rowBorder" : ""
+                    }`}
                   >
                     {/* <div
                       className={`absolute inset-0 bg-transparent border-2 border-black  rounded-[5px] h-[47px] z-0 `}
@@ -455,7 +442,7 @@ const Table = ({
                       </td>
                     )}
 
-                    {Object.entries(item).map(([key, value]) => {
+                    {Object?.entries(item).map(([key, value]) => {
                       if (key === "status" && typeof value !== "object") {
                         return (
                           <td
@@ -482,40 +469,42 @@ const Table = ({
                             </div>
                           </td>
                         );
-                      } else if (
+                      }
+                      // else if (
+                      //   typeof value === "object" &&
+                      //   key === "imgObject"
+                      // ) {
+                      //   return (
+                      //     <td
+                      //       key={key}
+                      //       className="text-start  px-[12px] py-[8px]"
+                      //     >
+                      //       <div className="flex items-center gap-[8px]">
+                      //         <Avatar
+                      //           img={value.img}
+                      //           height="h-[31px]"
+                      //           width="w-[31px]"
+                      //           radius="rounded-full"
+                      //           background=""
+                      //         />
+                      //         <p>{value.name}</p>
+                      //       </div>
+                      //     </td>
+                      //   );
+                      // }
+                      else if (
                         typeof value === "object" &&
-                        (key === "customer" || key === "author")
-                      ) {
-                        return (
-                          <td
-                            key={key}
-                            className="text-start  px-[12px] py-[8px]"
-                          >
-                            <div className="flex items-center gap-[8px]">
-                            <Avatar
-                              img={value.img}
-                              height="h-[31px]"
-                              width="w-[31px]"
-                              radius="rounded-full"
-                              background=""
-                            />
-                            <p>{value.customerName}</p>
-                            </div>
-                          </td>
-                        );
-                      } else if (
-                        typeof value === "object" &&
-                        (key === "product" || key === "documentName")
+                        (key === "grpObject" || key === "imgObject")
                       ) {
                         return (
                           <td
                             key={key}
                             className="text-start px-[12px]  py-[8px]"
                           >
-                            <div className="flex gap-[8px]">
+                            <div className="flex gap-[8px] items-center">
                               <Avatar
-                                height="lg:h-[32px] xl:h-[32px]"
-                                width="lg:w-[32px] xl:w-[32px]"
+                                height="h-[32px]"
+                                width="w-[32px]"
                                 radius="rounded-[5px]"
                                 img={value.img}
                                 background=""
@@ -523,11 +512,17 @@ const Table = ({
 
                               <div className="flex items-center justify-between">
                                 <div className="flex flex-col">
-                                  <p className="text-blue  font-semibold lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-albertSans">
-                                    {value.productName}
+                                  <p
+                                    className={`${
+                                      key === "grpObject"
+                                        ? "text-blue font-[600]"
+                                        : "text-mediumGray font-[500]"
+                                    }  lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-albertSans`}
+                                  >
+                                    {value?.name}
                                   </p>
                                   <p className="text-mediumGray lg:text-[12px] xl:text-[14px] lg:leading-[14.4px] xl:leading-[16.8px] font-barlow">
-                                    {value.productCategory}
+                                    {value?.subValue}
                                   </p>
                                 </div>
                               </div>
@@ -539,8 +534,11 @@ const Table = ({
                         key === "totalOrder"
                       ) {
                         return (
-                          <td key={key} className="text-start px-[12px]  py-[8px]">
-                            <div className="text-[14px] leading-[21px] font-[500]">
+                          <td
+                            key={key}
+                            className="text-start px-[12px]  py-[8px]"
+                          >
+                            <div className="lg:text-[12px] xl:text-[14px] leading-[21px] font-[500]">
                               <p className="text-darkGray">{value.quantity}</p>
                               <p className="text-mediumGray">{value.date}</p>
                             </div>
@@ -550,7 +548,7 @@ const Table = ({
                         return (
                           <td
                             key={key}
-                            className="text-start px-[12px]  py-[8px]"
+                            className="text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500]"
                           >
                             {value}
                           </td>
@@ -560,35 +558,37 @@ const Table = ({
 
                     {action && (
                       <td className=" py-[8px] px-[12px] rounded-r-[5px] ">
-                      <div className="flex gap-[16px] items-center">
-                        <Button
-                          text={"View"}
-                          background="bg-lightGray"
-                          color="text-primaryPurple"
-                          fontSize="text-[14px]"
-                          fontWeight="font-[600]"
-                          rounded="rounded-[3.2px]"
-                          gap="gap-[8px]"
-                          lineHeight="leading-[21px]"
-                          border="border-primaryPurple border"
-                          px="px-[8px]"
-                          py="py-[4px]"
-                          img={""}
-                        />
-                        <Button
-                          text={"Edit"}
-                          background="bg-lightGray"
-                          color="text-primaryPurple"
-                          fontSize="text-[14px]"
-                          fontWeight="font-[600]"
-                          rounded="rounded-[3.2px]"
-                          gap="gap-[8px]"
-                          lineHeight="leading-[21px]"
-                          border="border-primaryPurple border"
-                          px="px-[8px]"
-                          py="py-[4px]"
-                          img={""}
-                        />
+                        <div className="flex gap-[16px] items-center">
+                          <Button
+                            text={"View"}
+                            background="bg-lightGray"
+                            color="text-primaryPurple"
+                            fontSize="text-[14px]"
+                            fontWeight="font-[600]"
+                            rounded="rounded-[3.2px]"
+                            gap="gap-[8px]"
+                            lineHeight="leading-[21px]"
+                            border="border-primaryPurple border"
+                            px="px-[8px]"
+                            py="py-[4px]"
+                            width=""
+                            img={""}
+                          />
+                          <Button
+                            text={"Edit"}
+                            background="bg-lightGray"
+                            color="text-primaryPurple"
+                            fontSize="text-[14px]"
+                            fontWeight="font-[600]"
+                            rounded="rounded-[3.2px]"
+                            gap="gap-[8px]"
+                            lineHeight="leading-[21px]"
+                            border="border-primaryPurple border"
+                            px="px-[8px]"
+                            py="py-[4px]"
+                            width=""
+                            img={""}
+                          />
                         </div>
                       </td>
                     )}

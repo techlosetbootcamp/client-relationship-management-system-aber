@@ -70,10 +70,12 @@ export const POST = async (req: Request) => {
         user: {
           connect: { id: userId },
         },
-        author: {
-          img: image,
-          authorName: userName,
-        },
+        authorImage : image,
+        authorName : userName
+        // author: {
+        //   img: image,
+        //   authorName: userName,
+        // },
       },
     });
     console.log("response in add document", document);

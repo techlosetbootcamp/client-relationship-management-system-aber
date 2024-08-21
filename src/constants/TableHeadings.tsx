@@ -67,3 +67,24 @@ export const OrderOverviewTableHeadings = [
       heading: "Actions",
     },
   ];
+
+
+  
+  export const ProductsTableHeadings = [
+    {
+      heading: "Product",
+    },
+    {
+      heading: "Qantity",
+    },
+    {
+      heading: "Price",
+    },
+    {
+      heading: "Category",
+    },
+    {
+      heading: "Actions",
+    },
+
+  ];
