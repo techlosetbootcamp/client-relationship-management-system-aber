@@ -43,6 +43,7 @@ const Page = () => {
       console.log("item", item);
 
       return {
+        id:item.id,
         grpObject: {
      
           img: fileIcons[item.type] || fileIcons?.default,
@@ -86,6 +87,7 @@ const Page = () => {
         bgHeader="bg-lightPurple"
         tableHeading={DocumentsTableHeadings}
         // tableData={DocumentsTableData}
+        page="documents"
         tableData={document}
         action={true}
         rowBorder={false}

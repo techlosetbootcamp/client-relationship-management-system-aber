@@ -31,6 +31,7 @@ type orderViewTableData = {
 
 ///////MAKE CHANGES LATER
 type documentsTableData = {
+  id:string;
   grpObject: grpObject;
   type: string;
   imgObject: imgObject;
@@ -54,6 +55,7 @@ type customertableData = {
 };
 
 type productTableData = {
+  id:string;
   imgObject: imgObject;
   quantity: number;
   price: string;
@@ -72,6 +74,7 @@ export type TableProps = {
   bgRows: string;
   action: boolean;
   rowBorder: boolean;
+  page? : string;
   tableHeading: tableHeading[];
   tableData:
     | dashboardtableData[]

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../inputField/InputField";
 import Button from "../button/Button";
 import { MdOutlineAddBox } from "react-icons/md";
@@ -8,9 +8,11 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import { IoClose } from "react-icons/io5";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
+import { BiEdit } from "react-icons/bi";
 
 type uploadModalProps = {
   toggleModal: () => void;
+  item?: any;
 };
 
 const CategoryValues = [
@@ -27,14 +29,16 @@ const CategoryValues = [
     text: "Wood Co.",
   },
 ];
- 
-const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
+
+const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
+  console.log("item from somewhere", item?.imgObject?.name);
   const [productName, setProductName] = useState<string>("");
   const [quantity, setQuantity] = useState<string>("");
   const [category, setCategory] = useState<string>("Select Category");
   const [price, setPrice] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
   const [isClicked, setIsClicked] = useState(false);
+
   const CategoryHandler = (category: string) => {
     setCategory(category);
     setIsClicked(false);
@@ -50,6 +54,41 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
     }
   };
 
+  // const getSingleProduct = async () => {
+  //   console.log("id before sending", id);
+  //   try {
+  //     setLoading(true);
+  //     const response = await axiosInstance.post(
+  //       "/products/get-single-product",
+  //       {
+  //         id,
+  //       }
+  //     );
+  //     console.log("single product in useeffect", response);
+  //     if (response) {
+  //       console.log("product data insode if", response);
+
+  //       setProductName(response?.data?.product?.productName ?? "");
+  //       setCategory(response?.data?.product?.category ?? "");
+  //       setQuantity(response?.data?.product?.quantity ?? "");
+  //       setPrice(response?.data?.product?.price ?? "");
+  //     } else {
+  //       console.log("inside else");
+  //     }
+  //   } catch (error) {
+  //     console.log("error in single product in useeffect");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    setProductName(item?.imgObject?.name ?? "");
+    setCategory(item?.category ?? "");
+    setQuantity(item?.quantity ?? "");
+    setPrice(item?.price ?? "");
+  }, [item]);
+
   const addProduct = async () => {
     toggleModal();
     if (selectedFile) {
@@ -60,17 +99,42 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
       formData.append("quantity", quantity);
       formData.append("category", category);
       formData.append("image", selectedFile);
-      const response = await axiosInstance.post("/products/add-product", formData);
+      const response = await axiosInstance.post(
+        "/products/add-product",
+        formData
+      );
       console.log("upload-file response", response);
     }
   };
 
+  const editProduct = async () => {
+    console.log("edit is clicked");
+    toggleModal();
+    // if (selectedFile) {
+    const formData = new FormData();
+    formData.append("id", item?.id);
+    formData.append("productName", productName);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("category", category);
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
+    const response = await axiosInstance.post(
+      "/products/edit-product",
+      formData
+    );
+    console.log("edit-product response", response);
+    // }
+  };
+
+  console.log("i am being open in table", item);
+
   return (
-    <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
-      {/* <div className="bg-white rounded-[8px] shadow-md w-[35%] p-[20px]  flex flex-col gap-[16px]"> */}
+    <div className="backdrop-brightness-50 z-20 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
       <CardWrapper width="w-[35%] " flexDirection="flex-col" height="">
         <div className="flex justify-between">
-          <p className="text-[22px] text-darkGray font-[600]">Add Document</p>
+          <p className="text-[22px] text-darkGray font-[600]">Add Product</p>
           <IoClose size={30} onClick={toggleModal} />
         </div>
         <InputField
@@ -151,9 +215,9 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
           </div>
         </div>
 
-        <div onClick={() => addProduct()}>
+        <div onClick={item ? () => editProduct() : () => addProduct()}>
           <Button
-            text={"Add product"}
+            text={item ? "Edit Product" : "Add product"}
             background="bg-primaryPurple"
             color="text-white"
             fontSize="text-[16px]"
@@ -165,11 +229,14 @@ const ImageUploadModal = ({ toggleModal }: uploadModalProps) => {
             px="px-[12px]"
             py="py-[6px]"
             img={""}
-            width=""
-            Icon={MdOutlineAddBox}
+            width="w-full"
+            Icon={item ? BiEdit : MdOutlineAddBox}
           />
         </div>
       </CardWrapper>
+
+      {/* <div className="bg-white rounded-[8px] shadow-md w-[35%] p-[20px]  flex flex-col gap-[16px]"> */}
+
       {/* </div> */}
     </div>
   );

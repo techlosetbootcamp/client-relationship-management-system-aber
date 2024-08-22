@@ -75,7 +75,7 @@ export const OrderOverviewTableHeadings = [
       heading: "Product",
     },
     {
-      heading: "Qantity",
+      heading: "Quantity",
     },
     {
       heading: "Price",

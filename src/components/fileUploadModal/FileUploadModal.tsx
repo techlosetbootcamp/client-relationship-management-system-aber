@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../inputField/InputField";
 import Button from "../button/Button";
 import { MdOutlineAddBox } from "react-icons/md";
@@ -11,11 +11,13 @@ import firebase from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "@/helpers/firebaseConfig";
 import { useSession } from "next-auth/react";
+import { BiEdit } from "react-icons/bi";
 
 const storage = getStorage(app);
 
 type fileUploadModalProps = {
   toggleModal: () => void;
+  item?: any;
 };
 
 const StatusValues = [
@@ -27,7 +29,7 @@ const StatusValues = [
   },
 ];
 
-const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
+const FileUploadModal = ({ toggleModal, item }: fileUploadModalProps) => {
   const session = useSession();
   const userId = session?.data?.user?.id;
   const userName = session?.data?.user?.name;
@@ -37,6 +39,8 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
   const [selectedFile, setSelectedFile] = useState<File>();
   const [fileURL, setFileURL] = useState<string>("");
   const [isClicked, setIsClicked] = useState(false);
+
+  console.log("item in fileModal", item);
   const statusHandler = (status: string) => {
     setStatus(status);
     setIsClicked(false);
@@ -93,6 +97,24 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
     console.log("upload-file response", response);
   };
 
+  const editDocument = async () => {
+    console.log("edit doc is clicked");
+    toggleModal();
+
+    const response = await axiosInstance.post("/documents/edit-document", {
+      version,
+      status,
+      id: item.id,
+    });
+    console.log("edit-product response", response);
+    // }
+  };
+
+  useEffect(() => {
+    setStatus(item?.status ?? "");
+    setVersion(item?.version ?? "");
+  }, [item]);
+
   return (
     <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
       <div className="bg-white rounded-[8px] shadow-md w-[35%] p-[20px]  flex flex-col gap-[16px]">
@@ -100,15 +122,18 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
           <p className="text-[22px] text-darkGray font-[600]">Add Document</p>
           <IoClose size={30} onClick={toggleModal} />
         </div>
-        <InputField
-          width="w-full"
-          rounded="8px"
-          height="h-[3rem]"
-          placeholder="File"
-          onChange={handleFileUpload}
-          type="file"
-          // value={file}
-        />
+
+        {!item && (
+          <InputField
+            width="w-full"
+            rounded="8px"
+            height="h-[3rem]"
+            placeholder="File"
+            onChange={handleFileUpload}
+            type="file"
+            // value={file}
+          />
+        )}
 
         <InputField
           width="w-full"
@@ -164,9 +189,9 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
           </div>
         </div>
 
-        <div onClick={() => addDocument()}>
+        <div onClick={item ? () => editDocument() : () => addDocument()}>
           <Button
-            text={"Create Document"}
+            text={item ? "Edit Product" : "Create Document"}
             background="bg-primaryPurple"
             color="text-white"
             fontSize="text-[16px]"
@@ -178,8 +203,8 @@ const FileUploadModal = ({ toggleModal }: fileUploadModalProps) => {
             px="px-[12px]"
             py="py-[6px]"
             img={""}
-            width=""
-            Icon={MdOutlineAddBox}
+            width="w-full"
+            Icon={item ? BiEdit : MdOutlineAddBox}
           />
         </div>
       </div>

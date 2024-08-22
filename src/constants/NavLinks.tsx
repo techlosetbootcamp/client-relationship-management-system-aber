@@ -40,6 +40,11 @@ export const NavLinks = [
       path: "/documents",
     },
     {
+      text: "Products Overview",
+      icon: <Icon6 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
+      path: "/products-overview",
+    },
+    {
       text: "Products",
       icon: <Icon6 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
       path: "/products",
