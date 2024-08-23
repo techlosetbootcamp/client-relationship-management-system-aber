@@ -6,8 +6,8 @@ import productImg from "@/assets/images/productImg.svg";
 
 const ProductCard = () => {
   return (
-    <CardWrapper height="" width="xs:300px" flexDirection="flex-col">
-      <div className="rounded-[10px] sm:min-w-[260px] min-h-[120px] shadow-md flex items-center justify-center">
+    <CardWrapper height="" width="w-full" flexDirection="flex-col">
+      <div className="rounded-[10px] w-full min-h-[120px] shadow-md flex items-center justify-center">
         <Image src={productImg} alt="product Image" />
       </div>
       <div className="flex flex-col justify-start w-full gap-[10px]">

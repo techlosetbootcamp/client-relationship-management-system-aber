@@ -23,15 +23,16 @@ type tableHeading = {
 };
 
 type orderViewTableData = {
+  id: string;
   grpObject: grpObject;
   totalOrder: order;
   status: string;
   price: string;
 };
 
-///////MAKE CHANGES LATER
-type documentsTableData = {
-  id:string;
+export type documentsTableData = {
+  id: string;
+  fileURL: string;
   grpObject: grpObject;
   type: string;
   imgObject: imgObject;
@@ -40,6 +41,7 @@ type documentsTableData = {
 };
 
 type dashboardtableData = {
+  id: string;
   date: string;
   imgObject: imgObject;
   status: string;
@@ -47,6 +49,7 @@ type dashboardtableData = {
 };
 
 type customertableData = {
+  id: string;
   imgObject: imgObject;
   email: string;
   phone: string;
@@ -55,7 +58,7 @@ type customertableData = {
 };
 
 type productTableData = {
-  id:string;
+  id: string;
   imgObject: imgObject;
   quantity: number;
   price: string;
@@ -74,7 +77,7 @@ export type TableProps = {
   bgRows: string;
   action: boolean;
   rowBorder: boolean;
-  page? : string;
+  page?: string;
   tableHeading: tableHeading[];
   tableData:
     | dashboardtableData[]

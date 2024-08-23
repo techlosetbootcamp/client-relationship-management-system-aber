@@ -37,7 +37,7 @@ const barData = {
 const Page = () => {
   return (
     <div className="flex flex-col border gap-[22px] ml-[12px] w-full">
-      <Header text="Analytics" />
+      <Header text="Analytics" avatar={true}/>
 
       <div className="flex gap-[24px]">
         <WeeklySalesStats />

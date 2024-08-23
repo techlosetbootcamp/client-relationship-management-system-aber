@@ -43,9 +43,8 @@ const Page = () => {
       console.log("item", item);
 
       return {
-        id:item.id,
+        id: item.id,
         grpObject: {
-     
           img: fileIcons[item.type] || fileIcons?.default,
           name: item.fileName,
           subValue: `Uploaded on ${format(
@@ -60,6 +59,7 @@ const Page = () => {
         },
         version: item.version,
         status: item.status,
+        fileURL: item.fileURL,
       };
     });
     setDocument(documentsArray);
@@ -73,7 +73,7 @@ const Page = () => {
 
   return (
     <div className="flex flex-col gap-[22px] ml-[12px] w-full">
-      <Header text="Documents" />
+      <Header text="Documents" avatar={true}/>
 
       <Table
         heading=""

@@ -8,17 +8,18 @@ import Image from "next/image";
 
 type HeaderProps = {
   text: string;
+  avatar : boolean
 };
-export const Header = ({ text }: HeaderProps) => {
+export const Header = ({ text ,avatar}: HeaderProps) => {
   const { startDate, startDay, endDay, month, year, range } = useCalendar();
   console.log(startDate, startDay, endDay, range);
   // const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex md:flex-row xs:flex-col xs:flex-col-reverse xs:gap-[26.5px] md:justify-between py-[41px] border-2 border-secondaryRed w-full">
+    <div className="flex md:flex-row xs:flex-col xs:flex-col-reverse xs:gap-[26.5px] md:justify-between py-[41px] w-full">
       <p className="xs:text-[26px] xs:leading-[40px] xl:text-[32px] xl:leading-[48px] text-darkGray font-bold font-albertSans">
         {text}
       </p>
-      <div className="flex border items-center gap-[16px] justify-between">
+      <div className={`${avatar ? "flex" : "hidden" } items-center gap-[16px] justify-between`}>
         <div>
           <Calendar />
         </div>

@@ -2,6 +2,7 @@ import img from "@/assets/images/avatar.png";
 import productImg from "@/assets/images/productImg.svg";
 export const DashboardTableData = [
   {
+    id:"1",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -12,6 +13,7 @@ export const DashboardTableData = [
     total: "$999.00",
   },
   {
+    id:"2",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -22,6 +24,7 @@ export const DashboardTableData = [
     total: "$999.00",
   },
   {
+    id:"3",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -31,6 +34,7 @@ export const DashboardTableData = [
     total: "$999.00",
   },
   {
+    id:"4",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -41,6 +45,7 @@ export const DashboardTableData = [
     total: "$999.00",
   },
   {
+    id:"5",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -51,6 +56,7 @@ export const DashboardTableData = [
     total: "$999.00",
   },
   {
+    id:"6",
     date: "31 july 2023",
     imgObject: {
       img: img,
@@ -64,6 +70,7 @@ export const DashboardTableData = [
 
 export const CustomerTableData = [
   {
+    id:"1",
     imgObject: {
       img: img,
       name: "Jacob Swanson",
@@ -74,6 +81,7 @@ export const CustomerTableData = [
     status: "Online",
   },
   {
+    id:"2",
     imgObject: {
       img: img,
       name: "Amelia Johnson",
@@ -84,6 +92,7 @@ export const CustomerTableData = [
     status: "Online",
   },
   {
+    id:"3",
     imgObject: {
       img: img,
       name: "Eric Slator",
@@ -95,6 +104,7 @@ export const CustomerTableData = [
   },
 
   {
+    id:"4",
     imgObject: {
       img: img,
       name: "Aaron Chadwick",
@@ -105,6 +115,7 @@ export const CustomerTableData = [
     status: "Online",
   },
   {
+    id:"5",
     imgObject: {
       img: img,
       name: "Jessica Sloan",
@@ -115,6 +126,7 @@ export const CustomerTableData = [
     status: "Online",
   },
   {
+    id:"6",
     imgObject: {
       img: img,
       name: "Mary Grover",
@@ -125,6 +137,7 @@ export const CustomerTableData = [
     status: "Online",
   },
   {
+    id:"7",
     imgObject: {
       img: img,
       name: "Jacob Swanson",
@@ -138,6 +151,7 @@ export const CustomerTableData = [
 
 export const OrderViewTableData = [
   {
+    id:"1",
     grpObject: {
       img: productImg,
       name: "Ceramic Bowl",
@@ -151,6 +165,7 @@ export const OrderViewTableData = [
     price: "$29.00",
   },
   {
+    id:"2",
     grpObject: {
       img: productImg,
       name: "Ceramic Bowl",
@@ -164,6 +179,7 @@ export const OrderViewTableData = [
     price: "$29.00",
   },
   {
+    id:"3",
     grpObject: {
       img: productImg,
       name: "Ceramic Bowl",
@@ -177,6 +193,7 @@ export const OrderViewTableData = [
     price: "$29.00",
   },
   {
+    id:"4",
     grpObject: {
       img: productImg,
       name: "Ceramic Bowl",

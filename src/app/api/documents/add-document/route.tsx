@@ -42,11 +42,7 @@ export const POST = async (req: Request) => {
     .catch((error) => {
       console.error("Error uploading file:", error);
     });
-  // title   String
-  // type    String
-  // version String
-  // status  String
-  // fileURL String
+
 
   console.log(
     "in upload-file api",

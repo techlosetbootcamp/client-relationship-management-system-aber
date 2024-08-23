@@ -9,7 +9,7 @@ import React from "react";
 const Page = () => {
   return (
     <div className="flex flex-col w-full border gap-[22px]">
-      <Header text="Order Overview" />
+      <Header text="Order Overview" avatar={true}/>
 
       <div className="flex gap-[26px] border border-secondaryGreen justify-between">
         <div className="flex flex-col flex-1 border border-secondaryGreen w-[631px] gap-[20px]">

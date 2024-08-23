@@ -40,7 +40,7 @@ const customerData = [
 const Page = () => {
   return (
     <div className="flex flex-col border-2 border-primaryPurple gap-[22px] xl:ml-[12px] w-full">
-      <Header text="Customers" />
+      <Header text="Customers" avatar={true}/>
 
       <div className="grid sm:grid-cols-2  md:grid-cols-4 gap-[20px] border-2">
         {customerData.map((item, i) => {
