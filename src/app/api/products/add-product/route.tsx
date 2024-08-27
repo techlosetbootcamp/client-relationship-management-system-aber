@@ -14,7 +14,7 @@ export const POST = async (req: Request) => {
 
   const productName = formdata.get("productName") as string;
   const price = formdata.get("price") as string;
-  const quantity = formdata.get("quantity") as string;
+  const totalStock = formdata.get("totalStock") as string;
   const category = formdata.get("category") as string;
   const image = formdata.get("image") as File;
 
@@ -35,7 +35,7 @@ export const POST = async (req: Request) => {
     const newProduct = await prisma.product.create({
       data: {
         productName: productName,
-        quantity: quantity,
+        totalStock: totalStock,
         price: price,
         category: category,
         image: response?.secure_url,

@@ -33,7 +33,7 @@ const CategoryValues = [
 const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
   console.log("item from somewhere", item?.imgObject?.name);
   const [productName, setProductName] = useState<string>("");
-  const [quantity, setQuantity] = useState<string>("");
+  const [totalStock, setTotalStock] = useState<string>("");
   const [category, setCategory] = useState<string>("Select Category");
   const [price, setPrice] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -85,7 +85,7 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
   useEffect(() => {
     setProductName(item?.imgObject?.name ?? "");
     setCategory(item?.category ?? "");
-    setQuantity(item?.quantity ?? "");
+    setTotalStock(item?.totalStock ?? "");
     setPrice(item?.price ?? "");
   }, [item]);
 
@@ -96,7 +96,7 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
 
       formData.append("productName", productName);
       formData.append("price", price);
-      formData.append("quantity", quantity);
+      formData.append("totalStock", totalStock);
       formData.append("category", category);
       formData.append("image", selectedFile);
       const response = await axiosInstance.post(
@@ -115,7 +115,7 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
     formData.append("id", item?.id);
     formData.append("productName", productName);
     formData.append("price", price);
-    formData.append("quantity", quantity);
+    formData.append("totalStock", totalStock);
     formData.append("category", category);
     if (selectedFile) {
       formData.append("image", selectedFile);
@@ -162,7 +162,7 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           width="w-full"
           rounded="8px"
           height="h-[3rem]"
-          placeholder="Quantity"
+          placeholder="Total Stock"
           onChange={(e) => {
             setPrice(e.target.value);
           }}
@@ -176,10 +176,10 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           height="h-[3rem]"
           placeholder="Price"
           onChange={(e) => {
-            setQuantity(e.target.value);
+            setTotalStock(e.target.value);
           }}
           type="text"
-          value={quantity}
+          value={totalStock}
         />
 
         <div className="relative border-2 h-[3rem]">

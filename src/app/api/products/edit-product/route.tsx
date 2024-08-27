@@ -15,14 +15,13 @@ export const POST = async (req: Request) => {
   const id = formdata.get("id") as string;
   const productName = formdata.get("productName") as string;
   const price = formdata.get("price") as string;
-  const quantity = formdata.get("quantity") as string;
+  const totalStock = formdata.get("totalStock") as string;
   const category = formdata.get("category") as string;
   const image = formdata.get("image") as File;
 
   let updatedProduct;
 
   try {
-
     const product = await prisma.product.findUnique({
       where: {
         id: id,
@@ -45,7 +44,7 @@ export const POST = async (req: Request) => {
         },
         data: {
           productName: productName,
-          quantity: quantity,
+          totalStock: totalStock,
           price: price,
           category: category,
 
@@ -60,7 +59,7 @@ export const POST = async (req: Request) => {
         },
         data: {
           productName: productName,
-          quantity: quantity,
+          totalStock: totalStock,
           price: price,
           category: category,
         },

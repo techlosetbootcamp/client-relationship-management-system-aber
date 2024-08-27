@@ -118,3 +118,12 @@ export type StatusTagProps = {
   fontSize: string;
   lineHeight: string;
 };
+
+export type ProductProps = {
+  id: string;
+  image: string;
+  productName: string;
+  category: string;
+  price: string;
+  totalStock: string;
+};

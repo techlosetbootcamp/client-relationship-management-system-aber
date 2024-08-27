@@ -17,7 +17,6 @@ export const POST = async (req: Request) => {
       },
     });
 
-
     if (product && product.public_id) {
       await cloudinary.uploader.destroy(product.public_id);
     }

@@ -11,6 +11,7 @@ import { axiosInstance } from "@/helpers/axiosInstance";
 import { format } from "date-fns";
 import { BsFilePdf, BsFileWord, BsFileExcel } from "react-icons/bs";
 import { FaRegFileAlt } from "react-icons/fa";
+import userAvatar from "@/assets/images/userAvatar.png"
 
 // import Map from '@/components/map/Map'
 // import dynamic from 'next/dynamic'
@@ -54,7 +55,7 @@ const Page = () => {
         },
         type: item.type,
         imgObject: {
-          img: item.authorImage,
+          img: item.authorImage!="null" ? item.authorImage : userAvatar ,
           name: item.authorName,
         },
         version: item.version,

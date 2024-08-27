@@ -3,6 +3,8 @@
 import Avatar from "@/components/avatar/Avatar";
 import React, { useState } from "react";
 import img from "@/assets/images/avatar.png";
+import userAvatar from "@/assets/images/userAvatar.png"
+import avatar from "@/assets/images/avatar.png"
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import { documentsTableData, TableProps } from "@/types/Types";
 import Button from "@/components/button/Button";
@@ -326,6 +328,7 @@ const Table = ({
                         typeof value === "object" &&
                         (key === "grpObject" || key === "imgObject")
                       ) {
+                      
                         return (
                           <td
                             key={key}

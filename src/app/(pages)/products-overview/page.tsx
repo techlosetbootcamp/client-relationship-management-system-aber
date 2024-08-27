@@ -31,7 +31,7 @@ const Page = () => {
           img: item.image,
           name: item.productName,
         },
-        quantity: item.quantity,
+        totalStock: item.totalStock,
         price: item.price,
         category: item.category,
       };
