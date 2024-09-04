@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { US_STATES } from "@/constants/UsStates";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Suspense } from 'react';
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -62,6 +63,7 @@ const Page = () => {
   const { addOrder } = useCart(totalQuantity);
 
   return (
+    
     <div className="flex flex-col gap-[22px] ml-[12px] w-full h-full overflow-x-auto ">
       <Header text="Checkout" avatar={false} />
       <div className="grid grid-cols-2 h-[500px] overflow-auto items-center">
@@ -180,6 +182,7 @@ const Page = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
