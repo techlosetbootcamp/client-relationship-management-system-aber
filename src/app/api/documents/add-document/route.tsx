@@ -27,6 +27,14 @@ export const POST = async (req: Request) => {
   // const fileURL = formdata.get("fileURL") as string;
   const fileName = file?.name?.split(".")[0];
   const fileType = file?.name?.split(".")[1];
+
+  if (!status || !version || !file) {
+    return NextResponse.json({
+      message: "Input Fields must not be empty",
+      status: 400,
+    });
+  }
+
   console.log("in upload-file api", version, status, file, fileType, fileName);
   const fileRef = ref(storage, file.name);
   await uploadBytes(fileRef, file)
@@ -43,7 +51,6 @@ export const POST = async (req: Request) => {
     .catch((error) => {
       console.error("Error uploading file:", error);
     });
-
 
   console.log(
     "in upload-file api",
@@ -67,8 +74,8 @@ export const POST = async (req: Request) => {
         user: {
           connect: { id: userId },
         },
-        authorImage : image,
-        authorName : userName
+        authorImage: image,
+        authorName: userName,
         // author: {
         //   img: image,
         //   authorName: userName,
@@ -76,9 +83,12 @@ export const POST = async (req: Request) => {
       },
     });
     console.log("response in add document", document);
-    return NextResponse.json({ "file response": document });
+    return NextResponse.json({
+      message: "document has been added successfully",
+      status: 201,
+    });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ "file error response": error });
+    return NextResponse.json({ message: "Invalid Data", status: 400 });
   }
 };

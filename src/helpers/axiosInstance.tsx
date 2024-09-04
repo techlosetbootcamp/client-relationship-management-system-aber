@@ -8,5 +8,5 @@ const baseURL =
 
 export const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout:30000
+  timeout:40000
 });

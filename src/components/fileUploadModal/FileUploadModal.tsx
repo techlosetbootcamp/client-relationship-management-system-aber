@@ -8,12 +8,15 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import { IoClose } from "react-icons/io5";
 import firebase from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { app } from "@/helpers/firebaseConfig";
-import { useSession } from "next-auth/react";
+// import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// import { app } from "@/helpers/firebaseConfig";
+// import { useSession } from "next-auth/react";
 import { BiEdit } from "react-icons/bi";
+import useSessionData from "@/hooks/useSessionData";
+import useDocuments from "@/hooks/useDocuments";
+import { CgSpinner } from "react-icons/cg";
 
-const storage = getStorage(app);
+// const storage = getStorage(app);
 
 type fileUploadModalProps = {
   toggleModal: () => void;
@@ -30,90 +33,68 @@ const StatusValues = [
 ];
 
 const FileUploadModal = ({ toggleModal, item }: fileUploadModalProps) => {
-  const session = useSession();
-  const userId = session?.data?.user?.id;
-  const userName = session?.data?.user?.name;
-  const image = session.data?.user?.image;
-  const [version, setVersion] = useState<string>("");
-  const [status, setStatus] = useState<string>("Status");
-  const [selectedFile, setSelectedFile] = useState<File>();
-  const [fileURL, setFileURL] = useState<string>("");
-  const [isClicked, setIsClicked] = useState(false);
+  const { userId, userName, userEmail, userImage } = useSessionData();
+  const {
+    statusHandler,
+    handleFileUpload,
+    addDocument,
+    editDocument,
+    version,
+    setVersion,
+    status,
+    setStatus,
+    isClicked,
+    setIsClicked,
+    isLoading,
+  } = useDocuments(item);
 
   console.log("item in fileModal", item);
-  const statusHandler = (status: string) => {
-    setStatus(status);
-    setIsClicked(false);
-  };
 
-  const handleFileUpload = (event: Event) => {
-    const input = event.target as HTMLInputElement;
-    const file = input.files ? input.files[0] : null;
+  // const addDocument = async (userId:string, userName:string, userImage:string) => {
+  //   toggleModal();
+  //   if (selectedFile) {
+  //     console.log("selected file", selectedFile);
+  //     // const fileRef = ref(storage, selectedFile.name);
+  //     // uploadBytes(fileRef, selectedFile)
+  //     //   .then(async (snapshot) => {
+  //     //     console.log("Uploaded a blob or file!", snapshot);
+  //     //     try {
+  //     //       const downloadURL = await getDownloadURL(fileRef);
+  //     //       setFileURL(downloadURL);
+  //     //       console.log("File available at", downloadURL);
+  //     //     } catch (error) {
+  //     //       console.error("Error getting download URL:", error);
+  //     //     }
+  //     //   })
+  //     //   .catch((error) => {
+  //     //     console.error("Error uploading file:", error);
+  //     //   });
+  //   }
 
-    if (file) {
-      setSelectedFile(file);
-      console.log("selected file", file, selectedFile);
-    }
-  };
+  //   const formData = new FormData();
+  //   if (selectedFile) {
+  //     // formData.append("fileURL", fileURL);
+  //     formData.append("file", selectedFile);
+  //     formData.append("version", version);
+  //     formData.append("status", status);
+  //     formData.append("userId", userId);
+  //     formData.append("userName", userName);
+  //     formData.append("image", userImage);
+  //   } else {
+  //     console.log("no file");
+  //   }
 
-  const addDocument = async () => {
-    toggleModal();
-    if (selectedFile) {
-      console.log("selected file", selectedFile);
-      // const fileRef = ref(storage, selectedFile.name);
-      // uploadBytes(fileRef, selectedFile)
-      //   .then(async (snapshot) => {
-      //     console.log("Uploaded a blob or file!", snapshot);
-      //     try {
-      //       const downloadURL = await getDownloadURL(fileRef);
-      //       setFileURL(downloadURL);
-      //       console.log("File available at", downloadURL);
-      //     } catch (error) {
-      //       console.error("Error getting download URL:", error);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error uploading file:", error);
-      //   });
-    }
+  //   const response = await axiosInstance.post(
+  //     "/documents/add-document",
+  //     formData
+  //   );
+  //   console.log("upload-file response", response);
+  // };
 
-    const formData = new FormData();
-    if (selectedFile) {
-      // formData.append("fileURL", fileURL);
-      formData.append("file", selectedFile);
-      formData.append("version", version);
-      formData.append("status", status);
-      formData.append("userId", userId);
-      formData.append("userName", userName);
-      formData.append("image", image);
-    } else {
-      console.log("no file");
-    }
-
-    const response = await axiosInstance.post(
-      "/documents/add-document",
-      formData
-    );
-    console.log("upload-file response", response);
-  };
-
-  const editDocument = async () => {
-    console.log("edit doc is clicked");
-    toggleModal();
-
-    const response = await axiosInstance.post("/documents/edit-document", {
-      version,
-      status,
-      id: item.id,
-    });
-    console.log("edit-product response", response);
-    // }
-  };
-
-  useEffect(() => {
-    setStatus(item?.status ?? "");
-    setVersion(item?.version ?? "");
-  }, [item]);
+  // useEffect(() => {
+  //   setStatus(item?.status ?? "");
+  //   setVersion(item?.version ?? "");
+  // }, [item]);
 
   return (
     <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
@@ -189,24 +170,30 @@ const FileUploadModal = ({ toggleModal, item }: fileUploadModalProps) => {
           </div>
         </div>
 
-        <div onClick={item ? () => editDocument() : () => addDocument()}>
-          <Button
-            text={item ? "Edit Product" : "Create Document"}
-            background="bg-primaryPurple"
-            color="text-white"
-            fontSize="text-[16px]"
-            fontWeight="font-[600]"
-            rounded="rounded-[4px]"
-            gap="gap-[8px]"
-            lineHeight="leading-[24px]"
-            border="border-primaryPurple border"
-            px="px-[12px]"
-            py="py-[6px]"
-            img={""}
-            width="w-full"
-            Icon={item ? BiEdit : MdOutlineAddBox}
-          />
-        </div>
+        <Button
+          text={item ? (isLoading ? "Editting Document..." : "Edit Product") : (isLoading ? "Creating Document..." :"Create Document")}
+          background="bg-primaryPurple"
+          color="text-white"
+          fontSize="text-[16px]"
+          fontWeight="font-[600]"
+          rounded="rounded-[4px]"
+          gap="gap-[8px]"
+          lineHeight="leading-[24px]"
+          border="border-primaryPurple border"
+          px="px-[12px]"
+          py="py-[6px]"
+          img={""}
+          width="w-full"
+          Icon={isLoading ? CgSpinner : item ? BiEdit : MdOutlineAddBox}
+          disabled={isLoading ? true : false}
+          // Icon={item ? BiEdit : MdOutlineAddBox}
+          onClick={
+            item
+              ? () => {editDocument(toggleModal)}
+              : () => {addDocument(userId, userName, userImage, toggleModal)}
+          }
+    
+        />
       </div>
     </div>
   );

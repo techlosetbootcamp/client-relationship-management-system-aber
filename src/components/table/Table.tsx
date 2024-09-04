@@ -3,8 +3,8 @@
 import Avatar from "@/components/avatar/Avatar";
 import React, { useState } from "react";
 import img from "@/assets/images/avatar.png";
-import userAvatar from "@/assets/images/userAvatar.png"
-import avatar from "@/assets/images/avatar.png"
+import userAvatar from "@/assets/images/userAvatar.png";
+import avatar from "@/assets/images/avatar.png";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import { documentsTableData, TableProps } from "@/types/Types";
 import Button from "@/components/button/Button";
@@ -20,6 +20,7 @@ import ImageUploadModal from "../imageUploadModal/ImageUploadModal";
 import FileUploadModal from "../fileUploadModal/FileUploadModal";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import Link from "next/link";
+import OrderedProductsModal from "../orderedProductsModal/OrderedProductsModal";
 
 const Table = ({
   width,
@@ -42,6 +43,7 @@ const Table = ({
   const [item, setItem] = useState();
   const [selectAll, setSelectAll] = useState(false);
   const [checkedItems, setCheckedItems] = useState<any>([]);
+  const [orderById, setOrderById] = useState<any>([]);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -101,6 +103,30 @@ const Table = ({
       checkedItemsIds,
     });
     console.log("delete docs response", response);
+  };
+
+  const getOrderById = async (orderId: string) => {
+    const response = await axiosInstance.post("/order/get-order-by-id", {
+      orderId,
+    });
+
+    // const orderDataArray = response.data.order.orders.map((item: any) => {
+    //   console.log(item);
+    //   return {
+    //     productId: item.product.id,
+    //     image: item.product.image,
+    //     name: item.product.productName,
+    //     category: item.product.category,
+    //     price: item.product.price,
+    //     quantity: item.quantity,
+    //   };
+    // });
+    setOrderById(response.data.order.orders);
+
+    console.log("get order by id clicked", orderById);
+    toggleModal();
+
+    // console.log("client response in getorder by id", response.data.order.orders);
   };
 
   const downloadDocuments = async () => {
@@ -185,49 +211,49 @@ const Table = ({
             <Tabs />
             <div className="flex gap-[16px] md:flex-row xs:flex-col  ">
               <SearchInput />
-              <div onClick={downloadDocuments}>
-                <Button
-                  text={"Download"}
-                  background="bg-lightGray"
-                  color="text-primaryPurple"
-                  fontSize="text-[14px]"
-                  fontWeight="font-[600]"
-                  rounded="rounded-[3.2px]"
-                  gap="gap-[8px]"
-                  lineHeight="leading-[21px]"
-                  border="border-primaryPurple border"
-                  px="px-[8px]"
-                  py="py-[4px]"
-                  img={""}
-                  width="h-full"
-                  Icon={null}
-                />
-              </div>
-              <div onClick={deleteDocuments}>
-                <Button
-                  text={"Delete"}
-                  background="bg-lightGray"
-                  color="text-primaryPurple"
-                  fontSize="text-[14px]"
-                  fontWeight="font-[600]"
-                  rounded="rounded-[3.2px]"
-                  gap="gap-[8px]"
-                  lineHeight="leading-[21px]"
-                  border="border-primaryPurple border"
-                  px="px-[8px]"
-                  py="py-[4px]"
-                  img={""}
-                  width="h-full"
-                  Icon={null}
-                />
-              </div>
+
+              <Button
+                text={"Download"}
+                background="bg-lightGray"
+                color="text-primaryPurple"
+                fontSize="text-[14px]"
+                fontWeight="font-[600]"
+                rounded="rounded-[3.2px]"
+                gap="gap-[8px]"
+                lineHeight="leading-[21px]"
+                border="border-primaryPurple border"
+                px="px-[8px]"
+                py="py-[4px]"
+                img={""}
+                width="h-full"
+                onClick={downloadDocuments}
+                disabled={false}
+              />
+
+              <Button
+                text={"Delete"}
+                background="bg-lightGray"
+                color="text-primaryPurple"
+                fontSize="text-[14px]"
+                fontWeight="font-[600]"
+                rounded="rounded-[3.2px]"
+                gap="gap-[8px]"
+                lineHeight="leading-[21px]"
+                border="border-primaryPurple border"
+                px="px-[8px]"
+                py="py-[4px]"
+                img={""}
+                width="h-full"
+                onClick={deleteDocuments}
+                disabled={false}
+              />
             </div>
           </div>
         )}
 
         {divider && <div className="border border-borderGray w-full" />}
 
-        <div className={`overflow-x-auto`}>
+        <div className={``}>
           <table className="w-full table-auto rounded-[8px] font-barlow border-separate border-spacing-y-[12px]">
             <thead className={`h-[47px] ${bgHeader} relative w-full`}>
               <tr className={`${bgHeader}  relative z-10 py-[12px] h-[47px] `}>
@@ -269,7 +295,7 @@ const Table = ({
                           name=""
                           id=""
                           checked={checkedItems[item?.id] || false}
-                          onChange={() => handleCheckbox(event, item.id)}
+                          onChange={() => handleCheckbox(event, item?.id)}
                         />
                       </td>
                     )}
@@ -328,7 +354,6 @@ const Table = ({
                         typeof value === "object" &&
                         (key === "grpObject" || key === "imgObject")
                       ) {
-                      
                         return (
                           <td
                             key={key}
@@ -388,6 +413,15 @@ const Table = ({
                       ) {
                         return (
                           <td
+                            onClick={
+                              key == "orders"
+                                ? () => {
+                                    getOrderById(item?.id);
+                                  }
+                                : () => {
+                                    console.log("clicked not order");
+                                  }
+                            }
                             key={key}
                             className="text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500]"
                           >
@@ -401,7 +435,10 @@ const Table = ({
                       <td className=" py-[8px] px-[12px] rounded-r-[5px] ">
                         <div className="flex gap-[16px] items-center">
                           {page === "documents" ? (
-                            <Link href={(item as documentsTableData).fileURL} target="_blank">
+                            <Link
+                              href={(item as documentsTableData).fileURL}
+                              target="_blank"
+                            >
                               <Button
                                 text={"View"}
                                 background="bg-lightGray"
@@ -416,31 +453,13 @@ const Table = ({
                                 py="py-[4px]"
                                 width=""
                                 img={""}
+                                onClick={() => {}}
+                                disabled={false}
                               />
                             </Link>
                           ) : (
-                            <div onClick={() => deleteProduct(item)}>
-                              <Button
-                                text={"Delete"}
-                                background="bg-lightGray"
-                                color="text-primaryPurple"
-                                fontSize="text-[14px]"
-                                fontWeight="font-[600]"
-                                rounded="rounded-[3.2px]"
-                                gap="gap-[8px]"
-                                lineHeight="leading-[21px]"
-                                border="border-primaryPurple border"
-                                px="px-[8px]"
-                                py="py-[4px]"
-                                width=""
-                                img={""}
-                              />
-                            </div>
-                          )}
-
-                          <div onClick={() => editItem(item)}>
                             <Button
-                              text={"Edit"}
+                              text={"Delete"}
                               background="bg-lightGray"
                               color="text-primaryPurple"
                               fontSize="text-[14px]"
@@ -453,8 +472,28 @@ const Table = ({
                               py="py-[4px]"
                               width=""
                               img={""}
+                              onClick={() => deleteProduct(item)}
+                              disabled={false}
                             />
-                          </div>
+                          )}
+
+                          <Button
+                            text={"Edit"}
+                            background="bg-lightGray"
+                            color="text-primaryPurple"
+                            fontSize="text-[14px]"
+                            fontWeight="font-[600]"
+                            rounded="rounded-[3.2px]"
+                            gap="gap-[8px]"
+                            lineHeight="leading-[21px]"
+                            border="border-primaryPurple border"
+                            px="px-[8px]"
+                            py="py-[4px]"
+                            width=""
+                            img={""}
+                            onClick={() => editItem(item)}
+                            disabled={false}
+                          />
                         </div>
                       </td>
                     )}
@@ -466,7 +505,7 @@ const Table = ({
 
           <div
             className={`${isModalOpen ? "block" : "hidden"} ${
-              page === "documents" && "hidden"
+              (page === "documents" || page === "orders") && "hidden"
             }`}
           >
             <ImageUploadModal toggleModal={toggleModal} item={item} />
@@ -478,6 +517,14 @@ const Table = ({
             }`}
           >
             <FileUploadModal toggleModal={toggleModal} item={item} />
+          </div>
+
+          <div
+            className={`${isModalOpen ? "block" : "hidden"} ${
+              page != "orders" && "hidden"
+            }`}
+          >
+            <OrderedProductsModal toggleModal={toggleModal} order={orderById} />
           </div>
         </div>
       </CardWrapper>

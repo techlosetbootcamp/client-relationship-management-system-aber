@@ -40,7 +40,7 @@ const Page = () => {
               {session?.data?.user?.name}
             </p>
           </div>
-          <div onClick={handleButtonClick} className="flex items-center">
+          <div className="flex items-center">
             <Button
               text={"Change Photo"}
               background="bg-primaryPurple"
@@ -55,7 +55,8 @@ const Page = () => {
               img={""}
               width=""
               border=""
-              Icon={null}
+              onClick={handleButtonClick}
+              disabled={false}
             />
           </div>
         </div>
@@ -81,7 +82,7 @@ const Page = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <div onClick={updateProfile} className="w-full flex justify-end">
+      <div className="w-full flex justify-end">
         <Button
           text={"Update Profile"}
           background="bg-primaryPurple"
@@ -96,7 +97,8 @@ const Page = () => {
           img={""}
           border=""
           width=""
-          Icon={null}
+          onClick={updateProfile}
+          disabled={false}
         />
       </div>
 

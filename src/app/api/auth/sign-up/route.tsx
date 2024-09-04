@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
+
 const prisma = new PrismaClient();
 
 export const POST = async (req: Request) => {
@@ -31,7 +32,11 @@ export const POST = async (req: Request) => {
       },
     });
 
-    return NextResponse.json({ newUser }, { status: 201 });
+    return NextResponse.json({
+      newUser,
+      status: 201,
+      message: "User has been created",
+    });
   } catch (error) {
     console.log("in sign-up", error);
     return NextResponse.json({ message: error });

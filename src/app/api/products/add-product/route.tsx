@@ -13,11 +13,13 @@ export const POST = async (req: Request) => {
   console.log("in add product api", formdata);
 
   const productName = formdata.get("productName") as string;
-  const price = formdata.get("price") as string;
-  const totalStock = formdata.get("totalStock") as string;
+  const price = parseInt(formdata.get("price") as string, 10);
+  const purchasedPrice = parseInt(formdata.get("purchasedPrice") as string, 10);
+  const totalStock = parseInt(formdata.get("totalStock") as string, 10);
   const category = formdata.get("category") as string;
   const image = formdata.get("image") as File;
 
+  console.log(price, typeof price, totalStock, typeof totalStock);
   try {
     const product = await prisma.product.findFirst({
       where: {
@@ -37,6 +39,7 @@ export const POST = async (req: Request) => {
         productName: productName,
         totalStock: totalStock,
         price: price,
+        purchasedPrice: purchasedPrice,
         category: category,
         image: response?.secure_url,
         public_id: response?.public_id,

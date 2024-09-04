@@ -14,7 +14,7 @@ export const GET = async (req: Request) => {
     }
 
     return NextResponse.json({
-      message: "document list",
+      message: "document list Fetched Successfully",status : 200,
       document,
     });
   } catch (error) {

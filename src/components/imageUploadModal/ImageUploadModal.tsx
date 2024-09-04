@@ -9,6 +9,9 @@ import { axiosInstance } from "@/helpers/axiosInstance";
 import { IoClose } from "react-icons/io5";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import { BiEdit } from "react-icons/bi";
+import { productValidation } from "@/validations/productValidation";
+import { FormatErrors } from "@/helpers/formatErrors";
+import { toast } from "@/helpers/toastify";
 
 type uploadModalProps = {
   toggleModal: () => void;
@@ -36,8 +39,17 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
   const [totalStock, setTotalStock] = useState<string>("");
   const [category, setCategory] = useState<string>("Select Category");
   const [price, setPrice] = useState("");
+  const [purchasedPrice, setPurchasedPrice] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
   const [isClicked, setIsClicked] = useState(false);
+  const [errorsMessages, setErrorMessages] = useState("");
+
+  useEffect(() => {
+    if (errorsMessages) {
+      toast.error(errorsMessages);
+    }
+    setErrorMessages("");
+  }, [errorsMessages]);
 
   const CategoryHandler = (category: string) => {
     setCategory(category);
@@ -84,17 +96,34 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
 
   useEffect(() => {
     setProductName(item?.imgObject?.name ?? "");
-    setCategory(item?.category ?? "");
+    setCategory(item?.category ?? "Select Category");
     setTotalStock(item?.totalStock ?? "");
     setPrice(item?.price ?? "");
+    setPurchasedPrice(item?.purchasedPrice ?? "");
   }, [item]);
 
   const addProduct = async () => {
-    toggleModal();
+    const validation = productValidation.safeParse({
+      productName,
+      category,
+      totalStock: parseInt(totalStock, 10),
+      price: parseInt(price, 10),
+      purchasedPrice: parseInt(purchasedPrice, 10),
+    });
+
+    if (!validation.success) {
+      console.log("validation errors", validation.error.flatten().fieldErrors);
+      setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
+      console.log(errorsMessages);
+      return;
+    }
+
+    // toggleModal();
     if (selectedFile) {
       const formData = new FormData();
 
       formData.append("productName", productName);
+      formData.append("purchasedPrice", purchasedPrice);
       formData.append("price", price);
       formData.append("totalStock", totalStock);
       formData.append("category", category);
@@ -104,10 +133,28 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
         formData
       );
       console.log("upload-file response", response);
+    } else {
+      toast.error("product image is not selected");
+      console.log("no file");
+      return;
     }
   };
 
   const editProduct = async () => {
+    const validation = productValidation.safeParse({
+      productName,
+      category,
+      totalStock,
+      price,
+      purchasedPrice,
+    });
+
+    if (!validation.success) {
+      console.log("validation errors", validation.error.flatten().fieldErrors);
+      setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
+      console.log(errorsMessages);
+      return;
+    }
     console.log("edit is clicked");
     toggleModal();
     // if (selectedFile) {
@@ -162,7 +209,19 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           width="w-full"
           rounded="8px"
           height="h-[3rem]"
-          placeholder="Total Stock"
+          placeholder="Purchased Price"
+          onChange={(e) => {
+            setPurchasedPrice(e.target.value);
+          }}
+          type="text"
+          value={purchasedPrice}
+        />
+
+        <InputField
+          width="w-full"
+          rounded="8px"
+          height="h-[3rem]"
+          placeholder="Sale Price"
           onChange={(e) => {
             setPrice(e.target.value);
           }}
@@ -174,11 +233,11 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           width="w-full"
           rounded="8px"
           height="h-[3rem]"
-          placeholder="Price"
+          placeholder="Total Stock"
           onChange={(e) => {
             setTotalStock(e.target.value);
           }}
-          type="text"
+          type="number"
           value={totalStock}
         />
 
@@ -215,24 +274,24 @@ const ImageUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           </div>
         </div>
 
-        <div onClick={item ? () => editProduct() : () => addProduct()}>
-          <Button
-            text={item ? "Edit Product" : "Add product"}
-            background="bg-primaryPurple"
-            color="text-white"
-            fontSize="text-[16px]"
-            fontWeight="font-[600]"
-            rounded="rounded-[4px]"
-            gap="gap-[8px]"
-            lineHeight="leading-[24px]"
-            border="border-primaryPurple border"
-            px="px-[12px]"
-            py="py-[6px]"
-            img={""}
-            width="w-full"
-            Icon={item ? BiEdit : MdOutlineAddBox}
-          />
-        </div>
+        <Button
+          text={item ? "Edit Product" : "Add product"}
+          background="bg-primaryPurple"
+          color="text-white"
+          fontSize="text-[16px]"
+          fontWeight="font-[600]"
+          rounded="rounded-[4px]"
+          gap="gap-[8px]"
+          lineHeight="leading-[24px]"
+          border="border-primaryPurple border"
+          px="px-[12px]"
+          py="py-[6px]"
+          img={""}
+          width="w-full"
+          Icon={item ? BiEdit : MdOutlineAddBox}
+          onClick={item ? () => editProduct() : () => addProduct()}
+          disabled={false}
+        />
       </CardWrapper>
 
       {/* <div className="bg-white rounded-[8px] shadow-md w-[35%] p-[20px]  flex flex-col gap-[16px]"> */}

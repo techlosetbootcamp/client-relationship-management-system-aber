@@ -19,7 +19,6 @@ import { useCalendarContext } from "@/providers/calendarContextProvider/Calendar
 const Calendar = () => {
   // const { range, setRange, startDate, startDay, endDay, month, year } =
   //   useCalendar();
-  const [isOpen, setIsOpen] = useState(false);
 
   const obj = useCalendarContext();
   // console.log("range", obj?.range, format(obj?.range[0].startDate, "PP"));
@@ -28,8 +27,8 @@ const Calendar = () => {
   return (
     <div>
       <div
-        onClick={() => setIsOpen(!isOpen)}
-        className="z-10 h-[38px] bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
+        onClick={() => obj?.setIsOpen(!obj?.isOpen)}
+        className="z-80 relative h-[38px] bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
       >
         {obj?.startDay != obj?.endDay ? (
           <p>
@@ -43,10 +42,11 @@ const Calendar = () => {
       </div>
       <div
         className={`absolute mt-[16px] right-[75px] ${
-          isOpen ? "block" : "hidden"
+          obj?.isOpen ? "block" : "hidden"
         }`}
       >
         <DateRange
+        
           //   onChange={(item) => setRange([item.selection])}
           onChange={(item) => {
             const selection = item.selection;

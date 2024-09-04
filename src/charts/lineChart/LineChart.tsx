@@ -11,7 +11,9 @@ ChartJs.register(PointElement, LineElement, LinearScale, CategoryScale,TimeScale
 
 
 const LineChart = ({datasets,labels,display}:any) => {
+  console.log("datasets", datasets)
   const obj = useCalendarContext()
+  console.log(obj?.formattedStartDate)
   // const {formattedStartDate,formattedEndDate,range} = useCalendar()
   // console.log(range,formattedStartDate,formattedEndDate)
 
@@ -20,13 +22,17 @@ const LineChart = ({datasets,labels,display}:any) => {
       options={{
         scales: {
           x: {
-            type:"time",
-            time:{
-              unit:"day"
-            },
-            
-            min:obj?.formattedStartDate,
-            max:obj?.formattedEndDate,
+
+            ...(labels.length===0 && {
+
+              type:"time",
+              time:{
+                unit:"day"
+              },
+              
+              min:obj?.formattedStartDate,
+              max:obj?.formattedEndDate,
+            }),
             ticks: {
               display: display,
             },
@@ -45,7 +51,7 @@ const LineChart = ({datasets,labels,display}:any) => {
         },
       }}
       data={{
-        // labels: labels,
+        labels: labels,
         datasets: datasets,
       }}
     />

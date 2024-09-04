@@ -1,8 +1,8 @@
 import { toast as reactToast, Bounce } from 'react-toastify';
 
 export const toast = {
-  success: () => {
-    return reactToast.success('Successful!', {
+  success: (data : string) => {
+    return reactToast.success(data || 'Successful!', {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -27,8 +27,8 @@ export const toast = {
       transition: Bounce,
     });
   },
-  error: () => {
-    return reactToast.error('Something went wrong', {
+  error: (data: any) => {
+    return reactToast.error(data || 'Something went wrong', {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,

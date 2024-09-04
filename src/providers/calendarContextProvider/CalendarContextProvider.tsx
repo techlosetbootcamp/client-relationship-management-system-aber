@@ -23,6 +23,8 @@ type CalenderProps = {
   year: string;
   formattedStartDate: string;
   formattedEndDate: string;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const CalenderContext = createContext<CalenderProps | null>(null);
@@ -42,6 +44,8 @@ const CalendarContextProvider = ({
     year,
     formattedEndDate,
     formattedStartDate,
+    isOpen,
+    setIsOpen,
   } = useCalendar();
   return (
     <CalenderContext.Provider
@@ -55,6 +59,8 @@ const CalendarContextProvider = ({
         year,
         formattedEndDate,
         formattedStartDate,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

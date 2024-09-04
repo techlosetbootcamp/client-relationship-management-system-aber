@@ -21,6 +21,7 @@ type ForgetPasswordArgs = {
   payload: {
     email: string;
   };
+  callback : (data:any) =>void
 };
 
 type ResetPasswordArgs = {
@@ -29,6 +30,7 @@ type ResetPasswordArgs = {
     confirmPassword: string;
     userId: string;
   };
+  callback : (data:any) =>void
 };
 
 type ChangePasswordArgs = {
@@ -61,6 +63,7 @@ export const ForgetPassword = createAsyncThunk<[], ForgetPasswordArgs>(
       "/auth/forget-password",
       data?.payload
     );
+    data?.callback && data.callback(response);
     console.log("forgetPassword response", response, response.status);
     return response.data;
   }
@@ -74,6 +77,7 @@ export const ResetPassword = createAsyncThunk<[], ResetPasswordArgs>(
       "/auth/reset-password",
       data?.payload
     );
+    data?.callback && data.callback(response);
     console.log("ResetPassword response", response);
     return response.data;
   }

@@ -17,24 +17,25 @@ const useCalendar = () => {
     },
   ]);
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [startDay, setStartDay] = useState('');
-  const [endDay, setEndDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [formattedStartDate, setFormattedStartDate] = useState('');
-  const [formattedEndDate, setFormattedEndDate] = useState('');
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startDay, setStartDay] = useState("");
+  const [endDay, setEndDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [formattedStartDate, setFormattedStartDate] = useState("");
+  const [formattedEndDate, setFormattedEndDate] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setStartDate(format(range[0].startDate, 'PP'));
-    setEndDate(format(range[0].endDate, 'PP'));
-    setStartDay(format(range[0].startDate, 'dd'));
-    setEndDay(format(range[0].endDate, 'dd'));
-    setMonth(format(range[0].endDate, 'MMM'));
-    setYear(format(range[0].endDate, 'yyyy'));
-    setFormattedStartDate(format(range[0].startDate, 'yyyy-MM-dd'));
-    setFormattedEndDate(format(range[0].endDate, 'yyyy-MM-dd'));
+    setStartDate(format(range[0].startDate, "PP"));
+    setEndDate(format(range[0].endDate, "PP"));
+    setStartDay(format(range[0].startDate, "dd"));
+    setEndDay(format(range[0].endDate, "dd"));
+    setMonth(format(range[0].endDate, "MMM"));
+    setYear(format(range[0].endDate, "yyyy"));
+    setFormattedStartDate(format(range[0].startDate, "yyyy-MM-dd"));
+    setFormattedEndDate(format(range[0].endDate, "yyyy-MM-dd"));
   }, [range]);
 
   // let startDate = format(range[0].startDate, "PP");
@@ -68,7 +69,9 @@ const useCalendar = () => {
     month,
     year,
     formattedStartDate,
-    formattedEndDate
+    formattedEndDate,
+    isOpen,
+    setIsOpen,
   };
 };
 

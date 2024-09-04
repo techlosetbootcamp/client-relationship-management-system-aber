@@ -21,7 +21,7 @@ const Page = () => {
       </Link>
 
       <Link href={`/settings/change-password/`}>
-      <CardWrapper height="" width="w-full" flexDirection="flex-row">
+        <CardWrapper height="" width="w-full" flexDirection="flex-row">
           <div className="flex justify-between w-full">
             <p className="font-[600] text-[18px]">Change Password</p>
             <RiLockPasswordLine size={25} />

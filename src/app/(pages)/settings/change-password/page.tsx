@@ -56,25 +56,23 @@ const Page = () => {
             onChange={(e) => setConfirmNewPassword(e.target.value)}
           />
 
-          <div className="w-full">
-            <div onClick={onsubmit}>
-              <Button
-                text="Update Password"
-                background="bg-primaryPurple"
-                width="w-full"
-                py="py-[8px]"
-                rounded="rounded-[8px]"
-                color="text-white"
-                fontSize="text-[18px]"
-                fontWeight="font-[600]"
-                img={""}
-                gap=""
-                px=""
-                lineHeight=""
-                border=""
-              />
-            </div>
-          </div>
+          <Button
+            text="Update Password"
+            background="bg-primaryPurple"
+            width="w-full"
+            py="py-[8px]"
+            rounded="rounded-[8px]"
+            color="text-white"
+            fontSize="text-[18px]"
+            fontWeight="font-[600]"
+            img={""}
+            gap=""
+            px=""
+            lineHeight=""
+            border=""
+            onClick={onsubmit}
+            disabled={false}
+          />
         </div>
         {/* </form> */}
       </div>

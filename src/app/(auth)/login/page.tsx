@@ -7,9 +7,10 @@ import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 import useLogin from "@/hooks/useLogin";
+import { CgSpinner } from "react-icons/cg";
 
 const Page = () => {
-  const { email, setEmail, password, setPassword, onLogin, loginWithGoogle } =
+  const { email, setEmail, password, setPassword, onLogin, loginWithGoogle, isLoading } =
     useLogin();
 
   return (
@@ -21,7 +22,7 @@ const Page = () => {
         {/* <form action="" className="w-full"> */}
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
-          type="email"
+            type="email"
             placeholder="Enter Your Email"
             value={email}
             width="w-full"
@@ -30,7 +31,7 @@ const Page = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
-          type="password"
+            type="password"
             placeholder="Enter Your Password"
             value={password}
             width="w-full"
@@ -45,24 +46,25 @@ const Page = () => {
           </Link>
 
           <div className="w-full">
-            <div onClick={onLogin}>
-              <Button
-                text="Login"
-                background="bg-primaryPurple"
-                width="w-full"
-                py="py-[8px]"
-                rounded="rounded-[8px]"
-                color="text-white"
-                fontSize="text-[18px]"
-                fontWeight="font-[600]"
-                img={""}
-                gap=""
-                px=""
-                lineHeight=""
-                border=""
-                Icon={null}
-              />
-            </div>
+            <Button
+              text={isLoading ? "Logging In..." :"Login"}
+              background="bg-primaryPurple"
+              width="w-full"
+              py="py-[8px]"
+              rounded="rounded-[8px]"
+              color="text-white"
+              fontSize="text-[18px]"
+              fontWeight="font-[600]"
+              img={""}
+              gap=""
+              px=""
+              lineHeight=""
+              border=""
+              onClick={onLogin}
+              Icon={isLoading? CgSpinner : null}
+              disabled ={isLoading ? true : false}
+            />
+
             <div>
               <p className="text-[12px] mt-[5px] text-center">
                 Don&apos;t Have an Account?
@@ -81,10 +83,7 @@ const Page = () => {
           <p className="px-[15px] -top-[12px] bg-white absolute z-10">OR</p>
           {/* <span className='w-full'></span> */}
         </div>
-        <div
-          className="w-full border-2 hover:bg-lightGray border-borderGray rounded-[8px]"
-          onClick={loginWithGoogle}
-        >
+        <div className="w-full border-2 hover:bg-lightGray border-borderGray rounded-[8px]">
           <Button
             text="Continue with Google"
             background="white"
@@ -99,7 +98,8 @@ const Page = () => {
             px=""
             lineHeight=""
             border=""
-            Icon={null}
+            onClick={loginWithGoogle}
+            disabled={false}
           />
         </div>
       </div>

@@ -5,6 +5,7 @@ import googleLogo from "@/assets/images/google.svg";
 import Image from "next/image";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
+import { CgSpinner } from "react-icons/cg";
 
 import useResetPassword from "@/hooks/useResetPassword";
 
@@ -16,6 +17,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
     confirmPassword,
     setConfirmPassword,
     onSubmit,
+    isLoading
   } = useResetPassword(userId);
 
   return (
@@ -25,7 +27,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
 
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
-          type="password"
+            type="password"
             placeholder="New Password"
             value={password}
             width="w-full"
@@ -34,7 +36,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <InputField
-          type="password"
+            type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             width="w-full"
@@ -43,23 +45,24 @@ const Page = ({ params }: { params: { userId: string } }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <div onClick={onSubmit}>
-            <Button
-              text="Send Code"
-              background="bg-primaryPurple"
-              width="w-full"
-              py="py-[8px]"
-              rounded="rounded-[8px]"
-              color="text-white"
-              fontSize="text-[18px]"
-              fontWeight="font-[600]"
-              img={""}
-              gap=""
-              px=""
-              lineHeight=""
-              border=""
-            />
-          </div>
+          <Button
+            text="Send Code"
+            background="bg-primaryPurple"
+            width="w-full"
+            py="py-[8px]"
+            rounded="rounded-[8px]"
+            color="text-white"
+            fontSize="text-[18px]"
+            fontWeight="font-[600]"
+            img={""}
+            gap=""
+            px=""
+            lineHeight=""
+            border=""
+            onClick={onSubmit}
+            Icon={isLoading ? CgSpinner : null}
+            disabled={isLoading ? true : false}
+          />
         </div>
       </div>
     </div>

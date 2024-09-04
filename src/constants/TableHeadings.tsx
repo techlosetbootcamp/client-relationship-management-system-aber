@@ -75,10 +75,13 @@ export const OrderOverviewTableHeadings = [
       heading: "Product",
     },
     {
-      heading: "Quantity",
+      heading: "Total Stock",
     },
     {
-      heading: "Price",
+      heading: "Purchased Price",
+    },
+    {
+      heading: "Sale Price",
     },
     {
       heading: "Category",
@@ -87,4 +90,34 @@ export const OrderOverviewTableHeadings = [
       heading: "Actions",
     },
 
+  ];
+
+  export const orderTableHeading = [
+    {
+      heading: "Order Id",
+    },
+    {
+      heading: "Customer Id",
+    },
+    {
+      heading: "Customer",
+    },
+    {
+      heading: "Email",
+    },
+    {
+      heading: "Contact",
+    },
+    {
+      heading: "Address",
+    },
+    {
+      heading: "Orders",
+    },
+    {
+      heading: "Total Quantity",
+    },
+    {
+      heading: "SubTotal",
+    },
   ];

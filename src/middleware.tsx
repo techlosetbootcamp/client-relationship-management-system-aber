@@ -7,7 +7,7 @@ const privateRoutes = [
   "/documents",
   "/order-review",
 ];
-const publicRoutes = ["/login", "/forget-password","/sign-up"];
+const publicRoutes = ["/login", "/forget-password", "/sign-up"];
 
 const apiRoutes = [
   "/api/users",
@@ -19,8 +19,10 @@ const apiRoutes = [
 
 export function middleware(request: NextRequest) {
   let headers = new Headers(request.headers);
-  const authorization = headers.get("cookie")?.includes("next-auth.session-token");
-  console.log("authorization", authorization)
+  const authorization = headers
+    .get("cookie")
+    ?.includes("next-auth.session-token");
+  console.log("authorization", authorization);
 
   if (apiRoutes.includes(request.nextUrl.pathname)) {
     if (!authorization) {

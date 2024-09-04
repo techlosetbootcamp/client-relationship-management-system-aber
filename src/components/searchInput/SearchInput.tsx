@@ -32,6 +32,8 @@ const SearchInput = () => {
         border=""
         width=""
         Icon={null}
+        onClick={()=>{}}
+        disabled={false}
       />
     </div>
   );

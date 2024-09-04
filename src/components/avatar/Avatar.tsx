@@ -12,8 +12,6 @@ type AvatarProps = {
 };
 
 const Avatar = ({ height, width, radius, img, background }: AvatarProps) => {
-  const session = useSession();
-
   return (
     <div
       className={`${height} ${width} ${radius} ${background} overflow-hidden relative flex justify-center`}

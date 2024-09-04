@@ -30,6 +30,18 @@ type orderViewTableData = {
   price: string;
 };
 
+type ordersTableData = {
+  id: string;
+  customerId: string;
+  customer: string;
+  email: string;
+  contact: string;
+  address: string;
+  orders: "Click Here to View";
+  totalQuantity: number;
+  subTotal: number;
+};
+
 export type documentsTableData = {
   id: string;
   fileURL: string;
@@ -84,7 +96,8 @@ export type TableProps = {
     | customertableData[]
     | orderViewTableData[]
     | documentsTableData[]
-    | productTableData[];
+    | productTableData[]
+    | ordersTableData[];
 };
 
 export type IconProps = {
@@ -107,6 +120,8 @@ export type ButtonProps = {
   lineHeight: string;
   border: string;
   width: string;
+  disabled: boolean;
+  onClick: () => void;
 };
 
 export type StatusTagProps = {
@@ -124,6 +139,6 @@ export type ProductProps = {
   image: string;
   productName: string;
   category: string;
-  price: string;
-  totalStock: string;
+  price: number;
+  totalStock: number;
 };

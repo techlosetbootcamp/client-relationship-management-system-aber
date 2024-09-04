@@ -10,45 +10,15 @@ import { ProductsTableHeadings } from "@/constants/TableHeadings";
 import { ProductsTableData } from "@/constants/TableData";
 import { toast } from "@/helpers/toastify";
 import { axiosInstance } from "@/helpers/axiosInstance";
+import useProducts from "@/hooks/useProducts";
 
 const Page = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [products, setProducts] = useState<any>([]);
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const getProducts = async () => {
-    const productData = await axiosInstance.get("/products/get-products");
-    console.log("get products", productData.data.product);
-
-    const productsArray = productData.data.product.map((item: any) => {
-      console.log("item", item);
-
-      return {
-        id: item.id,
-        imgObject: {
-          img: item.image,
-          name: item.productName,
-        },
-        totalStock: item.totalStock,
-        price: item.price,
-        category: item.category,
-      };
-    });
-    setProducts(productsArray);
-
-    console.log("get products", products);
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, []);
+  const { fotmattedProducts, toggleModal, isModalOpen } = useProducts();
 
   return (
     <div className="flex flex-col border-2 border-primaryPurple gap-[22px] -[12px] w-full">
-      <Header text="Products" avatar={true}/>
-      <div className="flex self-end" onClick={toggleModal}>
+      <Header text="Products" avatar={true} />
+      <div className="flex self-end">
         <Button
           text={"Add Product"}
           background="bg-primaryPurple"
@@ -64,6 +34,8 @@ const Page = () => {
           img={""}
           width=""
           Icon={IoMdAddCircleOutline}
+          onClick={toggleModal}
+          disabled={false}
         />
       </div>
 
@@ -74,7 +46,7 @@ const Page = () => {
       <Table
         tableHeading={ProductsTableHeadings}
         // tableData={ProductsTableData}
-        tableData={products}
+        tableData={fotmattedProducts}
         background="bg-white"
         bgHeader="bg-lightPurple"
         bgRows="bg-white"

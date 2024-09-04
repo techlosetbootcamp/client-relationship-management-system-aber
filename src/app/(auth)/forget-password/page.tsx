@@ -5,11 +5,11 @@ import googleLogo from "@/assets/images/google.svg";
 import Image from "next/image";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
-
+import { CgSpinner } from "react-icons/cg";
 import useForgetPassword from "@/hooks/useForgetPassword";
 
 const Page = () => {
-  const { email, setEmail, onSubmit } = useForgetPassword();
+  const { email, setEmail, onSubmit, isLoading } = useForgetPassword();
 
   return (
     <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
@@ -27,23 +27,24 @@ const Page = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <div onClick={onSubmit}>
-            <Button
-              text="Send Code"
-              background="bg-primaryPurple"
-              width="w-full"
-              py="py-[8px]"
-              rounded="rounded-[8px]"
-              color="text-white"
-              fontSize="text-[18px]"
-              fontWeight="font-[600]"
-              img={""}
-              gap=""
-              px=""
-              lineHeight=""
-              border=""
-            />
-          </div>
+          <Button
+            text="Send Code"
+            background="bg-primaryPurple"
+            width="w-full"
+            py="py-[8px]"
+            rounded="rounded-[8px]"
+            color="text-white"
+            fontSize="text-[18px]"
+            fontWeight="font-[600]"
+            img={""}
+            gap=""
+            px=""
+            lineHeight=""
+            border=""
+            onClick={onSubmit}
+            Icon={isLoading ? CgSpinner : null}
+            disabled={isLoading ? true : false}
+          />
         </div>
       </div>
     </div>

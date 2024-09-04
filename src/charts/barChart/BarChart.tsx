@@ -21,22 +21,27 @@ type AxisProps = {
 
 const BarChart = ({ axis,data }: any) => {
   const obj = useCalendarContext()
+  console.log("data in bar chart",data)
 
   return (
     <Bar
       options={{
 
         /////////FIX IT///////////////
-        scales: {
-          x: {
-            type:"time",
-            time:{
-              unit:"day"
+        ...(data?.labels?.length===0 && {
+
+          scales: {
+            x: {
+              type:"time",
+              time:{
+                unit:"day"
+              },
+              min:obj?.formattedStartDate,
+              max:obj?.formattedEndDate,
             },
-            min:obj?.formattedStartDate,
-            max:obj?.formattedEndDate,
           },
-        },
+        }),
+        
             
          
         indexAxis: axis,

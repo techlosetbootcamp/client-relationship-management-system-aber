@@ -15,10 +15,17 @@ export const NavLinks = [
       path: "/",
     },
     {
-      text: "Notifications",
+      text: "Orders",
       icon: <Icon2 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "#",
+      path: "/orders",
     },
+
+    //CHANGE LATER
+    // {
+    //   text: "Notifications",
+    //   icon: <Icon2 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
+    //   path: "#",
+    // },
     {
       text: "Customers",
       icon: <Icon3 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,

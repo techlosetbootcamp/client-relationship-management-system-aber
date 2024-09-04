@@ -4,21 +4,9 @@ import { NextAuthOptions } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
-
-// const users = [
-//   {
-//     id: "1",
-//     email: "test1@test.com",
-//     password: 123456,
-//   },
-//   {
-//     id: "2",
-//     email: "test2@test.com",
-//     password: 123456,
-//   },
-// ];
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -31,13 +19,16 @@ const authOptions: NextAuthOptions = {
       authorize: async function (credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
           console.log(
-            "something is not present",
+            "Input Fields must not be empty",
             credentials,
             credentials?.email,
             credentials?.password
           );
           return null;
         }
+
+
+        
         try {
           await prisma.$connect();
 
@@ -91,7 +82,6 @@ const authOptions: NextAuthOptions = {
         return {
           ...token,
           id: user?.id,
-         
         };
       }
       if (trigger === "update" && session) {
@@ -118,7 +108,7 @@ const authOptions: NextAuthOptions = {
           name: token.name,
           email: token.email,
           image: token.picture,
-          public_id : token.public_id
+          public_id: token.public_id,
         },
       };
     },

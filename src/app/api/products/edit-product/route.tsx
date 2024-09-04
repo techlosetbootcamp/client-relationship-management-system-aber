@@ -14,8 +14,9 @@ export const POST = async (req: Request) => {
 
   const id = formdata.get("id") as string;
   const productName = formdata.get("productName") as string;
-  const price = formdata.get("price") as string;
-  const totalStock = formdata.get("totalStock") as string;
+  const price = formdata.get("price") as unknown as number;
+  const purchasedPrice = formdata.get("purchasedPrice") as unknown as number;
+  const totalStock = formdata.get("totalStock") as unknown as number;
   const category = formdata.get("category") as string;
   const image = formdata.get("image") as File;
 
@@ -46,8 +47,8 @@ export const POST = async (req: Request) => {
           productName: productName,
           totalStock: totalStock,
           price: price,
+          purchasedPrice: purchasedPrice,
           category: category,
-
           image: response?.secure_url,
           public_id: response?.public_id,
         },

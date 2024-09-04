@@ -16,14 +16,17 @@ const Button = ({
   py,
   lineHeight,
   border,
+  onClick,
   Icon,
+  disabled
 }: ButtonProps) => {
   return (
     <button
-      className={`${background} ${border} ${rounded} ${gap} ${px} ${py} ${width}  flex items-center justify-center`}
+      onClick={onClick}
+      className={`${background}  ${border} ${rounded} ${gap} ${px} ${py} ${width} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} flex items-center justify-center`}
     >
       {img && <Image src={img} alt="icon" />}
-      {Icon && <Icon color="white" size={25} />}
+      {Icon && <Icon color="white" size={25} className={disabled ? "animate-spin" : ""}/>}
 
       <p
         className={`${fontSize} ${color} ${lineHeight} ${fontWeight} font-albertSans`}

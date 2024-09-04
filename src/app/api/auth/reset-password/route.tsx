@@ -10,11 +10,14 @@ export const POST = async (req: Request) => {
   console.log("in reset-password api", password, confirmPassword, userId);
 
   if (!password || !confirmPassword) {
-    return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
+    return NextResponse.json({ message: "Invalid Data", status: 400 });
   }
 
   if (password != confirmPassword) {
-    return NextResponse.json({ message: "Passwords does not match" });
+    return NextResponse.json({
+      message: "Passwords do not match. Please check your input and try again.",
+      status: 400,
+    });
   }
 
   const newPassword = await bcrypt.hash(password, 10);
@@ -29,7 +32,10 @@ export const POST = async (req: Request) => {
       },
     });
 
-    return NextResponse.json({ message: "Passwords changed successfully" });
+    return NextResponse.json({
+      message: "Your password has been successfully reset",
+      status: 200,
+    });
   } catch (error) {
     console.log(error);
   }

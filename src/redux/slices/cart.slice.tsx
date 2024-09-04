@@ -1,10 +1,5 @@
 import { ProductProps } from "@/types/Types";
-import {
-  createAsyncThunk,
-  createSlice,
-  current,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 type CartState = {
@@ -16,9 +11,10 @@ type CartState = {
 };
 
 const initialState: CartState = {
-  cartData: localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart") as string)
-    : [],
+  // cartData: localStorage.getItem("cart")
+  //   ? JSON.parse(localStorage.getItem("cart") as string)
+  //   : [],
+  cartData: [],
   loading: false,
 };
 
@@ -42,11 +38,14 @@ const cartSlice = createSlice({
         state.cartData.push(action.payload);
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.cartData));
+      // localStorage.setItem("cart", JSON.stringify(state.cartData));
 
       state.cartData.map((item) => {
         console.log("item", item);
       });
+    },
+    handleRemoveFromCart : (state,action) =>{
+      state.cartData = state.cartData.filter((item : any)=>item.product.id!=action.payload.id)
     },
     handleCartQuantity: (state, action) => {
       console.log("handle cart quantity reducer", state, action);
@@ -57,7 +56,7 @@ const cartSlice = createSlice({
         state.cartData[productIndex].quantity = action.payload.quantity;
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.cartData));
+      // localStorage.setItem("cart", JSON.stringify(state.cartData));
     },
   },
   // extraReducers: (builder) => {
@@ -76,6 +75,6 @@ const cartSlice = createSlice({
   //   });
   // },
 });
-export const { handleAddToCart, handleCartQuantity } = cartSlice.actions;
+export const { handleAddToCart, handleCartQuantity, handleRemoveFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

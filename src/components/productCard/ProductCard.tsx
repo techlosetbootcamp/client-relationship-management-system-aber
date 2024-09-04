@@ -8,9 +8,9 @@ type ProductCardProps = {
   id: string;
   productName: string;
   category: string;
-  price: string;
+  price: number;
   image: string;
-  onClick : () =>void
+  onClick: () => void;
 };
 
 const ProductCard = ({
@@ -35,7 +35,7 @@ const ProductCard = ({
       <div className="rounded-[10px] w-full min-h-[150px] shadow-md flex items-center justify-center relative overflow-hidden">
         <Image src={image} alt="product Image" fill className="object-cover" />
       </div>
-      <div className="flex flex-col justify-start w-full gap-[10px]">
+      <div className="flex flex-row justify-between items-center w-full gap-[10px]">
         <div>
           <p className="text-[20px] font-[600]">{productName}</p>
           <p className="text-[14px] font-[500] text-blue">{category}</p>
@@ -44,7 +44,6 @@ const ProductCard = ({
         <p className="font-[500]">${price}</p>
       </div>
       {/* <div className="flex w-full mx-auto gap-[10px]"> */}
-      <div onClick={onClick}>
 
       <Button
         text={"Add to Cart"}
@@ -59,9 +58,11 @@ const ProductCard = ({
         px="px-[12px]"
         py="py-[6px]"
         img={""}
-        width=""
+        width="w-full"
+        onClick={onClick}
+        disabled={false}
       />
-      </div>
+
       {/* <Button
           text={"Add to Cart"}
           background="bg-white"

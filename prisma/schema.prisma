@@ -43,20 +43,18 @@ model User {
 // }
 
 model Document {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  fileName String?
-
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  fileName    String?
   type        String
   version     String
   status      String
   fileURL     String
-  user        User   @relation(fields: [userId], references: [id])
-  userId      String @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @db.ObjectId
   authorImage String
   authorName  String
-
-  CreatedAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  CreatedAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // type DocumentFile {
@@ -71,24 +69,28 @@ model Document {
 // }
 
 model Product {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  productName String
-  totalStock  String
-  image       String?
-  public_id   String?
-  price       String
-  category    String
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  productName    String
+  totalStock     Int
+  image          String?
+  public_id      String?
+  purchasedPrice Int
+  price          Int
+  category       String
+  soldQuantity   Int     @default(0)
 }
 
 model Order {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  user            User   @relation(fields: [userId], references: [id])
-  userId          String @db.ObjectId
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String    @db.ObjectId
   customerName    String
   customerEmail   String
   customerPhone   String
   customerAddress String
   orders          Json?
-  subTotal        String
+  subTotal        Int
   totalQuantity   Int
+  CreatedAt       DateTime? @default(now())
+  updatedAt       DateTime? @updatedAt
 }
