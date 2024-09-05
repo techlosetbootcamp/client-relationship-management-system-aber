@@ -39,22 +39,23 @@ const DesktopSidebar = () => {
                   <Link
                     key={item.text}
                     href={item.path}
-                    className={`${
-                      pathname === item.path ? "active" : ""
-                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
+                    // className={`${
+                    //   pathname === item.path ? "active" : ""
+                    // }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
                   >
-                    <div
+                    {/* <div
                       key={item.text}
                       className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer"
-                    >
-                      {/* <Img fill=""/> */}
+                    > */}
+                    {/* <Img fill=""/> */}
 
-                      {/* <Image src={item.icon} alt="nav-icon" /> */}
-                      <div className="flex items-center">{item.icon}</div>
-                      {/* <item.icon/> */}
+                    {/* <Image src={item.icon} alt="nav-icon" /> */}
+                    {/* <div className="flex items-center">{item.icon}</div> */}
+                    {/* <item.icon/> */}
 
-                      <div className="font-barlow ">{item.text}</div>
-                    </div>
+                    {/* <div className="font-barlow ">{item.text}</div>
+                    </div> */}
+                    <div className="font-barlow ">{item.text}</div>
                   </Link>
                 );
               })}
@@ -68,7 +69,6 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(8, 10).map((item) => {
                 return (
-                  <>
                   <Link
                     key={item.text}
                     href={item.path}
@@ -84,8 +84,6 @@ const DesktopSidebar = () => {
                       <div className="font-barlow">{item.text}</div>
                     </div>
                   </Link>
-                  <div>outside link</div>
-                  </>
                 );
               })}
             </div>
