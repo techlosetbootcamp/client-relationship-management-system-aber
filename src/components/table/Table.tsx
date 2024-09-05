@@ -65,8 +65,10 @@ const Table = ({
     setSelectAll(!selectAll);
     const checkedArray: any = {};
     tableData.forEach((item) => {
-      console.log(item.id);
-      checkedArray[item.id] = temp;
+      if ("id" in item) {
+        // console.log(item.id);
+        checkedArray[item?.id] = temp;
+      }
     });
 
     console.log("checkedArray", checkedArray);
@@ -85,7 +87,9 @@ const Table = ({
       };
 
       console.log("newCheckedItems", newCheckedItems);
-      const allChecked = tableData.every((item) => newCheckedItems[item.id]);
+      const allChecked = tableData.every(
+        (item) => "id" in item && newCheckedItems[item?.id]
+      );
       console.log("allChecked", allChecked);
       setSelectAll(allChecked);
       return newCheckedItems;
@@ -294,8 +298,12 @@ const Table = ({
                           type="checkbox"
                           name=""
                           id=""
-                          checked={checkedItems[item?.id] || false}
-                          onChange={() => handleCheckbox(event, item?.id)}
+                          checked={
+                            ("id" in item && checkedItems[item?.id]) || false
+                          }
+                          onChange={(event) =>
+                            "id" in item && handleCheckbox(event, item?.id)
+                          }
                         />
                       </td>
                     )}
@@ -414,9 +422,9 @@ const Table = ({
                         return (
                           <td
                             onClick={
-                              key == "orders"
+                              key == "orders" && "orderId" in item
                                 ? () => {
-                                    getOrderById(item?.id);
+                                    getOrderById(item?.orderId);
                                   }
                                 : () => {
                                     console.log("clicked not order");

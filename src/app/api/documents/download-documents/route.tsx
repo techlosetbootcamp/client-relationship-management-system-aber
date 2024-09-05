@@ -8,7 +8,8 @@ import { NextResponse } from "next/server";
 import { app } from "@/helpers/firebaseConfig";
 import DocumentDownload from "@/helpers/documentDownload";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { checkedItemsIds } = await req.json();

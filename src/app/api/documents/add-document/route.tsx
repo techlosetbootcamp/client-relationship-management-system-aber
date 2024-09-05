@@ -5,9 +5,9 @@ import SendEmail from "@/helpers/SendEmail";
 import { PrismaClient } from "@prisma/client";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { NextResponse } from "next/server";
-
+import prisma from "@/helpers/prisma";
 import { app } from "@/helpers/firebaseConfig";
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 const storage = getStorage(app);
 

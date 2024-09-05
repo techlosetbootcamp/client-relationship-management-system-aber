@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Button from "../button/Button";
 import img from "@/assets/images/ArrowUp.svg";
 import Img2 from "@/assets/images/Icon6";
@@ -6,22 +7,71 @@ import Avatar from "../avatar/Avatar";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import BarChart from "@/charts/barChart/BarChart";
 import StatusTag from "../statusTag/StatusTag";
+import { axiosInstance } from "@/helpers/axiosInstance";
+import { format, startOfMonth, endOfMonth } from "date-fns";
 
-const data = {
-  labels: ["May", "Jun", "Jul"],
-  datasets: [
-    {
-      label: "Dataset",
-      data: [6500, 5000, 4000],
+// const data = {
+//   labels: ["May", "Jun", "Jul"],
+//   datasets: [
+//     {
+//       label: "Dataset",
+//       data: [6500, 5000, 4000],
 
-      backgroundColor: ["#9A55FF", "#41A5FF", "#ED4D5C"],
+//       backgroundColor: ["#9A55FF", "#41A5FF", "#ED4D5C"],
 
-      borderWidth: 1,
-    },
-  ],
-};
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
+// Get the current date
+const currentDate = new Date();
+
+// Get the first day of the month
+const firstDayOfMonth = format(startOfMonth(currentDate), "MMMM d, yyyy");
+
+// Get the last day of the month
+const lastDayOfMonth = format(endOfMonth(currentDate), "MMMM d, yyyy");
 const Card2 = () => {
+  const [checkResponse, setCheckRespone] = useState<any>();
+  const [currentMonthIncome, setCurrentMonthIncome] = useState(0);
+
+  const check = async () => {
+    const response = await axiosInstance.get("/order/get-order-by-month");
+    console.log("monthly income response", response);
+    const data = {
+      // labels: ["May", "Jun", "Jul"],
+      labels: response?.data?.monthlyOrders?.map((monthlyOrder: any) => {
+        return monthlyOrder.month;
+      }),
+      datasets: [
+        {
+          label: "Dataset",
+          data: response?.data?.monthlyOrders?.map(
+            (monthlyOrder: any, index: number) => {
+              if (index == 0) {
+                setCurrentMonthIncome(monthlyOrder.totalIncome);
+              }
+              return monthlyOrder.totalIncome;
+            }
+          ),
+
+          backgroundColor: ["#9A55FF", "#41A5FF", "#ED4D5C"],
+
+          borderWidth: 1,
+        },
+      ],
+    };
+    setCheckRespone(data);
+  };
+
+  useEffect(() => {
+    console.log("in useEffect card2", checkResponse);
+  }, [checkResponse]);
+
+  useEffect(() => {
+    check();
+  }, []);
   return (
     <CardWrapper
       width="xl:w-[561px] lg:w-[459px] "
@@ -34,7 +84,7 @@ const Card2 = () => {
         </p>
         <div className="flex justify-between">
           <p className="font-bold md:text-[19.6px] xl:text-[24px] md:leading-[24.5px] xl:leading-[36px] font-albertSans">
-            $ 6,567.00
+            $ {currentMonthIncome}
           </p>
           <div>
             <StatusTag
@@ -65,13 +115,13 @@ const Card2 = () => {
               Accounting
             </p>
             <p className="text-mediumGray md:text-[12.2px] xl:text-[15px] font font-medium md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
-              July 1, 2023 - July 31, 2023
+              {firstDayOfMonth} - {lastDayOfMonth}
             </p>
           </div>
         </div>
       </div>
       <div className="md:w-[55%] h-full flex items-center">
-        <BarChart axis="y" data={data} />
+        {checkResponse && <BarChart axis="y" data={checkResponse} />}
       </div>
     </CardWrapper>
   );

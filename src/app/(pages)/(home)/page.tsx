@@ -92,18 +92,24 @@ export default function Home() {
               btnText="3.4%"
               color="text-secondaryGreen"
               background="bg-lightGreen"
+              text = "Total Profit"
+              chart = "profit"
               img={img}
             />
             <GraphCard
               btnText="2.6%"
               color="text-secondaryRed"
               background="bg-lightRed"
+              text = "Total Expenses"
+              chart = "expenses"
               img={img}
             />
             <GraphCard
               btnText="10%"
               color="text-secondaryBlue"
               background="bg-lightBlue"
+              text = "New Customers"
+              chart = "customers"
               img={img}
             />
           </div>

@@ -2,7 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import next from "next";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const {
@@ -13,6 +14,7 @@ export const POST = async (req: Request) => {
     customerAddress,
     orders,
     subTotal,
+    totalPurchasedPrice,
     totalQuantity,
     paidAmount,
   } = await req.json();
@@ -33,6 +35,7 @@ export const POST = async (req: Request) => {
     customerAddress,
     orders,
     subTotal,
+    totalPurchasedPrice,
     totalQuantity,
     paidAmount,
     typeof paidAmount
@@ -90,6 +93,7 @@ export const POST = async (req: Request) => {
         customerAddress,
         orders,
         subTotal: subTotal,
+        totalPurchasedPrice : totalPurchasedPrice,
         totalQuantity,
       },
     });

@@ -10,19 +10,17 @@ import { axiosInstance } from "@/helpers/axiosInstance";
 export const Visitors = () => {
   const [data, setData] = useState<any>();
   const obj = useCalendarContext();
-  let orderData : any ={}
+  let orderData: any = {};
   const orderCountApi = async () => {
     try {
-      
       const response = await axiosInstance.post("/order/get-order-by-date", {
         startDate: obj && obj?.formattedStartDate,
         endDate: obj && obj?.formattedEndDate,
-      
       });
-  
+
       console.log("respone befor", response);
-  
-       orderData = {
+
+      orderData = {
         labels: [],
         // labels: ["1Jul", "2Jul", "3Jul", "4Jul", "5Jul", "6Jul", "7Jul"],
         datasets: [
@@ -41,14 +39,14 @@ export const Visitors = () => {
                 y: item.orderCount,
               };
             }),
-  
+
             backgroundColor: ["#C9F19C"],
-  
+
             borderWidth: 1,
           },
         ],
       };
-  
+
       if (!orderData.datasets[0].data.length) {
         console.error("No data available in datasets[0].data");
       }
@@ -56,8 +54,7 @@ export const Visitors = () => {
       setData(orderData);
       console.log("visitor Data", data);
     } catch (error) {
-      console.log("error in visitor",error);
-      
+      console.log("error in visitor", error);
     }
   };
   useEffect(() => {
@@ -79,10 +76,7 @@ export const Visitors = () => {
       </p>
       <div className="border border-borderGray" />
       <div className="h-[223px]">
-        {
-          data && 
-        <BarChart axis={"x"} data={ data} />
-        }
+        {data && <BarChart axis={"x"} data={data} />}
       </div>
 
       <div className="border border-borderGray" />

@@ -10,6 +10,7 @@ const useCart = (totalQuantity: number) => {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
+  const [totalPurchasedPrice, setTotalPurchasedPrice] = useState(0);
 
   const cartData = useSelector((state: RootState) => state.cart.cartData);
   
@@ -26,6 +27,7 @@ const useCart = (totalQuantity: number) => {
       paidAmount : amount,
       orders: cartData,
       subTotal,
+      totalPurchasedPrice,
       totalQuantity,
     });
 
@@ -35,11 +37,13 @@ const useCart = (totalQuantity: number) => {
   };
 
   useEffect(() => {
-    let sum = 0;
+    let sum = 0, purchasePriceSum=0;
     cartData.forEach((item: any) => {
       sum += +item.product.price * +item.quantity;
+      purchasePriceSum  += item.product.purchasedPrice * +item.quantity
     });
     setSubTotal(sum);
+    setTotalPurchasedPrice(purchasePriceSum)
   }, [cartData]);
 
   return {

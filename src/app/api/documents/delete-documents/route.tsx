@@ -7,7 +7,8 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 import { NextResponse } from "next/server";
 import { app } from "@/helpers/firebaseConfig";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { checkedItemsIds } = await req.json();

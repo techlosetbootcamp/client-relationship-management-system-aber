@@ -60,6 +60,7 @@ const useProducts = () => {
           image: product.image,
           productName: product.productName,
           category: product.category,
+          purchasedPrice : product.purchasedPrice,
           price: product.price,
         },
         quantity: 1,

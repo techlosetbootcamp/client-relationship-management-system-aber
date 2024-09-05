@@ -21,7 +21,7 @@ type AxisProps = {
 
 const BarChart = ({ axis,data }: any) => {
   const obj = useCalendarContext()
-  console.log("data in bar chart",data)
+  console.log("data in bar chart",data, data.labels)
 
   return (
     <Bar

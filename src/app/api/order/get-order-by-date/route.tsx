@@ -5,7 +5,8 @@ import SendEmail from "@/helpers/SendEmail";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { startDate, endDate } = await req.json();
@@ -26,23 +27,35 @@ export const POST = async (req: Request) => {
       },
     });
 
-    const groupedOrders : any = [];
+    const groupedOrders: any = [];
+    let totalProfit: number = 0;
+    let totalExpense: number = 0;
+    let totalOrders : number =0
 
-    orders.forEach(order => {
-      const date = order.CreatedAt && new Date(order?.CreatedAt)?.toISOString().split('T')[0]; // Extract the date part (YYYY-MM-DD)
-    
-      const existingGroup = groupedOrders.find((group: { date: string; }) => group.date === date);
-    
+    orders.forEach((order) => {
+      totalProfit += order.subTotal - order.totalPurchasedPrice;
+      totalExpense += order.totalPurchasedPrice;
+      totalOrders +=1;
+      const date =
+        order.CreatedAt &&
+        new Date(order?.CreatedAt)?.toISOString().split("T")[0]; // Extract the date part (YYYY-MM-DD)
+
+      const existingGroup = groupedOrders.find(
+        (group: { date: string }) => group.date === date
+      );
+
       if (existingGroup) {
         existingGroup.subTotal += order.subTotal; // Add to the existing subTotal
+        existingGroup.totalPurchasedPrice += order.totalPurchasedPrice;
         existingGroup.orders.push(order); // Add the order to the existing array
-        existingGroup.orderCount += 1
+        existingGroup.orderCount += 1;
       } else {
         groupedOrders.push({
           date,
-          subTotal: order.subTotal, // Initialize with the first order's subTotal
+          subTotal: order.subTotal,
+          totalPurchasedPrice: order.totalPurchasedPrice, // Initialize with the first order's subTotal
           orders: [order], // Initialize with the first order
-          orderCount :1
+          orderCount: 1,
         });
       }
     });
@@ -74,6 +87,9 @@ export const POST = async (req: Request) => {
     return NextResponse.json({
       message: "got order by date ranges",
       order: groupedOrders,
+      totalProfit,
+      totalExpense,
+      totalOrders
     });
   } catch (error) {
     console.log("error", error);

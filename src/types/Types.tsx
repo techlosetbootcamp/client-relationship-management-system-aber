@@ -31,7 +31,7 @@ type orderViewTableData = {
 };
 
 type ordersTableData = {
-  id: string;
+  orderId:string;
   customerId: string;
   customer: string;
   email: string;
@@ -139,6 +139,7 @@ export type ProductProps = {
   image: string;
   productName: string;
   category: string;
+  purchasedPrice : number;
   price: number;
   totalStock: number;
 };
