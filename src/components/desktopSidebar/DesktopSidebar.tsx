@@ -35,7 +35,6 @@ const DesktopSidebar = () => {
             </p>
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(0, 8).map((item) => {
-                console.log(item);
                 return (
                   <Link
                     key={item.text}
@@ -51,11 +50,10 @@ const DesktopSidebar = () => {
                       {/* <Img fill=""/> */}
 
                       {/* <Image src={item.icon} alt="nav-icon" /> */}
-                      {/* <div className="flex items-center">{item.icon}</div> */}
+                      <div className="flex items-center">{item.icon}</div>
                       {/* <item.icon/> */}
 
-                      {/* <div className="font-barlow ">{item.text}</div> */}
-                      <div className="font-barlow ">Dashboard</div>
+                      <div className="font-barlow ">{item.text}</div>
                     </div>
                   </Link>
                 );
@@ -70,6 +68,7 @@ const DesktopSidebar = () => {
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(8, 10).map((item) => {
                 return (
+                  <>
                   <Link
                     key={item.text}
                     href={item.path}
@@ -85,6 +84,8 @@ const DesktopSidebar = () => {
                       <div className="font-barlow">{item.text}</div>
                     </div>
                   </Link>
+                  <div>outside link</div>
+                  </>
                 );
               })}
             </div>
