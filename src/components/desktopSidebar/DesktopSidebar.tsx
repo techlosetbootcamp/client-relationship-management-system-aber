@@ -35,6 +35,7 @@ const DesktopSidebar = () => {
             </p>
             <div className="flex flex-col gap-[16px] ">
               {NavLinks.slice(0, 8).map((item) => {
+                console.log(item);
                 return (
                   <Link
                     key={item.text}
@@ -53,7 +54,8 @@ const DesktopSidebar = () => {
                       {/* <div className="flex items-center">{item.icon}</div> */}
                       {/* <item.icon/> */}
 
-                      <div className="font-barlow ">{item.text}</div>
+                      {/* <div className="font-barlow ">{item.text}</div> */}
+                      <div className="font-barlow ">Dashboard</div>
                     </div>
                   </Link>
                 );
