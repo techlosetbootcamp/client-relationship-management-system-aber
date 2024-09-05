@@ -39,9 +39,9 @@ const DesktopSidebar = () => {
                   <Link
                     key={item.text}
                     href={item.path}
-                    // className={`${
-                    //   pathname === item.path ? "active" : ""
-                    // }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
+                    className={`${
+                      pathname === item.path ? "active" : ""
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
                   >
                     {/* <div
                       key={item.text}
