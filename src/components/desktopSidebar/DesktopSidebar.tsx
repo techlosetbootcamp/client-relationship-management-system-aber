@@ -50,7 +50,7 @@ const DesktopSidebar = () => {
                       {/* <Img fill=""/> */}
 
                       {/* <Image src={item.icon} alt="nav-icon" /> */}
-                      {/* <div className="flex items-center">{item.icon}</div> */}
+                      <div className="flex items-center">{item.icon}</div>
                       {/* <item.icon/> */}
 
                       <div className="font-barlow ">{item.text}</div>
