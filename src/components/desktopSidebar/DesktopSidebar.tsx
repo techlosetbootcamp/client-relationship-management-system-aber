@@ -47,12 +47,12 @@ const DesktopSidebar = () => {
                       {/* <Img fill=""/> */}
 
                       {/* <Image src={item.icon} alt="nav-icon" /> */}
-                      {/* <div className="flex items-center">{item.icon}</div> */}
+                      <div className="flex items-center">{item.icon}</div>
                       {/* <item.icon/> */}
 
                       <div className="font-barlow ">{item.text}</div>
                     </div>
-                    <div className="font-barlow ">{item.text}</div>
+         
                   </Link>
                 );
               })}
@@ -75,7 +75,7 @@ const DesktopSidebar = () => {
                   >
                     <div
                       key={item.text}
-                      className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                      className="text-darkGray flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
                     >
                       <div className="flex items-center">{item.icon}</div>
                       <div className="font-barlow">{item.text}</div>
@@ -92,7 +92,7 @@ const DesktopSidebar = () => {
                 <div
                   key={item.text}
                   onClick={SignOutHandler}
-                  className="text-darkGray flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                  className="text-darkGray flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
                 >
                   <div className="flex items-center">{item.icon}</div>
                   <div className="font-barlow">{item.text}</div>
