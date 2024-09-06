@@ -43,7 +43,7 @@ const DesktopSidebar = () => {
                       pathname === item.path ? "active" : ""
                     }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
                   >
-                    <div className="flex h-[40px] px-[16px] py-[8px] opacity-[0px] w-full gap-[8px] cursor-pointer">
+                    <div className="flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer">
                       {/* <Img fill=""/> */}
 
                       {/* <Image src={item.icon} alt="nav-icon" /> */}
