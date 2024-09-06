@@ -11,7 +11,7 @@ import Icon9 from "@/assets/images/Icon9";
 export const NavLinks = [
     {
       text: "Dashboard",
-      // icon: <Icon1 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
+      icon: <Icon1 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
       path: "/",
     },
     {
