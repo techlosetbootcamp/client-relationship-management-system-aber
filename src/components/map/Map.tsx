@@ -19,6 +19,9 @@ import "leaflet/dist/leaflet.css";
 import { statesData } from "@/constants/TempData";
 import { color } from "chart.js/helpers";
 import { LatLngExpression } from "leaflet";
+import { axiosInstance } from "@/helpers/axiosInstance";
+import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
+import { format } from "date-fns";
 const calculateCentroid = (coords: string | any[]) => {
   let centroidX = 0,
     centroidY = 0;
@@ -53,11 +56,22 @@ const CustomSVGOverlay = ({ coordinates, label, centroid, type }: any) => (
 );
 
 const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
+  const obj = useCalendarContext();
+
   const [hoveredPolygonId, setHoveredPolygonId] = useState<string | null>(null);
+  const [orderCount, setOrderCount] = useState(0);
+  const getStatesOrderCount = async (stateName: string) => {
+    console.log(" i am called", stateName);
+    const response = await axiosInstance.post("/order/get-states-order", {
+      state: stateName,
+    });
+    setOrderCount(response?.data?.orderCount);
+    console.log("inside map component", response);
+  };
   return (
-    <div className=" border-2 h-full w-full">
+    <div className=" border-2 h-full w-full  relative z-0">
       <MapContainer
-        className="h-full w-full  relative z-0"
+        className="h-full w-full "
         // center={[38.0311988, -102.1390331]}
         center={[longitude, latitude]}
         zoom={zoom}
@@ -97,21 +111,13 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
           //   state.geometry.coordinates[0].map((item) => [item[1], item[0]]);
           ///////////////////KEEP THIS/////////////////
 
-          // console.log("here is coordinate",coordinate[0])
           const population = state.properties.density;
           const stateName = state.properties.name;
           const stateType = state.geometry.type === "Polygon";
           const centroid = calculateCentroid(coordinate);
-          // console.log("centroid", centroid)
+          const currentDate = new Date();
+          const formattedDate = format(currentDate, "MMM d, yyyy");
 
-          // if(hover){
-          // const fillColor = isHovered ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF");
-
-          // }else{
-
-          //   const isHovered = state.id === hoveredPolygonId;
-          //   const fillColor = isHovered ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF");
-          // }
           const isHovered = state.id === hoveredPolygonId;
           let fillColor = "transparent";
           if (fill && hover) {
@@ -121,7 +127,7 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
           }
 
           if (state.geometry.type === "MultiPolygon") {
-            console.log("insde multipolygon", state.properties.name);
+            // console.log("insde multipolygon", state.properties.name);
             return coordinate.map((polygon: any, index: number) => (
               <Polygon
                 key={`${state.id}-${index}`}
@@ -137,6 +143,7 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
                 eventHandlers={{
                   mouseover: (e) => {
                     setHoveredPolygonId(state.id);
+                    getStatesOrderCount(state.properties.name);
                     const layer = e.target;
                     layer.setStyle({
                       filOpacity: 0.7,
@@ -155,12 +162,32 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
                       color: fill && "white",
                     });
                   },
-                  click: (e) => {},
+                  click: (e) => {
+                    getStatesOrderCount(stateName);
+                  },
                 }}
               >
                 {fill && (
                   <div>
-                    <Tooltip>{stateName}</Tooltip>
+                    <Tooltip>
+                      <div className="px-[9.82px] bg-white flex flex-col gap-[6.54px]">
+                        <p className="font-[600] text-[12px] leading-[18px] text-darkGray font-albertSans">
+                          {stateName}
+                        </p>
+                        <div className="flex items-center gap-[3.27px]">
+                          <p className="font-[700] text-[16.36px] leading-[24.54px] text-darkGray font-albertSans">
+                            {orderCount}
+                          </p>
+                          <p className="font-[500] text-[12px] leading-[18px] text-darkGray font-barlow">
+                            orders
+                          </p>
+                        </div>
+                        <div className="border border-borderGray" />
+                        <p className="font-[600] text-[12px] leading-[18px] text-[#ADB5BD] font-barlow">
+                          {formattedDate}
+                        </p>
+                      </div>
+                    </Tooltip>
                     <CustomSVGOverlay
                       label={stateName}
                       centroid={centroid}
@@ -188,6 +215,7 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
                 eventHandlers={{
                   mouseover: (e) => {
                     setHoveredPolygonId(state.id);
+                    getStatesOrderCount(state.properties.name);
                     const layer = e.target;
                     layer.setStyle({
                       filOpacity: 0.7,
@@ -211,7 +239,23 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
               >
                 {fill && (
                   <>
-                    <Tooltip>{stateName}</Tooltip>
+                    <Tooltip>
+                      <div className="px-[9.82px] bg-white flex flex-col gap-[6.54px]">
+                        <p className="font-[600] text-[12px] leading-[18px] text-darkGray font-albertSans">
+                          {stateName}
+                        </p>
+                        <div className="flex items-center gap-[3.27px]">
+                          <p className="font-[700] text-[16.36px] leading-[24.54px] text-darkGray font-albertSans">
+                            {orderCount}
+                          </p>
+                          <p className="font-[500] text-[12px] leading-[18px] text-darkGray font-barlow">
+                            orders
+                          </p>
+                        </div>
+                        <div className="border border-borderGray" />
+                        <p className="font-[600] text-[12px] leading-[18px] text-[#ADB5BD] font-barlow">{formattedDate}</p>
+                      </div>
+                    </Tooltip>
                     <CustomSVGOverlay
                       label={stateName}
                       centroid={centroid}
@@ -223,127 +267,6 @@ const Map = ({ hover, zoom, fill, longitude, latitude }: any) => {
               </Polygon>
             );
           }
-
-          {
-            /* {
-        centroid!=null && 
-                <ReactLeafletTextPath
-                  positions={[41.476292, -72.812885]}
-                  offset={10}
-                   
-                  options={{
-                    repeat: true,
-                    attributes: { "fill": "white", "font-size": "12px",
-  
-                      "dx":5,
-                      "dy":10
-                     },
-                  }}
-                  
-                  center
-                  align
-                  text={stateName}
-                />
-      } */
-          }
-
-          {
-            /* </ReactLeafletTextPath> */
-          }
-          {
-            /* <Pane>hello</Pane> */
-          }
-          {
-            /* <div>hello</div> */
-          }
-          {
-            /* <p className="border-2 text-[#000] text-[20px]">population</p> */
-          }
-
-          //       return (
-          //         <Polygon
-          //           key={state.id}
-          //           positions={coordinate}
-          //           pathOptions={{
-          //             // fillColor:`"#a220cd",`
-          //             // fillColor: hover ? (isHovered ? "#9A55FF" :"#ADB5BD" ):(population > 80 ? "#47178E" : "#CFAFFF"),
-          //             fillColor: fillColor,
-          //             // fillColor: hover ? "#FF5733" : (population > 80 ? "#47178E" : "#CFAFFF"),
-          //             fillOpacity: 1,
-          //             weight: 1,
-          //             opacity: 1,
-          //             // dashArray:'3',
-          //             color: fill ? "white" : "transparent",
-          //           }}
-          //           eventHandlers={{
-          //             mouseover: (e) => {
-          //               setHoveredPolygonId(state.id);
-          //               const layer = e.target;
-          //               layer.setStyle({
-          //                 filOpacity: 0.7,
-          //                 weight: 1,
-          //                 dashArray: "",
-          //                 color: fill && "#666",
-          //               });
-          //             },
-          //             mouseout: (e) => {
-          //               setHoveredPolygonId(null);
-          //               const layer = e.target;
-          //               layer.setStyle({
-          //                 filOpacity: 0.7,
-          //                 weight: 1,
-          //                 // dashArray: "3",
-          //                 color: fill && "white",
-          //               });
-          //             },
-          //             click: (e) => {},
-          //           }}
-          //         >
-          //           {/* <ReactLeafletTextPath
-          //     positions={coordinate}
-          //     text={stateName}
-          //     // center
-          //     offset={10}
-          // /> */}
-
-          //           {/* {
-          //   centroid!=null &&
-          //           <ReactLeafletTextPath
-          //             positions={[41.476292, -72.812885]}
-          //             offset={10}
-
-          //             options={{
-          //               repeat: true,
-          //               attributes: { "fill": "white", "font-size": "12px",
-
-          //                 "dx":5,
-          //                 "dy":10
-          //                },
-          //             }}
-
-          //             center
-          //             align
-          //             text={stateName}
-          //           />
-          // } */}
-
-          //           {/* </ReactLeafletTextPath> */}
-          //           {/* <Pane>hello</Pane> */}
-          //           {/* <div>hello</div> */}
-          //           {/* <p className="border-2 text-[#000] text-[20px]">population</p> */}
-
-          //           {fill && (
-          //             <>
-          //               {/* <Tooltip>{stateName}</Tooltip> */}
-          //               <CustomSVGOverlay
-          //                 label={stateName}
-          //                 centroid={centroid}
-          //                 coordinates={coordinate}
-          //               />
-          //             </>
-          //           )}
-          //         </Polygon>
-          // );
         })}
       </MapContainer>
     </div>

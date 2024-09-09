@@ -10,37 +10,43 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { US_STATES } from "@/constants/UsStates";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Suspense } from 'react';
+import { Suspense } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const [cartData, setCartData] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [subTotal, setSubTotal] = useState(0);
-  const [address, setAddress] = useState<string>("Select Address");
-  const [userPhone, setUserPhone] = useState<string>("")
-  const [amount, setAmount] = useState<string>("")
 
 
-  const [isClicked, setIsClicked] = useState(false);
-  
   const { userName, userEmail } = useSessionData();
-  const AddressHandler = (state: string) => {
-    setAddress(state);
-    setIsClicked(false);
-  };
+
+  const {
+    addOrder,
+    isLoading,
+    address,
+    AddressHandler,
+    subTotal,
+    setSubTotal,
+    userPhone,
+    setUserPhone,
+    amount,
+    setAmount,
+    isClicked,
+    setIsClicked,
+  } = useCart(totalQuantity ?? 0);
 
   useEffect(() => {
     const cartDataParam = searchParams.get("cartData");
     const totalQuantityParam = searchParams.get("totalQuantity");
     const subTotalParam = searchParams.get("subTotal");
-    console.log(
-      console.log("inside use effect"),
-      searchParams,
-      cartDataParam && JSON.parse(decodeURIComponent(cartDataParam)),
-      totalQuantityParam,
-      subTotalParam
-    );
+    
+      // console.log("inside use effect"),
+      // searchParams,
+      // cartDataParam && JSON.parse(decodeURIComponent(cartDataParam)),
+      // totalQuantityParam,
+      // subTotalParam
+   
 
     if (cartDataParam) {
       try {
@@ -60,14 +66,11 @@ const Page = () => {
     console.log(totalQuantity, cartData);
   }, [searchParams]);
 
-  const { addOrder } = useCart(totalQuantity);
-
   return (
-    
-    <div className="flex flex-col gap-[22px] ml-[12px] w-full h-full overflow-x-auto ">
+    <div className="flex flex-col gap-[22px] md:ml-[12px] w-full h-full overflow-x-auto ">
       <Header text="Checkout" avatar={false} />
-      <div className="grid grid-cols-2 h-[500px] overflow-auto items-center">
-        <div className="flex flex-col gap-[10px] px-[50px]">
+      <div className="grid md:grid-cols-2  overflow-auto items-center">
+        <div className="flex flex-col gap-[10px] md:px-[50px]">
           <div className="relative rounded-[8px] h-[4rem] border border-borderGray">
             <ul
               className={`absolute h-[290px] overflow-auto w-full ${
@@ -83,7 +86,9 @@ const Page = () => {
                         ? "bg-primaryPurple text-white"
                         : "text-black"
                     } `}
-                    onClick={() => AddressHandler(item.state)}
+                    onClick={() => {
+                      AddressHandler(item.state);
+                    }}
                   >
                     {item.state}
                   </li>
@@ -106,7 +111,7 @@ const Page = () => {
             rounded="rounded-[8px]"
             height="h-[4rem]"
             placeholder="Name"
-            value={userName}
+            value={userName ?? ""}
             disabled={true}
             onChange={() => {}}
           />
@@ -116,7 +121,7 @@ const Page = () => {
             rounded="rounded-[8px]"
             height="h-[4rem]"
             placeholder="Email"
-            value={userEmail}
+            value={userEmail ?? ""}
             disabled={true}
             onChange={() => {}}
           />
@@ -125,9 +130,11 @@ const Page = () => {
             width="w-full"
             rounded="rounded-[8px]"
             height="h-[4rem]"
-            placeholder="Enter Phone No. e.g, 03XX-XXXXXXX"
+            placeholder="Enter Phone No. e.g, 03123456789"
             value={userPhone}
-            onChange={(e) => {setUserPhone(e.target.value)}}
+            onChange={(e) => {
+              setUserPhone(e.target.value);
+            }}
           />
           <InputField
             type="text"
@@ -136,10 +143,12 @@ const Page = () => {
             height="h-[4rem]"
             value={amount}
             placeholder="Enter Amount e.g, 100"
-            onChange={(e) => {setAmount(e.target.value)}}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
           />
           <Button
-            text={"Checkout"}
+            text={isLoading ? "Checking Out..." : "Checkout"}
             background="bg-primaryPurple"
             color="text-white"
             fontSize="text-[16px]"
@@ -152,11 +161,13 @@ const Page = () => {
             py="py-[14px]"
             img={""}
             width="w-full"
-            disabled={false}
             onClick={() => addOrder(userPhone, address, amount)}
+            Icon={isLoading ? CgSpinner : null}
+            disabled={isLoading ? true : false}
           />
         </div>
-        <div className=" h-full flex flex-col gap-[20px] bg-lightGray  px-[50px] h-full overflow-auto justify-center">
+
+        <div className=" h-full flex flex-col xs:py-[20px] md:py-0 gap-[20px] md:px-[50px] h-full overflow-auto justify-center">
           {cartData.map((item: any) => {
             console.log("cardData item", item);
             // setSubtotal(subtotal+(+product.price))
@@ -182,7 +193,6 @@ const Page = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

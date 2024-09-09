@@ -27,7 +27,6 @@ const BarChart = ({ axis,data }: any) => {
     <Bar
       options={{
 
-        /////////FIX IT///////////////
         ...(data?.labels?.length===0 && {
 
           scales: {

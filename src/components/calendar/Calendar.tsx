@@ -10,25 +10,16 @@ import Image from "next/image";
 import useCalendar from "@/hooks/useCalendar";
 import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
 
-// type SelectionRange = {
-//   startDate: Date;
-//   endDate: Date;
-//   key: string;
-// };
-
 const Calendar = () => {
-  // const { range, setRange, startDate, startDay, endDay, month, year } =
-  //   useCalendar();
-
   const obj = useCalendarContext();
-  // console.log("range", obj?.range, format(obj?.range[0].startDate, "PP"));
+
   console.log("calendar provider", obj);
 
   return (
     <div>
       <div
         onClick={() => obj?.setIsOpen(!obj?.isOpen)}
-        className="z-80 relative h-[38px] bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
+        className="z-80 relative bg-primaryPurple text-white cursor-pointer items-center flex text-[16px] leading-[24px] font-[600] font-albertSans py-[6px] px-[12px] rounded-[4px] gap-[4px]"
       >
         {obj?.startDay != obj?.endDay ? (
           <p>
@@ -46,8 +37,6 @@ const Calendar = () => {
         }`}
       >
         <DateRange
-        
-          //   onChange={(item) => setRange([item.selection])}
           onChange={(item) => {
             const selection = item.selection;
             if (selection) {
@@ -60,14 +49,11 @@ const Calendar = () => {
               ]);
             }
           }}
-          //   editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={obj?.range}
           months={1}
-          // direction='horizontal'
-          className="rounded-lg shadow-lg"
+          className="rounded-lg shadow-lg relative z-10"
           date={new Date()}
-          // onChange={handleSelect}
         />
       </div>
     </div>

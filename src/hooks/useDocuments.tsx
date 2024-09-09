@@ -27,7 +27,6 @@ const fileIcons: any = {
 };
 
 const useDocuments = (item?: any) => {
-  console.log("i am the item man", item);
   const dispatch: AppDispatch = useDispatch();
   const docs = useSelector((state: RootState) => state.document.data);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +50,7 @@ const useDocuments = (item?: any) => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  // console.log("item in fileModal", item);
+
   const statusHandler = (status: string) => {
     setStatus(status);
     setIsClicked(false);
@@ -63,7 +62,6 @@ const useDocuments = (item?: any) => {
 
     if (file) {
       setSelectedFile(file);
-      console.log("selected file", file, selectedFile);
     }
   };
 
@@ -79,17 +77,9 @@ const useDocuments = (item?: any) => {
     });
 
     if (!validation.success) {
-      console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      console.log(errorsMessages);
+
       return;
-    }
-    console.log("inside add document ");
-    console.log("is model open", isModalOpen);
-    // toggleFunc();
-    console.log("is model open", isModalOpen);
-    if (selectedFile) {
-      console.log("selected file", selectedFile);
     }
 
     const formData = new FormData();
@@ -103,7 +93,6 @@ const useDocuments = (item?: any) => {
       formData.append("image", userImage);
     } else {
       toast.error("No file is selected");
-      console.log("no file");
       return;
     }
 
@@ -139,24 +128,19 @@ const useDocuments = (item?: any) => {
   };
 
   const editDocument = async (toggleFunc: () => void) => {
-    console.log("edit doc is clicked");
-    // toggleModal();
-
     const validation = documentValidation.safeParse({
       version,
       status,
     });
 
     if (!validation.success) {
-      console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      console.log(errorsMessages);
       return;
     }
 
     try {
       setIsLoading(true);
-      console.log("loading inside edit document", isLoading);
+
       await dispatch(
         EditDocument({
           payload: {
@@ -183,13 +167,57 @@ const useDocuments = (item?: any) => {
       toggleFunc();
       setIsLoading(false);
     }
+  };
 
-    // const response = await axiosInstance.post("/documents/edit-document", {
-    //   version,
-    //   status,
-    //   id: item.id,
-    // });
-    // console.log("edit-product response", response);
+  const deleteDocuments = async (getCheckedItemIds: () => void) => {
+    const checkedItemsIds = getCheckedItemIds();
+    try {
+      setIsLoading(true);
+      const response = await axiosInstance.post("/documents/delete-documents", {
+        checkedItemsIds,
+      });
+      await dispatch(GetDocument());
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const downloadDocuments = async (getCheckedItemIds: () => void) => {
+    const checkedItemsIds = getCheckedItemIds();
+
+    try {
+      const response = await axiosInstance.post(
+        "/documents/download-documents",
+        { checkedItemsIds }
+      );
+
+      if (response.data.documents.length > 0) {
+        response.data.documents.map(async (doc: any) => {
+          if (doc && doc.type && doc.fileName && doc.fileURL) {
+            const filePath = doc.fileName + "." + doc.type;
+            const fetchURL = await fetch(doc.fileURL);
+            if (!fetchURL.ok) throw new Error("Network response was not ok");
+
+            const blob = await fetchURL.blob();
+            const blobUrl = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+
+            link.href = blobUrl;
+            link.download = filePath;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(blobUrl);
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
   };
 
   useEffect(() => {
@@ -198,7 +226,6 @@ const useDocuments = (item?: any) => {
   }, [item]);
 
   const getDocuments = async () => {
-    console.log("inside get document funciotn");
     try {
       setIsLoading(true);
       await dispatch(GetDocument());
@@ -208,37 +235,6 @@ const useDocuments = (item?: any) => {
     } finally {
       setIsLoading(false);
     }
-    // console.log("inside custom hook", docs);
-    //  const documentData = await axiosInstance.get("/documents/get-documents");
-    // console.log("get document", documentData.data.document);
-
-    // const documentsArray = docs?.map((item: any) => {
-    //   console.log("item", item);
-
-    //   return {
-    //     id: item.id,
-    //     grpObject: {
-    //       img: fileIcons[item.type] || fileIcons?.default,
-
-    //       name: item.fileName,
-    //       subValue: `Uploaded on ${format(
-    //         new Date(item.CreatedAt),
-    //         "dd MMMM, yyyy"
-    //       )}`,
-    //     },
-    //     type: item.type,
-    //     imgObject: {
-    //       img: item.authorImage != "null" ? item.authorImage : userAvatar,
-    //       name: item.authorName,
-    //     },
-    //     version: item.version,
-    //     status: item.status,
-    //     fileURL: item.fileURL,
-    //   };
-    // });
-    // setDocument(documentsArray);
-
-    console.log("get documents", document);
   };
 
   useEffect(() => {
@@ -248,8 +244,6 @@ const useDocuments = (item?: any) => {
   useEffect(() => {
     if (docs && docs.length > 0) {
       const documentsArray = docs.map((item: any) => {
-        console.log("item", item);
-
         return {
           id: item.id,
           grpObject: {
@@ -271,9 +265,8 @@ const useDocuments = (item?: any) => {
         };
       });
       setDocument(documentsArray);
-      console.log("Processed documents array", document);
     }
-  }, [docs]); // Trigger this effect whenever `docs` changes
+  }, [docs]);
 
   return {
     isModalOpen,
@@ -294,6 +287,8 @@ const useDocuments = (item?: any) => {
     isClicked,
     setIsClicked,
     isLoading,
+    deleteDocuments,
+    downloadDocuments,
   };
 };
 

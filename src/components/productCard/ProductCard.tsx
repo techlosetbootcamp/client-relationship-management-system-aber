@@ -10,6 +10,7 @@ type ProductCardProps = {
   category: string;
   price: number;
   image: string;
+  stock : number;
   onClick: () => void;
 };
 
@@ -18,6 +19,7 @@ const ProductCard = ({
   category,
   price,
   image,
+  stock,
   onClick,
   id,
 }: ProductCardProps) => {
@@ -46,7 +48,7 @@ const ProductCard = ({
       {/* <div className="flex w-full mx-auto gap-[10px]"> */}
 
       <Button
-        text={"Add to Cart"}
+        text={`${stock>0 ? "Add to Cart" : "Sold Out"} `}
         background="bg-primaryPurple"
         color="text-white"
         fontSize="text-[16px]"
@@ -59,8 +61,8 @@ const ProductCard = ({
         py="py-[6px]"
         img={""}
         width="w-full"
-        onClick={onClick}
-        disabled={false}
+        onClick={stock>0 ? onClick : ()=>{}}
+        disabled={stock>0 ? false : true}
       />
 
       {/* <Button

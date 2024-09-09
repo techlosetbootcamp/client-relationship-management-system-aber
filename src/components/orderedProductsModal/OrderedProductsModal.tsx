@@ -57,7 +57,7 @@ const OrderedProductsModal = ({
   }, [order]);
   return (
     <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
-      <div className="bg-white rounded-[8px] shadow-md w-[75%] p-[20px]  flex flex-col gap-[16px] overflow-x-auto">
+      <div className="bg-white rounded-[8px] shadow-md xs:w-[95%] lg:w-[75%] p-[20px]  flex flex-col gap-[16px] overflow-x-auto">
         <div className="flex justify-between">
           <p className="text-[22px] text-darkGray font-[600]">Order List</p>
           <IoClose size={30} onClick={toggleModal} />

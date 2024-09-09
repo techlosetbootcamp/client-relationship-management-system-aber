@@ -1,31 +1,13 @@
 "use client";
 import useCalendar from "@/hooks/useCalendar";
+import { CalenderProps } from "@/types/Types";
 import React, {
   createContext,
   Dispatch,
   SetStateAction,
   useContext,
 } from "react";
-type SelectionRange = {
-  startDate: Date;
-  endDate: Date;
-  key: string;
-};
 
-type CalenderProps = {
-  range: SelectionRange[];
-  //   setRange: {};
-  setRange: Dispatch<SetStateAction<SelectionRange[]>>;
-  startDate: string;
-  startDay: string;
-  endDay: string;
-  month: string;
-  year: string;
-  formattedStartDate: string;
-  formattedEndDate: string;
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
 
 const CalenderContext = createContext<CalenderProps | null>(null);
 

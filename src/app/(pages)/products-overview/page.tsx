@@ -3,17 +3,13 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/button/Button";
 import { Header } from "@/components/header/Header";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import ImageUploadModal from "@/components/imageUploadModal/ImageUploadModal";
-import DummyTable from "@/components/dummyTable/DummyTable";
+import ImageUploadModal from "@/components/productUploadModal/ProductUploadModal";
 import Table from "@/components/table/Table";
 import { ProductsTableHeadings } from "@/constants/TableHeadings";
-import { ProductsTableData } from "@/constants/TableData";
-import { toast } from "@/helpers/toastify";
-import { axiosInstance } from "@/helpers/axiosInstance";
 import useProducts from "@/hooks/useProducts";
 
 const Page = () => {
-  const { fotmattedProducts, toggleModal, isModalOpen } = useProducts();
+  const { fotmattedProducts, toggleModal, isModalOpen } = useProducts("");
 
   return (
     <div className="flex flex-col border-2 border-primaryPurple gap-[22px] -[12px] w-full">
@@ -45,7 +41,6 @@ const Page = () => {
 
       <Table
         tableHeading={ProductsTableHeadings}
-        // tableData={ProductsTableData}
         tableData={fotmattedProducts}
         background="bg-white"
         bgHeader="bg-lightPurple"

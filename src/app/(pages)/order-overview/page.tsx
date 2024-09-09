@@ -11,13 +11,13 @@ const Page = () => {
     <div className="flex flex-col w-full border gap-[22px]">
       <Header text="Order Overview" avatar={true}/>
 
-      <div className="flex gap-[26px] border border-secondaryGreen justify-between">
-        <div className="flex flex-col flex-1 border border-secondaryGreen w-[631px] gap-[20px]">
+      <div className="flex xs:flex-col md:flex-row xs:gap-[20px] md:gap-[21.58px] xl:gap-[26px] border border-secondaryGreen justify-between">
+        <div className="flex flex-col flex-1 border border-secondaryGreen md:w-[523px] xl:w-[631px] xs:gap-[20px] md:gap-[8px] lg:gap-[16.6px] xl:gap-[20px]">
           <WeeklySalesStats />
           <Table
             heading="Best Selling Products"
             width="w-full"
-            height="h-[403px]"
+            height="md:h-[334px] xl:h-[403px]"
             pagination={false}
             divider={true}
             bgHeader="bg-lightPurple"

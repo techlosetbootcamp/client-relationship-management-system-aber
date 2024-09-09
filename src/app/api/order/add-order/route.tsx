@@ -93,7 +93,7 @@ export const POST = async (req: Request) => {
         customerAddress,
         orders,
         subTotal: subTotal,
-        totalPurchasedPrice : totalPurchasedPrice,
+        totalPurchasedPrice: totalPurchasedPrice,
         totalQuantity,
       },
     });
@@ -137,9 +137,12 @@ export const POST = async (req: Request) => {
 
     console.log("deduct value from stock after creating the order");
 
-    return NextResponse.json({ newOrder }, { status: 201 });
+    return NextResponse.json({
+      message: "order has been added successfully",
+      status: 201,
+    });
   } catch (error) {
     console.log("in add order", error);
-    return NextResponse.json({ message: error });
+    return NextResponse.json({ message: "Invalid Data", status: 400 });
   }
 };

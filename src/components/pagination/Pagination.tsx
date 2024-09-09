@@ -36,8 +36,8 @@ const Pagination = () => {
   }
 
   return (
-    <div className="flex">
-      <div onClick={()=>prev()} className="border flex items-center py-[4px] px-[8px] rounded-l-[3.2px]">
+    <div className="flex items-center">
+      <div onClick={()=>prev()} className="border flex items-center py-[4px] px-[8px] h-[31px] leading-[18px] rounded-l-[3.2px]">
         <IoIosArrowBack color= {page>1 ? "#9A55FF" :"#DEE2E6" }/>
       </div>
       {pages.map((item) => {
@@ -48,7 +48,7 @@ const Pagination = () => {
             background={item.pageNumber===currentPage ?"bg-primaryPurple" : "bg-white"}
             img=""
             color={item.pageNumber===currentPage ?"text-white" :"text-primaryPurple" }
-            width="w-[26px]"
+            width="w-[26px] h-[31px]"
             px="px-[8px]"
             py="py-[4px]"
             rounded=""
@@ -64,7 +64,7 @@ const Pagination = () => {
         );
       })}
 
-      <div onClick={()=>next()} className="border flex items-center py-[4px] px-[8px] rounded-r-[3.2px]">
+      <div onClick={()=>next()} className="border flex items-center py-[4px] px-[8px] h-[31px] leading-[18px] rounded-r-[3.2px]">
         <IoIosArrowForward color= "#9A55FF" />
       </div>
     </div>

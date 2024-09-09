@@ -28,15 +28,15 @@ import { format, startOfMonth, endOfMonth } from "date-fns";
 const currentDate = new Date();
 
 // Get the first day of the month
-const firstDayOfMonth = format(startOfMonth(currentDate), "MMMM d, yyyy");
+const firstDayOfMonth = format(startOfMonth(currentDate), "MMM d, yyyy");
 
 // Get the last day of the month
-const lastDayOfMonth = format(endOfMonth(currentDate), "MMMM d, yyyy");
-const Card2 = () => {
+const lastDayOfMonth = format(endOfMonth(currentDate), "MMM d, yyyy");
+const MonthlyIncomeCard = () => {
   const [checkResponse, setCheckRespone] = useState<any>();
   const [currentMonthIncome, setCurrentMonthIncome] = useState(0);
 
-  const check = async () => {
+  const monthlyIncomeHandler = async () => {
     const response = await axiosInstance.get("/order/get-order-by-month");
     console.log("monthly income response", response);
     const data = {
@@ -70,7 +70,7 @@ const Card2 = () => {
   }, [checkResponse]);
 
   useEffect(() => {
-    check();
+    monthlyIncomeHandler();
   }, []);
   return (
     <CardWrapper
@@ -100,31 +100,39 @@ const Card2 = () => {
         <p className="text-mediumGray md:text-[12px] xl:text-[14px] md:leading-[18px] xl:leading-[21px] font-barlow font-[500]">
           Compared to the previous month
         </p>
-        <div className="border border-divider w-full" />
+        <div className="border border-divider w-full md:block xs:hidden" />
+        <div>
+          <div className="flex flex-col-reverse xs:gap-[13.91px] md:gap-[0px]">
+            <div className="flex xs:gap-[9.82px] xl:gap-[12px] items-center">
+              <Avatar
+                img={<Img2 fill="fill-white" hover="" />}
+                height="xs:h-[23.32px] xl:h-[28.5px]"
+                width="xs:w-[23.32px] xl:w-[28.5px]"
+                radius="rounded-full"
+                background="bg-primaryPurple"
+              />
+              <div>
+                <p className="text-darkGray md:text-[12.2px] xl:text-[15px] font-semibold md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
+                  Accounting
+                </p>
+                <p className="text-mediumGray md:text-[12.2px] xl:text-[15px] font font-medium md:leading-[18.4px] xl:leading-[22.5px] font-barlow">
+                  {firstDayOfMonth} - {lastDayOfMonth}
+                </p>
+              </div>
+            </div>
+            <div className="border border-divider w-full md:hidden xs:block" />
 
-        <div className="flex xs:gap-[9.82px] xl:gap-[12px] items-center">
-          <Avatar
-            img={<Img2 fill="fill-white" hover="" />}
-            height="xs:h-[23.32px] xl:h-[28.5px]"
-            width="xs:w-[23.32px] xl:w-[28.5px]"
-            radius="rounded-full"
-            background="bg-primaryPurple"
-          />
-          <div>
-            <p className="text-darkGray md:text-[12.2px] xl:text-[15px] font-semibold md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
-              Accounting
-            </p>
-            <p className="text-mediumGray md:text-[12.2px] xl:text-[15px] font font-medium md:leading-[18.4px] xl:leading-[22.5px] font-barlow ">
-              {firstDayOfMonth} - {lastDayOfMonth}
-            </p>
+            <div className=" h-[158px] flex items-center md:hidden">
+              {checkResponse && <BarChart axis="y" data={checkResponse} />}
+            </div>
           </div>
         </div>
       </div>
-      <div className="md:w-[55%] h-full flex items-center">
+      <div className="md:w-[55%] h-full flex items-center xs:hidden md:block">
         {checkResponse && <BarChart axis="y" data={checkResponse} />}
       </div>
     </CardWrapper>
   );
 };
 
-export default Card2;
+export default MonthlyIncomeCard;

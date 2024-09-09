@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Page = () => {
   return (
-    <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] px-[15%]">
+    <div className="border-2 flex flex-col gap-[22px] w-full py-[41px]  md:px-[15%]">
       <p className="text-[32px] leading-[48px] text-darkGray font-bold font-albertSans">
         Settings
       </p>

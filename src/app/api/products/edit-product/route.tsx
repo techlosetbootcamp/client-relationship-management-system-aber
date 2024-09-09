@@ -15,9 +15,9 @@ export const POST = async (req: Request) => {
 
   const id = formdata.get("id") as string;
   const productName = formdata.get("productName") as string;
-  const price = formdata.get("price") as unknown as number;
-  const purchasedPrice = formdata.get("purchasedPrice") as unknown as number;
-  const totalStock = formdata.get("totalStock") as unknown as number;
+  const price = parseInt(formdata.get("price") as string, 10);
+  const purchasedPrice = parseInt(formdata.get("purchasedPrice") as string, 10);
+  const totalStock = parseInt(formdata.get("totalStock") as string, 10);
   const category = formdata.get("category") as string;
   const image = formdata.get("image") as File;
 
@@ -62,6 +62,7 @@ export const POST = async (req: Request) => {
         data: {
           productName: productName,
           totalStock: totalStock,
+          purchasedPrice: purchasedPrice,
           price: price,
           category: category,
         },
@@ -69,7 +70,7 @@ export const POST = async (req: Request) => {
     }
 
     return NextResponse.json({
-      message: "Product has been added successfully",
+      message: "Product has been updated successfully",
       updatedProduct,
     });
   } catch (error) {

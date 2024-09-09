@@ -18,7 +18,7 @@ const Page = () => {
     totalQuantity,
     toggleCart,
     addToCart,
-  } = useProducts();
+  } = useProducts("");
 
   return (
     <div className="flex flex-col gap-[22px] mx-[12px] w-full border-2">
@@ -36,7 +36,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-[8px]">
+      <div className="grid xmd:grid-cols-2 md:grid-cols-3  gap-[8px]">
         {productList?.map((product: ProductProps) => {
           return (
             <div key={product.id}>
@@ -46,6 +46,7 @@ const Page = () => {
                 category={product.category}
                 price={product.price}
                 image={product.image}
+                stock = {product.totalStock}
                 onClick={() => addToCart(product)}
               />
             </div>

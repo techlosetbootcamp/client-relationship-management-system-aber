@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CardWrapper } from "../cardWrapper/CardWrapper";
 import Image from "next/image";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
-import { ProductProps } from "@/types/Types";
+import { CartCardProps, ProductProps } from "@/types/Types";
 import {
   handleCartQuantity,
   handleRemoveFromCart,
@@ -19,8 +19,7 @@ const CartCard = ({
   quantity,
   id,
   type,
-}: any) => {
-  // const [productQuantity, setProductQuantity] = useState(+quantity);
+}: CartCardProps) => {
   const dispatch = useDispatch();
   if (type !== "checkout") {
     return (

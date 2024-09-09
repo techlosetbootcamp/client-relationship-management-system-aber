@@ -1,15 +1,8 @@
 "use client";
+import { AvatarProps } from "@/types/Types";
 import { useSession } from "next-auth/react";
 import Image, { StaticImageData } from "next/image";
 import React, { ReactElement, ReactNode } from "react";
-
-type AvatarProps = {
-  height: string;
-  width: string;
-  radius: string;
-  background: string;
-  img: string | StaticImageData | ReactElement;
-};
 
 const Avatar = ({ height, width, radius, img, background }: AvatarProps) => {
   return (
@@ -19,7 +12,6 @@ const Avatar = ({ height, width, radius, img, background }: AvatarProps) => {
       {typeof img === "string" || (typeof img === "object" && "src" in img) ? (
         <Image src={img} alt="avatar" fill />
       ) : (
-        // <Image src={img} alt='avatar' className='' fill/>
         <div className="flex items-center">{img}</div>
       )}
     </div>

@@ -10,14 +10,13 @@ const useOrders = () => {
   const dispatch: AppDispatch = useDispatch();
   const [orderList, setOrderList] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [orderById, setOrderById] = useState<any>([]);
 
   const order = useSelector((state: RootState) => state.order.data);
 
   useEffect(() => {
-    console.log("orders it si", order);
     if (order && order.length > 0) {
       const orderListArray = order.map((item: any) => {
-        console.log("item", item);
         return {
           orderId: item.id,
           customerId: item.userId,
@@ -38,23 +37,6 @@ const useOrders = () => {
     try {
       setIsLoading(true);
       await dispatch(GetOrders());
-      // const response = await axiosInstance.get("/order/get-orders");
-      // console.log("response of get orders", response);
-
-      // const orderListArray = await response.data.orderList.map((item: any) => {
-      //   return {
-      //     orderId: item.id,
-      //     customerId: item.userId,
-      //     customer: item.customerName,
-      //     email: item.customerEmail,
-      //     contact: item.customerPhone,
-      //     address: item.customerAddress,
-      //     orders: "Click Here to View",
-      //     totalQuantity: item.totalQuantity,
-      //     subTotal: `$${item.subTotal}`,
-      //   };
-      // });
-      // setOrderList(orderListArray);
 
       toast.success("Order list fetched successfully");
     } catch (error) {
@@ -65,12 +47,24 @@ const useOrders = () => {
     }
   };
 
+  const getOrderById = async (orderId: string, toggleFunc: () => void) => {
+    const response = await axiosInstance.post("/order/get-order-by-id", {
+      orderId,
+    });
+
+    setOrderById(response.data.order.orders);
+
+    toggleFunc();
+  };
+
   useEffect(() => {
     getOrders();
   }, []);
   return {
     isLoading,
     orderList,
+    getOrderById,
+    orderById,
   };
 };
 

@@ -44,8 +44,10 @@ const cartSlice = createSlice({
         console.log("item", item);
       });
     },
-    handleRemoveFromCart : (state,action) =>{
-      state.cartData = state.cartData.filter((item : any)=>item.product.id!=action.payload.id)
+    handleRemoveFromCart: (state, action) => {
+      state.cartData = state.cartData.filter(
+        (item: any) => item.product.id != action.payload.id
+      );
     },
     handleCartQuantity: (state, action) => {
       console.log("handle cart quantity reducer", state, action);
@@ -57,6 +59,9 @@ const cartSlice = createSlice({
       }
 
       // localStorage.setItem("cart", JSON.stringify(state.cartData));
+    },
+    handleEmptyCart: (state) => {
+      state.cartData = [];
     },
   },
   // extraReducers: (builder) => {
@@ -75,6 +80,7 @@ const cartSlice = createSlice({
   //   });
   // },
 });
-export const { handleAddToCart, handleCartQuantity, handleRemoveFromCart } = cartSlice.actions;
+export const { handleAddToCart, handleCartQuantity, handleRemoveFromCart, handleEmptyCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

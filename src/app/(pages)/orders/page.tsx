@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const { orderList, isLoading } = useOrders();
-  console.log("order list in order page", orderList, isLoading)
 
   return (
     <div className="flex flex-col gap-[22px] ml-[12px] w-full overflow-x-auto ">

@@ -18,19 +18,25 @@ const Button = ({
   border,
   onClick,
   Icon,
-  disabled
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`${background}  ${border} ${rounded} ${gap} ${px} ${py} ${width} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} flex items-center justify-center`}
+      className={`transition ease-in-out active:scale-[0.96] hover:brightness-[0.9] ${background}  ${border} ${rounded} ${gap} ${px} ${py} ${width} ${
+        disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+      } flex items-center justify-center`}
     >
       {img && <Image src={img} alt="icon" />}
-      {Icon && <Icon color="white" size={25} className={disabled ? "animate-spin" : ""}/>}
+      {Icon && (
+        <Icon
+          color="white"
+          size={25}
+          className={disabled ? "animate-spin" : ""}
+        />
+      )}
 
-      <p
-        className={`${fontSize} ${color} ${lineHeight} ${fontWeight} font-albertSans`}
-      >
+      <p className={`${fontSize} ${color} ${lineHeight} ${fontWeight}`}>
         {text}
       </p>
     </button>

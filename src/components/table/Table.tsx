@@ -1,26 +1,24 @@
-// allow read, write: if true;
 "use client";
 import Avatar from "@/components/avatar/Avatar";
 import React, { useState } from "react";
-import img from "@/assets/images/avatar.png";
-import userAvatar from "@/assets/images/userAvatar.png";
-import avatar from "@/assets/images/avatar.png";
+
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
 import { documentsTableData, TableProps } from "@/types/Types";
 import Button from "@/components/button/Button";
 import Pagination from "../pagination/Pagination";
-import InputField from "../inputField/InputField";
 import SearchInput from "../searchInput/SearchInput";
 import Tabs from "../tabs/Tabs";
-import { MdOutlineAddBox } from "react-icons/md";
-import { MdOutlineFileUpload } from "react-icons/md";
 import StatusTag from "../statusTag/StatusTag";
 import "../../styles/tableStyle.css";
-import ImageUploadModal from "../imageUploadModal/ImageUploadModal";
-import FileUploadModal from "../fileUploadModal/FileUploadModal";
+import ImageUploadModal from "../productUploadModal/ProductUploadModal";
+import FileUploadModal from "../documentUploadModal/DocumentUploadModal";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import Link from "next/link";
 import OrderedProductsModal from "../orderedProductsModal/OrderedProductsModal";
+import useTable from "@/hooks/useTable";
+import useDocuments from "@/hooks/useDocuments";
+import useOrders from "@/hooks/useOrders";
+import useProducts from "@/hooks/useProducts";
 
 const Table = ({
   width,
@@ -38,165 +36,22 @@ const Table = ({
   rowBorder,
   page,
 }: TableProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [productId, setProductId] = useState("");
-  const [item, setItem] = useState();
-  const [selectAll, setSelectAll] = useState(false);
-  const [checkedItems, setCheckedItems] = useState<any>([]);
-  const [orderById, setOrderById] = useState<any>([]);
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const {
+    getCheckedItemIds,
+    handleSelectAll,
+    handleCheckbox,
+    selectAll,
+    checkedItems,
+    editItem,
+    toggleModal,
+    item,
+    isModalOpen,
+    
+  } = useTable(tableData);
+  const { deleteDocuments, downloadDocuments } = useDocuments();
+  const {getOrderById, orderById} = useOrders()
+  const {deleteProduct} = useProducts("")
 
-  const editItem = (item: any) => {
-    setItem(item);
-    toggleModal();
-  };
-
-  const deleteProduct = async (item: any) => {
-    const response = await axiosInstance.post("/products/delete-product", {
-      id: item.id,
-    });
-    console.log("delete product response", response);
-  };
-
-  const handleSelectAll = () => {
-    const temp = !selectAll;
-    setSelectAll(!selectAll);
-    const checkedArray: any = {};
-    tableData.forEach((item) => {
-      if ("id" in item) {
-        // console.log(item.id);
-        checkedArray[item?.id] = temp;
-      }
-    });
-
-    console.log("checkedArray", checkedArray);
-
-    setCheckedItems(checkedArray);
-    console.log("checkedItems", checkedItems);
-  };
-
-  const handleCheckbox = (e: any, id: string) => {
-    const isChecked = e.target.checked;
-    console.log(isChecked, e.target);
-    setCheckedItems((prevState: any) => {
-      const newCheckedItems = {
-        ...prevState,
-        [id]: isChecked,
-      };
-
-      console.log("newCheckedItems", newCheckedItems);
-      const allChecked = tableData.every(
-        (item) => "id" in item && newCheckedItems[item?.id]
-      );
-      console.log("allChecked", allChecked);
-      setSelectAll(allChecked);
-      return newCheckedItems;
-    });
-  };
-
-  const getCheckedItemIds = () => {
-    return Object.keys(checkedItems).filter((id) => checkedItems[id]);
-  };
-
-  const deleteDocuments = async () => {
-    const checkedItemsIds = getCheckedItemIds();
-
-    const response = await axiosInstance.post("/documents/delete-documents", {
-      checkedItemsIds,
-    });
-    console.log("delete docs response", response);
-  };
-
-  const getOrderById = async (orderId: string) => {
-    const response = await axiosInstance.post("/order/get-order-by-id", {
-      orderId,
-    });
-
-    // const orderDataArray = response.data.order.orders.map((item: any) => {
-    //   console.log(item);
-    //   return {
-    //     productId: item.product.id,
-    //     image: item.product.image,
-    //     name: item.product.productName,
-    //     category: item.product.category,
-    //     price: item.product.price,
-    //     quantity: item.quantity,
-    //   };
-    // });
-    setOrderById(response.data.order.orders);
-
-    console.log("get order by id clicked", orderById);
-    toggleModal();
-
-    // console.log("client response in getorder by id", response.data.order.orders);
-  };
-
-  const downloadDocuments = async () => {
-    console.log("download is clicked");
-    const checkedItemsIds = getCheckedItemIds();
-
-    try {
-      const response = await axiosInstance.post(
-        "/documents/download-documents",
-        { checkedItemsIds }
-      );
-      console.log("in table document function", response);
-
-      if (response.data.documents.length > 0) {
-        response.data.documents.map(async (doc: any) => {
-          if (doc && doc.type && doc.fileName && doc.fileURL) {
-            const filePath = doc.fileName + "." + doc.type;
-            const fetchURL = await fetch(doc.fileURL);
-            if (!fetchURL.ok) throw new Error("Network response was not ok");
-
-            const blob = await fetchURL.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            // Create a download link and trigger a download
-            const link = document.createElement("a");
-
-            link.href = blobUrl;
-            link.download = filePath; // Use the filename from the path
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Clean up the Blob URL
-            URL.revokeObjectURL(blobUrl);
-          }
-        });
-      }
-
-      // const response = await fetch(
-
-      //   "https://firebasestorage.googleapis.com/v0/b/crm-techloset.appspot.com/o/Signature%20Page.pdf?alt=media&token=829dacc8-abf0-4af4-95e2-ba8e46f0180b"
-      // );
-      // if (!response.ok) throw new Error("Network response was not ok");
-
-      // const blob = await response.blob();
-      // const blobUrl = URL.createObjectURL(blob);
-
-      // // Create a download link and trigger a download
-      // const link = document.createElement("a");
-      // const filePath = "Signature Page.pdf";
-      // link.href = blobUrl;
-      // link.download = filePath; // Use the filename from the path
-      // document.body.appendChild(link);
-      // link.click();
-      // document.body.removeChild(link);
-
-      // // Clean up the Blob URL
-      // URL.revokeObjectURL(blobUrl);
-
-      // console.log("PDF downloaded successfully");
-
-      console.log("File downloaded successfully");
-    } catch (error) {
-      console.error("Error downloading file:", error);
-    }
-  };
 
   return (
     <>
@@ -210,7 +65,7 @@ const Table = ({
           {pagination && <Pagination />}
         </div>
 
-        {action && (
+        {page === "documents" && (
           <div className="flex justify-between md:flex-row xs:flex-col gap-[26.5px]">
             <Tabs />
             <div className="flex gap-[16px] md:flex-row xs:flex-col  ">
@@ -230,7 +85,7 @@ const Table = ({
                 py="py-[4px]"
                 img={""}
                 width="h-full"
-                onClick={downloadDocuments}
+                onClick={() => downloadDocuments(getCheckedItemIds)}
                 disabled={false}
               />
 
@@ -248,7 +103,7 @@ const Table = ({
                 py="py-[4px]"
                 img={""}
                 width="h-full"
-                onClick={deleteDocuments}
+                onClick={() => deleteDocuments(getCheckedItemIds)}
                 disabled={false}
               />
             </div>
@@ -257,7 +112,7 @@ const Table = ({
 
         {divider && <div className="border border-borderGray w-full" />}
 
-        <div className={``}>
+        <div className={`overflow-auto`}>
           <table className="w-full table-auto rounded-[8px] font-barlow border-separate border-spacing-y-[12px]">
             <thead className={`h-[47px] ${bgHeader} relative w-full`}>
               <tr className={`${bgHeader}  relative z-10 py-[12px] h-[47px] `}>
@@ -281,10 +136,9 @@ const Table = ({
                 })}
               </tr>
             </thead>
-            {/* <tbody className="w-full  flex flex-col gap-[12px]  text-[14px] leading-[21px] py-[8px] rounded-[5px] font-medium text-mediumGray gap-[12px]"> */}
+
             <tbody className="bg-transparent">
               {tableData?.map((item, i) => {
-                // console.log(checkedItems[item?.id] || checkedItems);
                 return (
                   <tr
                     key={i}
@@ -335,30 +189,7 @@ const Table = ({
                             </div>
                           </td>
                         );
-                      }
-                      // else if (
-                      //   typeof value === "object" &&
-                      //   key === "imgObject"
-                      // ) {
-                      //   return (
-                      //     <td
-                      //       key={key}
-                      //       className="text-start  px-[12px] py-[8px]"
-                      //     >
-                      //       <div className="flex items-center gap-[8px]">
-                      //         <Avatar
-                      //           img={value.img}
-                      //           height="h-[31px]"
-                      //           width="w-[31px]"
-                      //           radius="rounded-full"
-                      //           background=""
-                      //         />
-                      //         <p>{value.name}</p>
-                      //       </div>
-                      //     </td>
-                      //   );
-                      // }
-                      else if (
+                      } else if (
                         typeof value === "object" &&
                         (key === "grpObject" || key === "imgObject")
                       ) {
@@ -424,14 +255,12 @@ const Table = ({
                             onClick={
                               key == "orders" && "orderId" in item
                                 ? () => {
-                                    getOrderById(item?.orderId);
+                                    getOrderById(item?.orderId, toggleModal);
                                   }
-                                : () => {
-                                    console.log("clicked not order");
-                                  }
+                                : () => {}
                             }
                             key={key}
-                            className="text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500]"
+                            className={`text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500] ${key == "orders" && "orderId" in item && "cursor-pointer"}`}
                           >
                             {value}
                           </td>

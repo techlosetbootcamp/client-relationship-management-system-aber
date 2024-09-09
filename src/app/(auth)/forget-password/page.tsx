@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import logo from "@/assets/images/logo.svg";
-import googleLogo from "@/assets/images/google.svg";
 import Image from "next/image";
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
@@ -12,8 +11,8 @@ const Page = () => {
   const { email, setEmail, onSubmit, isLoading } = useForgetPassword();
 
   return (
-    <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
-      <div className=" w-[30%] flex flex-col gap-[50px] mx-auto justify-center items-center">
+    <div className="font-albertSans w-full h-screen flex">
+      <div className="xs:w-[90%] md:w-[60%] lg:w-[30%] flex flex-col gap-[50px] mx-auto justify-center items-center">
         <Image src={logo} alt="logo-image" height={30} priority />
 
         <div className="flex flex-col gap-[15px] w-full">
@@ -23,7 +22,7 @@ const Page = () => {
             value={email}
             width="w-full"
             height="h-[45px]"
-            rounded="rounded-[8px]"
+            rounded="rounded-[4px]"
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -32,7 +31,7 @@ const Page = () => {
             background="bg-primaryPurple"
             width="w-full"
             py="py-[8px]"
-            rounded="rounded-[8px]"
+            rounded="rounded-[4px]"
             color="text-white"
             fontSize="text-[18px]"
             fontWeight="font-[600]"

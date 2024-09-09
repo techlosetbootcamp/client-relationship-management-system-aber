@@ -30,12 +30,14 @@ export const POST = async (req: Request) => {
     const groupedOrders: any = [];
     let totalProfit: number = 0;
     let totalExpense: number = 0;
-    let totalOrders : number =0
+    let totalOrders : number =0;
+    let totalRevenue : number =0
 
     orders.forEach((order) => {
       totalProfit += order.subTotal - order.totalPurchasedPrice;
       totalExpense += order.totalPurchasedPrice;
       totalOrders +=1;
+      totalRevenue +=order.subTotal
       const date =
         order.CreatedAt &&
         new Date(order?.CreatedAt)?.toISOString().split("T")[0]; // Extract the date part (YYYY-MM-DD)
@@ -89,7 +91,8 @@ export const POST = async (req: Request) => {
       order: groupedOrders,
       totalProfit,
       totalExpense,
-      totalOrders
+      totalOrders,
+      totalRevenue
     });
   } catch (error) {
     console.log("error", error);

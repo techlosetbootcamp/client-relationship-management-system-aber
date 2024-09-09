@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, ReactElement, Dispatch, SetStateAction } from "react";
 import { IconBaseProps, IconType } from "react-icons/lib";
 
 type imgObject = {
@@ -143,3 +143,72 @@ export type ProductProps = {
   price: number;
   totalStock: number;
 };
+
+export type AvatarProps = {
+  height: string;
+  width: string;
+  radius: string;
+  background: string;
+  img: string | StaticImageData | ReactElement;
+};
+
+export type CardWrapperProps = {
+  height: string;
+  width: string;
+  flexDirection: string;
+  children: ReactNode;
+};
+
+export type CartCardProps = {
+  image : string ,
+  category : string,
+  productName : string,
+  price : string,
+  quantity : string,
+  id : string,
+  type : string,
+
+}
+
+
+export type DocumentUploadModalProps = {
+  toggleModal: () => void;
+  item?: any;
+};
+
+export type GraphCardProps = {
+  btnText: string;
+  img: string | StaticImageData;
+  color: string;
+  background: string;
+  text: string;
+  chart: string;
+};
+
+export type HeaderProps = {
+  text: string;
+  avatar : boolean
+};
+
+export type SelectionRange = {
+  startDate: Date;
+  endDate: Date;
+  key: string;
+};
+
+export type CalenderProps = {
+  range: SelectionRange[];
+  setRange: Dispatch<SetStateAction<SelectionRange[]>>;
+  startDate: string;
+  startDay: string;
+  endDay: string;
+  month: string;
+  year: string;
+  formattedStartDate: string;
+  formattedEndDate: string;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+
+

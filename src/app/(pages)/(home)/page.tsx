@@ -1,12 +1,7 @@
-
+'use client'
 import Avatar from "@/components/avatar/Avatar";
-import InputField from "@/components/inputField/InputField";
-import Button from "@/components/button/Button";
-import Image from "next/image";
-import Card from "@/components/card/Card";
-import Card2 from "@/components/card2/Card2";
-import iconImg from "@/assets/images/searchIcon.svg";
-import avatarImg from "@/assets/images/avatar.png";
+import TargetOrderCard from "@/components/targetOrderCard/TargetOrderCard";
+import MonthlyIncomeCard from "@/components/monthlyIncomeCard/MonthlyIncomeCard";
 import GraphCard from "@/components/graphCard/GraphCard";
 import productImg from "@/assets/images/productImg.svg";
 import Table from "@/components/table/Table";
@@ -16,6 +11,8 @@ import dynamic from "next/dynamic";
 import { DashboardTableHeadings } from "@/constants/TableHeadings";
 import { DashboardTableData } from "@/constants/TableData";
 import SearchInput from "@/components/searchInput/SearchInput";
+import userAvatar from "@/assets/images/userAvatar.png";
+import useSessionData from "@/hooks/useSessionData";
 const Map = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
 });
@@ -48,12 +45,13 @@ const productsData = [
 ];
 
 export default function Home() {
+  const {userImage, userName} = useSessionData()
   return (
     <main className="h-full my-[41px] w-full border  box-border">
       <div className="flex justify-between w-full border-2 mb-[56px] box-border ">
         <div className="flex gap-[22px]  items-center">
           <Avatar
-            img={avatarImg}
+            img={userImage ?? userAvatar}
             height="xs:h-[61px] lg:h-[80.1px] xl:h-[89px]"
             width="xs:w-[61px] lg:w-[80.1px] xl:w-[89px]"
             radius="rounded-full"
@@ -63,17 +61,15 @@ export default function Home() {
           <div className="py-[14.5px]">
             <p className="xs:text-[16px] xs:leading-[24px] lg:text-[21px] xl:leading-[32px] xl:leading-[36px] text-darkGray font-albertSans font-[700]">
               Welcome Back,&nbsp;
-              <span className="text-primaryPurple">Sophia Chester</span>
+              <span className="text-primaryPurple">{userName}</span>
             </p>
             <p className="xs:text-[13px] xl:leading-[19.5px] lg:text-[13.5px] lg:leading-[20.25px] xl:text-[15px] xl:leading-[22.5px] font-barlow font-semibold text-mediumGray">
               Here are your monthly store updates.
             </p>
           </div>
         </div>
-        <div className="md:flex xs:hidden items-center" >
-
-
-        <SearchInput/>
+        <div className="md:flex xs:hidden items-center">
+          <SearchInput />
         </div>
       </div>
 
@@ -81,35 +77,35 @@ export default function Home() {
         <div className="flex flex-col gap-[20px]">
           <div className="w-full box-border ">
             <div className="flex md:flex-row xs:flex-col gap-[21px] w-full flex-1 ">
-              <Card />
+              <TargetOrderCard />
 
-              <Card2 />
+              <MonthlyIncomeCard />
             </div>
           </div>
 
-          <div className="w-full flex xs:gap-[17.18px] xl:gap-[21px] overflow-hidden">
+          <div className="w-full flex xs:gap-[17.18px] xl:gap-[21px] overflow-x-auto">
             <GraphCard
               btnText="3.4%"
               color="text-secondaryGreen"
               background="bg-lightGreen"
-              text = "Total Profit"
-              chart = "profit"
+              text="Total Profit"
+              chart="profit"
               img={img}
             />
             <GraphCard
               btnText="2.6%"
               color="text-secondaryRed"
               background="bg-lightRed"
-              text = "Total Expenses"
-              chart = "expenses"
+              text="Total Expenses"
+              chart="expenses"
               img={img}
             />
             <GraphCard
               btnText="10%"
               color="text-secondaryBlue"
               background="bg-lightBlue"
-              text = "New Customers"
-              chart = "customers"
+              text="New Customers"
+              chart="customers"
               img={img}
             />
           </div>
@@ -158,7 +154,7 @@ export default function Home() {
           </div>
         </CardWrapper>
       </div>
-      <div className="flex xs:flex-col lg:flex-row xs:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px] ">
+      <div className="flex xs:flex-col lg:flex-row xs:gap-[41.56px] md:gap-[17.18px] xl:gap-[21px] mt-[22px]">
         <Table
           heading="New Customers"
           background="bg-white"

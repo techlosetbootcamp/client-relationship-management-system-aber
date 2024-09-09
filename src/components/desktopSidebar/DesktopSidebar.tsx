@@ -8,15 +8,8 @@ import Link from "next/link";
 
 import Img from "@/assets/images/Icon1";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
 
-const SignOutHandler = async () => {
-  console.log("SIgnput Button is clikced");
-  await signOut({
-    redirect: true,
-    callbackUrl: "/login",
-  });
-};
+import { SignOutHandler } from "@/helpers/SignOutHandler";
 
 const DesktopSidebar = () => {
   const pathname = usePathname();
@@ -41,7 +34,7 @@ const DesktopSidebar = () => {
                     href={item.path}
                     className={`${
                       pathname === item.path ? "active" : ""
-                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF] rounded-[4px]`}
                   >
                     <div className="flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer">
                       {/* <Img fill=""/> */}
@@ -52,7 +45,6 @@ const DesktopSidebar = () => {
 
                       <div className="font-barlow ">{item.text}</div>
                     </div>
-         
                   </Link>
                 );
               })}
@@ -71,7 +63,7 @@ const DesktopSidebar = () => {
                     href={item.path}
                     className={`${
                       pathname === item.path ? "active" : ""
-                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF]`}
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF] rounded-[4px]`}
                   >
                     <div
                       key={item.text}
@@ -92,7 +84,7 @@ const DesktopSidebar = () => {
                 <div
                   key={item.text}
                   onClick={SignOutHandler}
-                  className="text-darkGray flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] "
+                  className="text-darkGray flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer hover:text-[#9A55FF] hover:bg-[#E7D7FF] rounded-[4px]"
                 >
                   <div className="flex items-center">{item.icon}</div>
                   <div className="font-barlow">{item.text}</div>

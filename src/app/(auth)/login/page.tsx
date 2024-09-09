@@ -10,16 +10,21 @@ import useLogin from "@/hooks/useLogin";
 import { CgSpinner } from "react-icons/cg";
 
 const Page = () => {
-  const { email, setEmail, password, setPassword, onLogin, loginWithGoogle, isLoading } =
-    useLogin();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    onLogin,
+    loginWithGoogle,
+    isLoading,
+  } = useLogin();
 
   return (
     <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
-      <div className=" w-[30%] flex flex-col gap-[50px] mx-auto justify-center items-center">
+      <div className="xs:w-[90%] md:w-[60%] lg:w-[30%] flex flex-col gap-[50px] mx-auto justify-center items-center">
         {" "}
-        {/*self-center */}
         <Image src={logo} alt="logo-image" height={30} priority />
-        {/* <form action="" className="w-full"> */}
         <div className="flex flex-col gap-[15px] w-full">
           <InputField
             type="email"
@@ -27,7 +32,7 @@ const Page = () => {
             value={email}
             width="w-full"
             height="h-[45px]"
-            rounded="rounded-[8px]"
+            rounded="rounded-[4px]"
             onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
@@ -36,7 +41,7 @@ const Page = () => {
             value={password}
             width="w-full"
             height="h-[45px]"
-            rounded="rounded-[8px]"
+            rounded="rounded-[4px]"
             onChange={(e) => setPassword(e.target?.value)}
           />
           <Link href={"/forget-password"}>
@@ -47,11 +52,11 @@ const Page = () => {
 
           <div className="w-full">
             <Button
-              text={isLoading ? "Logging In..." :"Login"}
+              text={isLoading ? "Logging In..." : "Login"}
               background="bg-primaryPurple"
               width="w-full"
               py="py-[8px]"
-              rounded="rounded-[8px]"
+              rounded="rounded-[4px]"
               color="text-white"
               fontSize="text-[18px]"
               fontWeight="font-[600]"
@@ -61,8 +66,8 @@ const Page = () => {
               lineHeight=""
               border=""
               onClick={onLogin}
-              Icon={isLoading? CgSpinner : null}
-              disabled ={isLoading ? true : false}
+              Icon={isLoading ? CgSpinner : null}
+              disabled={isLoading ? true : false}
             />
 
             <div>
@@ -78,10 +83,8 @@ const Page = () => {
             </div>
           </div>
         </div>
-        {/* </form>  THIS WAS CAUSING THE ERROR */}
         <div className="border-t w-full flex justify-center sticky">
           <p className="px-[15px] -top-[12px] bg-white absolute z-10">OR</p>
-          {/* <span className='w-full'></span> */}
         </div>
         <div className="w-full border-2 hover:bg-lightGray border-borderGray rounded-[8px]">
           <Button
@@ -89,7 +92,7 @@ const Page = () => {
             background="white"
             width="w-full"
             py="py-[8px]"
-            rounded="rounded-[8px]"
+            rounded="rounded-[4px]"
             color="text-darkGray"
             fontSize="text-[18px]"
             fontWeight="font-[500]"

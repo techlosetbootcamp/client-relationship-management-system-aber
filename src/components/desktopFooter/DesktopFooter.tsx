@@ -7,8 +7,8 @@ import Image from 'next/image'
 
 const DesktopFooter = () => {
   return (
-    <div className='w-full h-[225px] xs:hidden md:block bg-white sticky mt-auto font-barlow'>
-        <div className='lg:mx-[62px] xl:mx-[70.5px] py-[17px] flex flex-col gap-[16px]'>
+    <div className='w-full h-[225px] xs:hidden md:block bg-white sticky mt-auto font-barlow mt-[67px]'>
+        <div className='md:mx-[62px] xl:mx-[70.5px] py-[17px] flex flex-col gap-[16px]'>
 
             <div className='py-[10px] flex justify-between items-center'>
                 <Image src={logo} alt='logo-img'/>

@@ -25,8 +25,8 @@ const Page = () => {
   return (
     <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] md:px-[10%] lg:px-[15%]">
       <CardWrapper width="w-full" height="" flexDirection="flex-row">
-        <div className="flex  justify-between w-full">
-          <div className="flex items-center xs:gap-[8px] md:gap-[16px]">
+        <div className="flex md:flex-row xs:flex-col gap-[20px] justify-between w-full">
+          <div className="flex xs:justify-center items-center xs:gap-[8px] md:gap-[16px]">
             <div className="w-fit">
               <Avatar
                 height="xs:h-[50px] md:h-[64px]"
@@ -45,16 +45,16 @@ const Page = () => {
               text={"Change Photo"}
               background="bg-primaryPurple"
               color="text-white"
-              rounded="rounded-[8px]"
+              fontSize="text-[16px]"
               fontWeight="font-[600]"
-              fontSize="xs:text-[14px] md:text-[16px]"
-              px="xs:px-[5px] md:px-[8px]"
-              py="xs:py-[10px] md:py-[14px]"
-              lineHeight="leading-[18px]"
-              gap=""
+              rounded="rounded-[4px]"
+              gap="gap-[8px]"
+              lineHeight="leading-[24px]"
+              border="border-primaryPurple border"
+              px="px-[12px]"
+              py="py-[6px]"
               img={""}
-              width=""
-              border=""
+              width="xs:w-full md:w-fit"
               onClick={handleButtonClick}
               disabled={false}
             />
@@ -82,21 +82,21 @@ const Page = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <div className="w-full flex justify-end">
+      <div className="w-full flex md:justify-end border-2">
         <Button
           text={"Update Profile"}
           background="bg-primaryPurple"
           color="text-white"
-          rounded="rounded-[8px]"
+          fontSize="text-[16px]"
           fontWeight="font-[600]"
-          fontSize="xs:text-[14px] md:text-[16px]"
-          px="xs:px-[5px] md:px-[8px]"
-          py="xs:py-[10px] md:py-[14px]"
-          lineHeight="leading-[18px]"
+          rounded="rounded-[4px]"
+          lineHeight="leading-[24px]"
+          border="border-primaryPurple border"
+          px="px-[12px]"
+          py="py-[6px]"
           gap=""
           img={""}
-          border=""
-          width=""
+          width="xs:w-full md:w-fit"
           onClick={updateProfile}
           disabled={false}
         />
