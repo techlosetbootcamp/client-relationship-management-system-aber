@@ -10,8 +10,8 @@ import SearchInput from "../searchInput/SearchInput";
 import Tabs from "../tabs/Tabs";
 import StatusTag from "../statusTag/StatusTag";
 import "../../styles/tableStyle.css";
-import ImageUploadModal from "../productUploadModal/ProductUploadModal";
-import FileUploadModal from "../documentUploadModal/DocumentUploadModal";
+import ProductUploadModal from "../productUploadModal/ProductUploadModal";
+import DocumentUploadModal from "../documentUploadModal/DocumentUploadModal";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import Link from "next/link";
 import OrderedProductsModal from "../orderedProductsModal/OrderedProductsModal";
@@ -46,12 +46,10 @@ const Table = ({
     toggleModal,
     item,
     isModalOpen,
-    
   } = useTable(tableData);
   const { deleteDocuments, downloadDocuments } = useDocuments();
-  const {getOrderById, orderById} = useOrders()
-  const {deleteProduct} = useProducts("")
-
+  const { getOrderById, orderById } = useOrders();
+  const { deleteProduct } = useProducts("");
 
   return (
     <>
@@ -260,7 +258,11 @@ const Table = ({
                                 : () => {}
                             }
                             key={key}
-                            className={`text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500] ${key == "orders" && "orderId" in item && "cursor-pointer"}`}
+                            className={`text-start px-[12px] lg:text-[12px] xl:text-[14px] py-[8px] font-[500] ${
+                              key == "orders" &&
+                              "orderId" in item &&
+                              "cursor-pointer"
+                            }`}
                           >
                             {value}
                           </td>
@@ -345,7 +347,7 @@ const Table = ({
               (page === "documents" || page === "orders") && "hidden"
             }`}
           >
-            <ImageUploadModal toggleModal={toggleModal} item={item} />
+            <ProductUploadModal toggleModal={toggleModal} item={item} />
           </div>
 
           <div
@@ -353,7 +355,7 @@ const Table = ({
               page != "documents" && "hidden"
             }`}
           >
-            <FileUploadModal toggleModal={toggleModal} item={item} />
+            <DocumentUploadModal toggleModal={toggleModal} item={item} />
           </div>
 
           <div

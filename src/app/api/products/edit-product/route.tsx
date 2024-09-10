@@ -1,17 +1,12 @@
-import { resetPasswordTemplate } from "@/constants/EmailTemplates";
 import cloudinary from "@/helpers/cloudinary";
 import { ImageUpload } from "@/helpers/ImageUpload";
-import SendEmail from "@/helpers/SendEmail";
-import { PrismaClient } from "@prisma/client";
+
 import { NextResponse } from "next/server";
 
-// const prisma = new PrismaClient();
 import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const formdata = await req.formData();
-
-  console.log("in add product api", formdata);
 
   const id = formdata.get("id") as string;
   const productName = formdata.get("productName") as string;
@@ -36,7 +31,7 @@ export const POST = async (req: Request) => {
 
     if (image) {
       const response: any = await ImageUpload(image);
-      console.log("response in change password", response);
+
       if (product && product.public_id) {
         await cloudinary.uploader.destroy(product.public_id);
       }

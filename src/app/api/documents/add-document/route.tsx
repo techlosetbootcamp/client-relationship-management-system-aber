@@ -1,21 +1,13 @@
-import { resetPasswordTemplate } from "@/constants/EmailTemplates";
-import cloudinary from "@/helpers/cloudinary";
-import { ImageUpload } from "@/helpers/ImageUpload";
-import SendEmail from "@/helpers/SendEmail";
-import { PrismaClient } from "@prisma/client";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { NextResponse } from "next/server";
 import prisma from "@/helpers/prisma";
 import { app } from "@/helpers/firebaseConfig";
-// const prisma = new PrismaClient();
 
 const storage = getStorage(app);
 
 export const POST = async (req: Request) => {
   const formdata = await req.formData();
   let downloadURL = "";
-
-  console.log("in change picture working", formdata);
 
   const version = formdata.get("version") as string;
   const status = formdata.get("status") as string;
@@ -24,7 +16,6 @@ export const POST = async (req: Request) => {
   const image = formdata.get("image") as string;
 
   const file = formdata.get("file") as File;
-  // const fileURL = formdata.get("fileURL") as string;
   const fileName = file?.name?.split(".")[0];
   const fileType = file?.name?.split(".")[1];
 
@@ -35,35 +26,20 @@ export const POST = async (req: Request) => {
     });
   }
 
-  console.log("in upload-file api", version, status, file, fileType, fileName);
   const fileRef = ref(storage, file.name);
   await uploadBytes(fileRef, file)
     .then(async (snapshot) => {
-      console.log("Uploaded a blob or file!", snapshot);
       try {
         downloadURL = await getDownloadURL(fileRef);
-        // setFileURL(downloadURL);
-        console.log("File available at", downloadURL);
       } catch (error) {
-        console.error("Error getting download URL:", error);
+        console.error(error);
       }
     })
     .catch((error) => {
-      console.error("Error uploading file:", error);
+      console.error(error);
     });
 
-  console.log(
-    "in upload-file api",
-    version,
-    status,
-    file,
-    fileType,
-    fileName,
-    downloadURL
-  );
-
   try {
-    // const response: any = await ImageUpload(file);
     const document = await prisma.document.create({
       data: {
         fileName: fileName,
@@ -76,19 +52,14 @@ export const POST = async (req: Request) => {
         },
         authorImage: image,
         authorName: userName,
-        // author: {
-        //   img: image,
-        //   authorName: userName,
-        // },
       },
     });
-    console.log("response in add document", document);
+
     return NextResponse.json({
       message: "document has been added successfully",
       status: 201,
     });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Invalid Data", status: 400 });
   }
 };

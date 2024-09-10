@@ -7,10 +7,7 @@ import useCart from "@/hooks/useCart";
 import Link from "next/link";
 
 const Cart = ({ toggleCart, toggleVal, totalQuantity }: any) => {
-  const {
-    subTotal,
-    cartData,
-  } = useCart(totalQuantity);
+  const { subTotal, cartData } = useCart(totalQuantity);
 
   return (
     <div
@@ -31,8 +28,6 @@ const Cart = ({ toggleCart, toggleVal, totalQuantity }: any) => {
           <>
             <div className=" flex flex-col gap-[8px] h-[480px] overflow-auto px-[10px] shadow-md">
               {cartData.map((item: any) => {
-                console.log("cardData item", item);
-
                 return (
                   <div key={item.product.id}>
                     <CartCard
@@ -41,8 +36,9 @@ const Cart = ({ toggleCart, toggleVal, totalQuantity }: any) => {
                       category={item.product.category}
                       productName={item?.product.productName}
                       price={item?.product.price}
-                      quantity={item?.quantity} 
-                      type={""}                    />
+                      quantity={item?.quantity}
+                      type={""}
+                    />
                   </div>
                 );
               })}

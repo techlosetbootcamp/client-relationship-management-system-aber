@@ -66,7 +66,6 @@ const ProductUploadModal = ({ toggleModal, item }: uploadModalProps) => {
           placeholder="Image"
           onChange={handleFileUpload}
           type="file"
-          // value={file}
         />
 
         <InputField

@@ -47,8 +47,8 @@ const productsData = [
 export default function Home() {
   const {userImage, userName} = useSessionData()
   return (
-    <main className="h-full my-[41px] w-full border  box-border">
-      <div className="flex justify-between w-full border-2 mb-[56px] box-border ">
+    <main className="h-full my-[41px] w-full   box-border">
+      <div className="flex justify-between w-full  mb-[56px] box-border ">
         <div className="flex gap-[22px]  items-center">
           <Avatar
             img={userImage ?? userAvatar}
@@ -180,7 +180,7 @@ export default function Home() {
             City Order Statistics
           </p>
           <div className="border border-borderGray" />
-          <div className="border-2 border-primaryPurple xs:h-[329px] lg:h-full">
+          <div className=" xs:h-[329px] lg:h-full">
             <Map
               hover={true}
               fill={true}

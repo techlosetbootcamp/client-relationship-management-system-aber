@@ -210,5 +210,31 @@ export type CalenderProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
+export type SidebarContextType = {
+  toggleSidebar: () => void;
+  toggle: boolean;
+};
 
+export type AddOrderArgs = {
+  payload: {
+    userId: string;
+    customerEmail: string;
+    customerName: string;
+    customerPhone: string;
+    customerAddress: string;
+    paidAmount: string;
+    orders: any[];
+    subTotal: number;
+    totalPurchasedPrice: number;
+    totalQuantity: number;
+  };
+  callback: (data: any) => void;
+};
 
+export type GetOrderByDateArgs = {
+  payload: {
+    startDate: string | null;
+    endDate: string | null;
+  };
+  callback: (data: any) => void;
+};

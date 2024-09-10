@@ -34,43 +34,10 @@ const useCart = (totalQuantity: number) => {
     setIsClicked(false);
   };
 
-  // useEffect(() => {
-  //   const cartDataParam = searchParams.get("cartData");
-  //   const totalQuantityParam = searchParams.get("totalQuantity");
-  //   const subTotalParam = searchParams.get("subTotal");
-  //   console.log(
-  //     console.log("inside use effect"),
-  //     searchParams,
-  //     cartDataParam && JSON.parse(decodeURIComponent(cartDataParam)),
-  //     totalQuantityParam,
-  //     subTotalParam
-  //   );
-
-  //   if (cartDataParam) {
-  //     try {
-  //       setCartData(JSON.parse(decodeURIComponent(cartDataParam)));
-  //     } catch (error) {
-  //       console.error("Failed to parse cart data:", error);
-  //     }
-  //   }
-
-  //   if (totalQuantityParam) {
-  //     setTotalQuantity(parseInt(totalQuantityParam, 10));
-  //   }
-  //   if (subTotalParam) {
-  //     setSubTotal(parseInt(subTotalParam, 10));
-  //   }
-
-  //   console.log(totalQuantity, cartData);
-  // }, [searchParams]);
-
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     if (errorsMessages) {
-      // Clear existing toasts
-
-      // Show the new error toast
       toast.error(errorsMessages);
     }
   }, [errorsMessages]);
@@ -82,8 +49,6 @@ const useCart = (totalQuantity: number) => {
     address: string,
     amount: string
   ) => {
-    // console.log("checking parse int", amount);
-    // console.log("inside add order", cartData);
     const validation = checkoutValidation.safeParse({
       userPhone,
       address,
@@ -91,9 +56,8 @@ const useCart = (totalQuantity: number) => {
     });
 
     if (!validation.success) {
-      // console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      // console.log(errorsMessages);
+
       return;
     } else if (parseInt(amount, 10) != subTotal) {
       toast.error("Amount must not be greater or less than the subtotal");
@@ -102,7 +66,7 @@ const useCart = (totalQuantity: number) => {
 
     try {
       setIsLoading(true);
-      // console.log("loading inside edit document", isLoading);
+
       await dispatch(
         AddOrder({
           payload: {
@@ -147,7 +111,6 @@ const useCart = (totalQuantity: number) => {
     if (cartData.length > 0) {
       setSubTotal(sum);
       setTotalPurchasedPrice(purchasePriceSum);
-      console.log("subtotal", subTotal);
     }
   }, [cartData]);
 

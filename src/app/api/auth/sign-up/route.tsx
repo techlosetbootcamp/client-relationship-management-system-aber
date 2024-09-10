@@ -1,15 +1,9 @@
-// import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import prisma from "@/helpers/prisma";
 
-// const prisma = new PrismaClient();
-
 export const POST = async (req: Request) => {
   const { email, username, password, confirmPassword } = await req.json();
-  console.log(req);
-
-  console.log("in sign-up api", username, email, password, confirmPassword);
 
   if (!email || !username || !password || !confirmPassword) {
     return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
@@ -38,7 +32,6 @@ export const POST = async (req: Request) => {
       message: "User has been created",
     });
   } catch (error) {
-    console.log("in sign-up", error);
     return NextResponse.json({ message: error });
   }
 };

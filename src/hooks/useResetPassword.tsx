@@ -30,13 +30,11 @@ const useResetPassword = (userId: string) => {
     });
 
     if (!validation.success) {
-      console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      console.log(errorsMessages);
+
       return;
     }
 
-    console.log("button is clicked", password, confirmPassword);
     try {
       setIsLoading(true);
       await dispatch(
@@ -50,22 +48,13 @@ const useResetPassword = (userId: string) => {
     } finally {
       setIsLoading(false);
     }
-
-    // console.log("In reset-password page", response);
-
-    // if (response) {
-    //   router.push("/login");
-    // }
   };
 
   const handleResponse = (data: any) => {
-    console.log("handle response function", data, data.status);
     if (data?.data.status === 200) {
       toast.success(data.data.message);
       router.push("/login");
     } else {
-      console.log("in else");
-
       toast.error(data.data.message);
     }
   };

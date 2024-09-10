@@ -24,33 +24,24 @@ type UpdateProfilePictureArgs = {
 export const EditProfile = createAsyncThunk<[], EditProfileArgs>(
   "user/editProfile",
   async (data) => {
-    console.log("async editProfile data", data);
     const response = await axiosInstance.post(
       "/user/update-user",
       data?.payload
     );
-    console.log("editProfile response", response, response.status);
+
     return response.data;
   }
 );
-
-///////////////////FINF THE PROBLEM MAN///////////////////
 
 export const UpdateProfilePicture = createAsyncThunk<
   any,
   UpdateProfilePictureArgs
 >("user/updateProfilePicture", async (data) => {
-  console.log(
-    "async UpdateProfilePicture data",
-    data,
-    typeof data,
-    typeof data.payload
-  );
   const response = await axiosInstance.post(
     "/user/update-profile-image",
     data.payload.formData
   );
-  console.log("UpdateProfilePicture response", response, response.status);
+
   return response.data;
 });
 

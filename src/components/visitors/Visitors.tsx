@@ -1,11 +1,9 @@
 "use client";
 import BarChart from "@/charts/barChart/BarChart";
 import { CardWrapper } from "@/components/cardWrapper/CardWrapper";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Avatar from "../avatar/Avatar";
 import img from "@/assets/images/badgeIcon.svg";
-import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
-import { axiosInstance } from "@/helpers/axiosInstance";
 import useVisitors from "@/hooks/useVisitors";
 
 export const Visitors = () => {

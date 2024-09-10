@@ -25,16 +25,12 @@ export const POST = async (req: Request) => {
     lastDayOfPreviousWeek,
   } = await req.json();
 
-  console.log("inside oversales",  firstDayOfCurrentWeek,
-    lastDayOfCurrentWeek,
-    firstDayOfPreviousWeek,
-    lastDayOfPreviousWeek,)
 
   try {
     const currentWeekOrders = await prisma.order.findMany({
       where: {
         CreatedAt: {
-          gte: new Date(firstDayOfCurrentWeek), // Start of date range
+          gte: new Date(firstDayOfCurrentWeek), 
           lte: new Date(`${lastDayOfCurrentWeek}`),
         },
       },
@@ -92,7 +88,7 @@ export const POST = async (req: Request) => {
       );
 
       if (existingGroup) {
-        existingGroup.subTotal += order.subTotal; // Add to the existing subTotal
+        existingGroup.subTotal += order.subTotal;
       } else {
         previousWeekGroupedOrders.push({
           date,
@@ -101,7 +97,7 @@ export const POST = async (req: Request) => {
       }
     });
 
-    console.log(currentWeekGroupedOrders, previousWeekGroupedOrders);
+    
 
     return NextResponse.json({
       message: "current and previous week sales data",
@@ -110,67 +106,12 @@ export const POST = async (req: Request) => {
       totalSale
     });
   } catch (error) {
-    console.log("error", error);
+    console.log( error);
     return NextResponse.json({
       error,
       message: "in get weekly order sales",
     });
   }
 
-  //   try {
-  //     const orders = await prisma.order.findMany({
-  //       where: {
-  //         CreatedAt: {
-  //           gte: threeMonthsAgo, // Greater than or equal to 3 months ago
-  //         },
-  //       },
-  //       orderBy: {
-  //         CreatedAt: "desc",
-  //       },
-  //     });
 
-  //     if (!orders) {
-  //       return NextResponse.json({
-  //         message: "No income was made during this period",
-  //       });
-  //     }
-
-  //     const groupedOrdersByMonth: any = [];
-
-  //     orders.forEach((order) => {
-  //       if (order.CreatedAt) {
-  //         const createdAt = new Date(order?.CreatedAt);
-  //         const year = createdAt.getFullYear();
-  //         const month = createdAt.getMonth(); // JavaScript months are 0-indexed
-
-  //         const key = monthNames[month]; // Format as "2024-08" for example
-  //         // const key = `July`;
-
-  //         if (!groupedOrdersByMonth[key]) {
-  //           groupedOrdersByMonth[key] = {
-  //             month : key,
-  //             totalIncome: 0,
-  //           };
-  //         }
-
-  //         groupedOrdersByMonth[key].totalIncome += order.subTotal; // Sum the order amount
-  //       }
-  //     });
-
-  //     console.log(groupedOrdersByMonth);
-  //     const monthlyOrdersArray = Object.values(groupedOrdersByMonth);
-  //     console.log(monthlyOrdersArray)
-
-  //       return NextResponse.json({
-  //         message: "Check monthly  income",
-
-  //         monthlyOrders:monthlyOrdersArray,
-  //       });
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     return NextResponse.json({
-  //       message: error,
-  //     });
-  //   }
 };

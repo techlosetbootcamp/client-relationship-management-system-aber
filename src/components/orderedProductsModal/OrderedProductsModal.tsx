@@ -1,11 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import Table from "../table/Table";
 import Image from "next/image";
-
-import { DashboardTableHeadings } from "@/constants/TableHeadings";
-import { DashboardTableData } from "@/constants/TableData";
 
 const OrderTableHeadings = [
   {
@@ -41,7 +37,6 @@ const OrderedProductsModal = ({
 
   useEffect(() => {
     const orderDataArray = order.map((item: any) => {
-      console.log(item);
       return {
         productId: item.product.id,
         image: item.product.image,
@@ -53,7 +48,6 @@ const OrderedProductsModal = ({
     });
 
     setOrderData(orderDataArray);
-    console.log("order it is", orderData);
   }, [order]);
   return (
     <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
@@ -68,7 +62,10 @@ const OrderedProductsModal = ({
             <tr className={`bg-lightPurple  relative z-10 py-[12px] h-[47px] `}>
               {OrderTableHeadings.map((item) => {
                 return (
-                  <th key={item.heading} className="text-start px-[20px]  h-[47px]">
+                  <th
+                    key={item.heading}
+                    className="text-start px-[20px]  h-[47px]"
+                  >
                     {item.heading}
                   </th>
                 );
@@ -76,15 +73,16 @@ const OrderedProductsModal = ({
             </tr>
           </thead>
           <tbody className="bg-transparent">
-            {orderData.map((item:any) => {
+            {orderData.map((item: any) => {
               return (
-                <tr key={item.productId} className="w-full shadow-md rounded-[5px]">
+                <tr
+                  key={item.productId}
+                  className="w-full shadow-md rounded-[5px]"
+                >
                   <td className="px-[20px]  py-[8px] text-start ">
                     {item.productId}
                   </td>
-                  <td className="px-[20px] py-[8px] text-start">
-                    {item.name}
-                  </td>
+                  <td className="px-[20px] py-[8px] text-start">{item.name}</td>
                   <td className="px-[20px]  py-[8px] text-start">
                     <Image
                       src={item.image}
@@ -107,22 +105,6 @@ const OrderedProductsModal = ({
             })}
           </tbody>
         </table>
-
-        {/* <Table
-          heading="New Customers"
-          background="bg-white"
-          width="lg:w-[606px] xl:w-[741px]"
-          height="lg:h-[412px] xl:h-[500px]"
-          pagination={false}
-          divider={true}
-          checkbox={false}
-          bgHeader="bg-lightPurple"
-          bgRows="bg-white"
-          action={false}
-          rowBorder={false}
-          tableHeading={DashboardTableHeadings}
-          tableData={DashboardTableData}
-        /> */}
       </div>
     </div>
   );

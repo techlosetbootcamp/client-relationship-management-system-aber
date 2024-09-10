@@ -1,6 +1,4 @@
-import { ProductProps } from "@/types/Types";
 import { createSlice, current } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
 type CartState = {
   cartData: {
@@ -11,9 +9,6 @@ type CartState = {
 };
 
 const initialState: CartState = {
-  // cartData: localStorage.getItem("cart")
-  //   ? JSON.parse(localStorage.getItem("cart") as string)
-  //   : [],
   cartData: [],
   loading: false,
 };
@@ -23,13 +18,10 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     handleAddToCart: (state, action) => {
-      console.log("in add to cart reducer", current(state), action.payload);
-
       const productIndex = state.cartData.findIndex(
         (item: any) => item.product.id === action.payload.product.id
       );
 
-      console.log("productIndex", productIndex);
       if (productIndex >= 0) {
         state.cartData[productIndex].quantity = (
           +state.cartData[productIndex].quantity + 1
@@ -38,11 +30,7 @@ const cartSlice = createSlice({
         state.cartData.push(action.payload);
       }
 
-      // localStorage.setItem("cart", JSON.stringify(state.cartData));
-
-      state.cartData.map((item) => {
-        console.log("item", item);
-      });
+      state.cartData.map((item) => {});
     },
     handleRemoveFromCart: (state, action) => {
       state.cartData = state.cartData.filter(
@@ -50,37 +38,23 @@ const cartSlice = createSlice({
       );
     },
     handleCartQuantity: (state, action) => {
-      console.log("handle cart quantity reducer", state, action);
       const productIndex = state.cartData.findIndex(
         (item: any) => item.product.id === action.payload.id
       );
       if (productIndex >= 0 && action.payload.quantity > 0) {
         state.cartData[productIndex].quantity = action.payload.quantity;
       }
-
-      // localStorage.setItem("cart", JSON.stringify(state.cartData));
     },
     handleEmptyCart: (state) => {
       state.cartData = [];
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(handleAddToCart.pending, (state, action) => {
-  //     state.loading = true;
-  //   });
-
-  //   builder.addCase(
-  //     handleAddToCart.fulfilled,
-  //     (state, action: PayloadAction<ProductProps[]>) => {
-  //       (state.loading = false), (state.cartData = action.payload);
-  //     }
-  //   );
-  //   builder.addCase(handleAddToCart.rejected, (state, action) => {
-  //     state.loading = false;
-  //   });
-  // },
 });
-export const { handleAddToCart, handleCartQuantity, handleRemoveFromCart, handleEmptyCart } =
-  cartSlice.actions;
+export const {
+  handleAddToCart,
+  handleCartQuantity,
+  handleRemoveFromCart,
+  handleEmptyCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

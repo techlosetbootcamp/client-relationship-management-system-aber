@@ -8,12 +8,10 @@ import { NextResponse } from "next/server";
 import { app } from "@/helpers/firebaseConfig";
 import DocumentDownload from "@/helpers/documentDownload";
 
-// const prisma = new PrismaClient();
 import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { checkedItemsIds } = await req.json();
-  console.log("in download api", checkedItemsIds);
   const storage = getStorage(app);
 
   try {
@@ -25,34 +23,20 @@ export const POST = async (req: Request) => {
       },
     });
 
-    // if (documents.length > 0) {
-    //   documents?.map(async (document) => {
-    //     console.log("documetn in downlaod api", document);
-    //     if (
-    //       document &&
-    //       document.type &&
-    //       document.fileName &&
-    //       document.fileURL
-    //     ) {
-    //       const filePath = document.fileName + "." + document.type;
-
-    //       const response = await DocumentDownload(document.fileURL, filePath);
-
-    //       console.log("response dwonsload", response);
-    //     }
-    //   });
-    // }
-
     if (!documents) {
-      return NextResponse.json({ message: "document do not exist" });
+      return NextResponse.json({
+        message: "document do not exist",
+        status: 404,
+      });
     }
 
     return NextResponse.json({
       message: "document has been downloaded from the list",
       documents,
+      status: 200,
     });
   } catch (error) {
-    console.log("error", error);
-    return NextResponse.json({ error, message: "in download document error" });
+    console.log(error);
+    return NextResponse.json({ message: error, status: 400 });
   }
 };

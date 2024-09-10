@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 const useChangePassword = () => {
   const session = useSession();
   const email = session.data?.user?.email;
-  const userId = session?.data?.user?.id
+  const userId = session?.data?.user?.id;
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
@@ -18,36 +18,17 @@ const useChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const onsubmit = async () => {
-    console.log(
-      "button is clicked",
-      currentPassword,
-      newPassword,
-      confirmNewPassword
-    );
     dispatch(
       ChangePassword({
-        payload: { currentPassword, newPassword, confirmNewPassword,userId },
+        payload: { currentPassword, newPassword, confirmNewPassword, userId },
       })
     )
       .then(async () => {
-        console.log("password changes or not")
-        // await signOut({
-        //   redirect: true,
-        //   callbackUrl: "/login",
-        // });
+        console.log("password changes or not");
       })
       .catch((error) => {
         console.log(error);
       });
-    // const response = await axiosInstance.post("/auth/change-password", {
-    //   currentPassword,
-    //   newPassword,
-    //   confirmNewPassword,
-    //   email,
-    // });
-    // if (response) {
-    //   router.push("/");
-    // }
   };
 
   return {

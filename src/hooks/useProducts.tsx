@@ -56,7 +56,7 @@ const useProducts = (item: any) => {
   const getFormattedProducts = async () => {
     const productData = await axiosInstance.get("/products/get-products");
 
-    const productsArray = productData.data.product.map((item: any) => {
+    const productsArray = productData?.data?.product?.map((item: any) => {
       return {
         id: item.id,
         imgObject: {
@@ -121,7 +121,6 @@ const useProducts = (item: any) => {
       return;
     }
 
-    // toggleModal();
     const formData = new FormData();
     if (selectedFile) {
       formData.append("productName", productName);
@@ -130,10 +129,6 @@ const useProducts = (item: any) => {
       formData.append("totalStock", totalStock);
       formData.append("category", category);
       formData.append("image", selectedFile);
-      // const response = await axiosInstance.post(
-      //   "/products/add-product",
-      //   formData
-      // );
     } else {
       toast.error("product image is not selected");
 

@@ -1,13 +1,9 @@
 import NextAuth, { Awaitable, RequestInternal, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
-import { NextResponse } from "next/server";
 import prisma from "@/helpers/prisma";
-
-// const prisma = new PrismaClient();
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -19,17 +15,9 @@ const authOptions: NextAuthOptions = {
       },
       authorize: async function (credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
-          console.log(
-            "Input Fields must not be empty",
-            credentials,
-            credentials?.email,
-            credentials?.password
-          );
           return null;
         }
 
-
-        
         try {
           await prisma.$connect();
 
@@ -47,9 +35,7 @@ const authOptions: NextAuthOptions = {
             user.password
           );
 
-          console.log("userpassword here", userPassword);
           if (!userPassword) {
-            console.log("inside userpassword");
             return null;
           }
           return user;
@@ -78,7 +64,6 @@ const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, session, trigger }) {
-      console.log("session in jwt callback", session);
       if (user) {
         return {
           ...token,
@@ -114,14 +99,6 @@ const authOptions: NextAuthOptions = {
       };
     },
   },
-  // callbacks: {
-  //   async jwt({ token, user, session }) {
-  //     if (user) {
-  //       token.id = user.id;
-  //     }
-  //     return token;
-  //   },
-  // },
 
   debug: true,
 };

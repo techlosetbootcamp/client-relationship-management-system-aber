@@ -10,7 +10,6 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import useCalendar from "@/hooks/useCalendar";
 import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
 
 ChartJs.register(

@@ -8,15 +8,14 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  TimeScale
+  TimeScale,
 } from "chart.js";
 import { useCalendarContext } from "@/providers/calendarContextProvider/CalendarContextProvider";
 
-ChartJs.register(Tooltip, CategoryScale, LinearScale, TimeScale,BarElement);
-
+ChartJs.register(Tooltip, CategoryScale, LinearScale, TimeScale, BarElement);
 
 const WeeklyScheduleMatrix = () => {
-  const obj = useCalendarContext()
+  const obj = useCalendarContext();
   return (
     <Bar
       options={{
@@ -25,41 +24,32 @@ const WeeklyScheduleMatrix = () => {
 
         scales: {
           x: {
-            
             grid: {
               display: false,
-              
             },
-            border:{
-                color : "transparent"
+            border: {
+              color: "transparent",
             },
-         
-           
-            type:"time",
-            time:{
-              unit : "day"
+
+            type: "time",
+            time: {
+              unit: "day",
             },
-            // min:obj?.formattedStartDate,
-            // max:obj?.formattedEndDate,
-         
           },
           y: {
             grid: {
               display: false,
-              drawOnChartArea:true,
-              drawTicks:false,
-             
+              drawOnChartArea: true,
+              drawTicks: false,
             },
-            border:{
-                color : "transparent"
+            border: {
+              color: "transparent",
             },
             grace: "5%",
             ticks: {
               labelOffset: -22,
               align: "center",
               crossAlign: "center",
-             
-          
             },
 
             min: 1,
@@ -68,8 +58,6 @@ const WeeklyScheduleMatrix = () => {
         },
       }}
       data={{
-        // labels: ["1Jul", "2Jul", "3Jul", "4Jul", "5Jul", "6Jul", "7Jul"],
-        // yLabels: ["1pm", "2pm", "3pm", "4pm", "5pm"],
         datasets: [
           {
             label: "My First Dataset",
@@ -92,29 +80,29 @@ const WeeklyScheduleMatrix = () => {
               { x: new Date(2024, 7, 3), y: [4, 5], sales: 3000 },
               { x: new Date(2024, 7, 3), y: [5, 6], sales: 100 },
 
-              { x:  new Date(2024, 7, 4), y: [1, 2], sales: 120 },
-              { x:  new Date(2024, 7, 4), y: [2, 3], sales: 12200 },
-              { x:  new Date(2024, 7, 4), y: [3, 4], sales: 2000 },
-              { x:  new Date(2024, 7, 4), y: [4, 5], sales: 5000 },
-              { x:  new Date(2024, 7, 4), y: [5, 6], sales: 500 },
+              { x: new Date(2024, 7, 4), y: [1, 2], sales: 120 },
+              { x: new Date(2024, 7, 4), y: [2, 3], sales: 12200 },
+              { x: new Date(2024, 7, 4), y: [3, 4], sales: 2000 },
+              { x: new Date(2024, 7, 4), y: [4, 5], sales: 5000 },
+              { x: new Date(2024, 7, 4), y: [5, 6], sales: 500 },
 
-              { x:  new Date(2024, 7, 5), y: [1, 2], sales: 120 },
-              { x:  new Date(2024, 7, 5), y: [2, 3], sales: 12200 },
-              { x:  new Date(2024, 7, 5), y: [3, 4], sales: 2000 },
-              { x:  new Date(2024, 7, 5), y: [4, 5], sales: 5000 },
-              { x:  new Date(2024, 7, 5), y: [5, 6], sales: 500 },
+              { x: new Date(2024, 7, 5), y: [1, 2], sales: 120 },
+              { x: new Date(2024, 7, 5), y: [2, 3], sales: 12200 },
+              { x: new Date(2024, 7, 5), y: [3, 4], sales: 2000 },
+              { x: new Date(2024, 7, 5), y: [4, 5], sales: 5000 },
+              { x: new Date(2024, 7, 5), y: [5, 6], sales: 500 },
 
-              { x:  new Date(2024, 7, 6), y: [1, 2], sales: 120 },
-              { x:  new Date(2024, 7, 6), y: [2, 3], sales: 12200 },
-              { x:  new Date(2024, 7, 6), y: [3, 4], sales: 2000 },
-              { x:  new Date(2024, 7, 6), y: [4, 5], sales: 5000 },
-              { x:  new Date(2024, 7, 6), y: [5, 6], sales: 500 },
+              { x: new Date(2024, 7, 6), y: [1, 2], sales: 120 },
+              { x: new Date(2024, 7, 6), y: [2, 3], sales: 12200 },
+              { x: new Date(2024, 7, 6), y: [3, 4], sales: 2000 },
+              { x: new Date(2024, 7, 6), y: [4, 5], sales: 5000 },
+              { x: new Date(2024, 7, 6), y: [5, 6], sales: 500 },
 
-              { x:  new Date(2024, 7, 7), y: [1, 2], sales: 70 },
-              { x:  new Date(2024, 7, 7), y: [2, 3], sales: 200 },
-              { x:  new Date(2024, 7, 7), y: [3, 4], sales: 2000 },
-              { x:  new Date(2024, 7, 7), y: [4, 5], sales: 3000 },
-              { x:  new Date(2024, 7, 7), y: [5, 6], sales: 100 },
+              { x: new Date(2024, 7, 7), y: [1, 2], sales: 70 },
+              { x: new Date(2024, 7, 7), y: [2, 3], sales: 200 },
+              { x: new Date(2024, 7, 7), y: [3, 4], sales: 2000 },
+              { x: new Date(2024, 7, 7), y: [4, 5], sales: 3000 },
+              { x: new Date(2024, 7, 7), y: [5, 6], sales: 100 },
             ],
             backgroundColor: (ctx: any) => {
               const sales = ctx?.raw?.sales;
@@ -129,10 +117,7 @@ const WeeklyScheduleMatrix = () => {
               }
             },
 
-            borderColor: [
-              "transparent",
-        
-            ],
+            borderColor: ["transparent"],
             borderWidth: 4,
             borderSkipped: false,
             borderRadius: 10,

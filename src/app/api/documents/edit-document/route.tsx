@@ -1,19 +1,15 @@
-import { resetPasswordTemplate } from "@/constants/EmailTemplates";
-import cloudinary from "@/helpers/cloudinary";
-import { ImageUpload } from "@/helpers/ImageUpload";
-import SendEmail from "@/helpers/SendEmail";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-// const prisma = new PrismaClient();
 import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { version, status, id } = await req.json();
 
-  if(!version || !status || !id){
-    return NextResponse.json({ message: "Input fields must not be empty" , status : 422});
-
+  if (!version || !status || !id) {
+    return NextResponse.json({
+      message: "Input fields must not be empty",
+      status: 422,
+    });
   }
 
   try {
@@ -24,7 +20,10 @@ export const POST = async (req: Request) => {
     });
 
     if (!document) {
-      return NextResponse.json({ message: "Document does not exists", status : 404 });
+      return NextResponse.json({
+        message: "Document does not exists",
+        status: 404,
+      });
     }
 
     const updatedDocument = await prisma.document.update({
@@ -39,10 +38,10 @@ export const POST = async (req: Request) => {
 
     return NextResponse.json({
       message: "Document has been updated successfully",
-      status : 200
+      status: 200,
     });
   } catch (error) {
-    console.log("error", error);
-    return NextResponse.json({ error});
+    console.log(error);
+    return NextResponse.json({ error });
   }
 };

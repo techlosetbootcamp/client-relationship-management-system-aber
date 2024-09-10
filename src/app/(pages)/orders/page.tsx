@@ -5,7 +5,7 @@ import Table from "@/components/table/Table";
 import { orderTableHeading } from "@/constants/TableHeadings";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import useOrders from "@/hooks/useOrders";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Page = () => {
   const { orderList, isLoading } = useOrders();

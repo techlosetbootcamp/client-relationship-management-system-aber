@@ -21,7 +21,7 @@ const Page = () => {
   } = useLogin();
 
   return (
-    <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
+    <div className="font-albertSans w-full h-screen flex">
       <div className="xs:w-[90%] md:w-[60%] lg:w-[30%] flex flex-col gap-[50px] mx-auto justify-center items-center">
         {" "}
         <Image src={logo} alt="logo-image" height={30} priority />

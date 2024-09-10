@@ -7,12 +7,10 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 import { NextResponse } from "next/server";
 import { app } from "@/helpers/firebaseConfig";
 
-// const prisma = new PrismaClient();
 import prisma from "@/helpers/prisma";
 
 export const POST = async (req: Request) => {
   const { checkedItemsIds } = await req.json();
-  console.log("in delete api", checkedItemsIds);
   const storage = getStorage(app);
 
   try {
@@ -38,10 +36,8 @@ export const POST = async (req: Request) => {
           if (document && document.type && document.fileName) {
             const fileRef = document.fileName + "." + document.type;
 
-            // Create a reference to the file to delete
             const delRef = ref(storage, fileRef);
 
-            // Delete the file
             deleteObject(delRef)
               .then(() => {
                 console.log("file Deleted SUccessfully");
@@ -55,15 +51,18 @@ export const POST = async (req: Request) => {
     }
 
     if (!documents) {
-      return NextResponse.json({ message: "document do not exist" });
+      return NextResponse.json({
+        message: "document do not exist",
+        status: 404,
+      });
     }
 
     return NextResponse.json({
       message: "document has been deleted from the list",
-      documents,
+      status: 200,
     });
   } catch (error) {
-    console.log("error", error);
-    return NextResponse.json({ error, message: "in delete product error" });
+    console.log(error);
+    return NextResponse.json({ message: error, status: 400 });
   }
 };

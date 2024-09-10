@@ -25,15 +25,14 @@ const useForgetPassword = () => {
     });
 
     if (!validation.success) {
-      console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      console.log(errorsMessages);
+
       return;
     }
 
     try {
       setIsLoading(true);
-      console.log("button is clicked", email);
+
       await dispatch(
         ForgetPassword({
           payload: { email },
@@ -48,12 +47,9 @@ const useForgetPassword = () => {
   };
 
   const handleResponse = (data: any) => {
-    console.log("handle response function", data, data.status);
     if (data?.data.status === 200) {
       toast.success(data.data.message);
     } else {
-      console.log("in else");
-
       toast.error(null);
     }
   };

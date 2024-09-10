@@ -15,9 +15,6 @@ const useLogin = () => {
 
   useEffect(() => {
     if (errorsMessages) {
-      // Clear existing toasts
-
-      // Show the new error toast
       toast.error(errorsMessages);
     }
   }, [errorsMessages]);
@@ -29,23 +26,18 @@ const useLogin = () => {
     });
 
     if (!validation.success) {
-      console.log("validation errors", validation.error.flatten().fieldErrors);
       setErrorMessages(FormatErrors(validation.error.flatten().fieldErrors));
-      console.log(errorsMessages);
+
       return;
     }
 
-    console.log(email, password, "Button is clicked");
     try {
       setIsLoading(true);
       const response = await signIn("credentials", {
         email: email,
         password: password,
         redirect: false,
-        // callbackUrl: "/",
       });
-
-      console.log("response", response);
 
       if (response?.ok) {
         router.push("/");
@@ -62,7 +54,6 @@ const useLogin = () => {
   };
 
   const loginWithGoogle = async () => {
-    console.log("google button is clicked");
     await signIn("google", {
       redirect: true,
       callbackUrl: "/",

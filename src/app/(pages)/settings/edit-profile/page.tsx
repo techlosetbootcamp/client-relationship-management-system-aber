@@ -23,7 +23,7 @@ const Page = () => {
   } = useEditProfile();
 
   return (
-    <div className="border-2 flex flex-col gap-[22px] w-full py-[41px] md:px-[10%] lg:px-[15%]">
+    <div className="flex flex-col gap-[22px] w-full py-[41px] md:px-[10%] lg:px-[15%]">
       <CardWrapper width="w-full" height="" flexDirection="flex-row">
         <div className="flex md:flex-row xs:flex-col gap-[20px] justify-between w-full">
           <div className="flex xs:justify-center items-center xs:gap-[8px] md:gap-[16px]">
@@ -82,7 +82,7 @@ const Page = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <div className="w-full flex md:justify-end border-2">
+      <div className="w-full flex md:justify-end ">
         <Button
           text={"Update Profile"}
           background="bg-primaryPurple"

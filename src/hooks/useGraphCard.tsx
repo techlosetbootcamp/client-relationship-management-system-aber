@@ -9,8 +9,8 @@ const useGraphCard = (chart: string) => {
   const currentDate = new Date();
   const previousMonthDate = new Date(
     currentDate.getFullYear(),
-    currentDate.getMonth() - 1, // Decrement the month by 1
-    currentDate.getDate() // Keep the same day
+    currentDate.getMonth() - 1,
+    currentDate.getDate()
   );
 
   const profitApi = async () => {
@@ -35,7 +35,7 @@ const useGraphCard = (chart: string) => {
       const chartDataset = [
         {
           label: "My First Dataset",
-          // data: [1, 2, 1, 7, 5, 6, 8],
+
           data:
             chart != "customers"
               ? response?.data?.order?.map((item: any) => {

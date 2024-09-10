@@ -18,7 +18,7 @@ const Page = () => {
   } = useChangePassword();
 
   return (
-    <div className="font-albertSans border-2 border-secondaryRed w-full h-screen flex">
+    <div className="font-albertSans w-full h-screen flex">
       <div className="xs:w-full md:w-[70%] lg:w-[45%] flex flex-col gap-[50px] mx-auto justify-center items-center">
         {" "}
         <p className="text-[28px] font-[700]">Change Password</p>

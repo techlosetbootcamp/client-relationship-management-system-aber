@@ -3,18 +3,12 @@ import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
   const { startDate, endDate } = await req.json();
-  console.log(
-    "thos os supposed to be date",
-    startDate,
-    endDate,
-    `${endDate}T23:59:59.999Z`
-  );
 
   try {
     const users = await prisma.user.findMany({
       where: {
         CreatedAt: {
-          gte: new Date(startDate), // Start of date range
+          gte: new Date(startDate),
           lte: new Date(`${endDate}T23:59:59.999Z`),
         },
         Order: {
@@ -32,7 +26,6 @@ export const POST = async (req: Request) => {
       });
     }
 
-    console.log("customers in the  backend",users);
     const groupedCustomers: any = [];
     let totalCustomers: number = 0;
 
@@ -41,7 +34,7 @@ export const POST = async (req: Request) => {
 
       const date =
         user.CreatedAt &&
-        new Date(user?.CreatedAt)?.toISOString().split("T")[0]; // Extract the date part (YYYY-MM-DD)
+        new Date(user?.CreatedAt)?.toISOString().split("T")[0];
 
       const existingGroup = groupedCustomers.find(
         (group: { date: string }) => group.date === date

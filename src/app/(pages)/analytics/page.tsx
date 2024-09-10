@@ -23,7 +23,7 @@ const barData = {
 };
 const Page = () => {
   return (
-    <div className="flex flex-col border gap-[22px] md:ml-[12px] w-full  border-2 ">
+    <div className="flex flex-col border gap-[22px] md:ml-[12px] w-full  ">
       <Header text="Analytics" avatar={true} />
 
       <div className="flex md:flex-row xs:flex-col xs:gap-[20px] md:gap-[10px] lg:gap-[19.65px] xl:gap-[24px] w-full">
@@ -47,7 +47,7 @@ const Page = () => {
             Sales Per Week
           </p>
           <div className="border border-borderGray" />
-          <div className="h-[284px] border-2 ">
+          <div className="h-[284px] ">
             <WeeklyScheduleMatrix />
           </div>
         </CardWrapper>

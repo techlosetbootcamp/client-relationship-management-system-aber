@@ -8,6 +8,8 @@ import userAvatar from "@/assets/images/userAvatar.png";
 import { useDispatch } from "react-redux";
 import {
   AddDocument,
+  DeleteDocument,
+  DownloadDocument,
   EditDocument,
   GetDocument,
 } from "@/redux/slices/document.slice";
@@ -23,7 +25,7 @@ const fileIcons: any = {
   docx: <BsFileWord size={32} />,
   xlsx: <BsFileExcel size={32} />,
 
-  default: <FaRegFileAlt size={32} />, // A default icon for unsupported types
+  default: <FaRegFileAlt size={32} />,
 };
 
 const useDocuments = (item?: any) => {
@@ -84,7 +86,6 @@ const useDocuments = (item?: any) => {
 
     const formData = new FormData();
     if (selectedFile) {
-      // formData.append("fileURL", fileURL);
       formData.append("file", selectedFile);
       formData.append("version", version);
       formData.append("status", status);
@@ -103,9 +104,6 @@ const useDocuments = (item?: any) => {
           payload: { formData },
           callback: async (data) => {
             if (data?.data?.status === 201) {
-              // setIsDocumentAdded(!isDocumentAdded);
-
-              // await getDocuments();
               await dispatch(GetDocument());
               toast.success(data?.data?.message);
             } else {
@@ -150,9 +148,6 @@ const useDocuments = (item?: any) => {
           },
           callback: async (data) => {
             if (data?.data?.status === 200) {
-              // setIsDocumentAdded(!isDocumentAdded);
-
-              // await getDocuments();
               await dispatch(GetDocument());
               toast.success(data?.data?.message);
             } else {
@@ -169,14 +164,26 @@ const useDocuments = (item?: any) => {
     }
   };
 
-  const deleteDocuments = async (getCheckedItemIds: () => void) => {
+  const deleteDocuments = async (getCheckedItemIds: () => string[]) => {
     const checkedItemsIds = getCheckedItemIds();
+
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post("/documents/delete-documents", {
-        checkedItemsIds,
-      });
-      await dispatch(GetDocument());
+      await dispatch(
+        DeleteDocument({
+          payload: {
+            checkedItemsIds: checkedItemsIds,
+          },
+          callback: async (data) => {
+            if (data?.data?.status === 200) {
+              await dispatch(GetDocument());
+              toast.success(data?.data?.message);
+            } else {
+              toast.error(data?.data?.message);
+            }
+          },
+        })
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -184,39 +191,30 @@ const useDocuments = (item?: any) => {
     }
   };
 
-  const downloadDocuments = async (getCheckedItemIds: () => void) => {
+  const downloadDocuments = async (getCheckedItemIds: () => string[]) => {
     const checkedItemsIds = getCheckedItemIds();
 
     try {
-      const response = await axiosInstance.post(
-        "/documents/download-documents",
-        { checkedItemsIds }
+      setIsLoading(true);
+      await dispatch(
+        DownloadDocument({
+          payload: {
+            checkedItemsIds: checkedItemsIds,
+          },
+          callback: async (data) => {
+            if (data?.data?.status === 200) {
+              await dispatch(GetDocument());
+              toast.success(data?.data?.message);
+            } else {
+              toast.error(data?.data?.message);
+            }
+          },
+        })
       );
-
-      if (response.data.documents.length > 0) {
-        response.data.documents.map(async (doc: any) => {
-          if (doc && doc.type && doc.fileName && doc.fileURL) {
-            const filePath = doc.fileName + "." + doc.type;
-            const fetchURL = await fetch(doc.fileURL);
-            if (!fetchURL.ok) throw new Error("Network response was not ok");
-
-            const blob = await fetchURL.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            const link = document.createElement("a");
-
-            link.href = blobUrl;
-            link.download = filePath;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            URL.revokeObjectURL(blobUrl);
-          }
-        });
-      }
     } catch (error) {
-      console.error("Error downloading file:", error);
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -229,7 +227,6 @@ const useDocuments = (item?: any) => {
     try {
       setIsLoading(true);
       await dispatch(GetDocument());
-      // toast.success("Document list fetched successfully")
     } catch (error) {
       console.log(error);
     } finally {

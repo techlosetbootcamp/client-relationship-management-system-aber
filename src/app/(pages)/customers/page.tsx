@@ -6,7 +6,6 @@ import { DeviceUsers } from "@/components/deviceUsers/DeviceUsers";
 import { CustomerDemographic } from "@/components/customerDemographic/CustomerDemographic";
 import Table from "@/components/table/Table";
 import { Header } from "@/components/header/Header";
-import dynamic from "next/dynamic";
 import { CustomerTableHeadings } from "@/constants/TableHeadings";
 import { CustomerTableData } from "@/constants/TableData";
 
@@ -39,10 +38,10 @@ const customerData = [
 
 const Page = () => {
   return (
-    <div className="flex flex-col border-2 border-primaryPurple gap-[22px] xl:ml-[12px] w-full">
+    <div className="flex flex-col gap-[22px] xl:ml-[12px] w-full">
       <Header text="Customers" avatar={true} />
 
-      <div className="grid sm:grid-cols-2  md:grid-cols-4 gap-[20px] border-2">
+      <div className="grid sm:grid-cols-2  md:grid-cols-4 gap-[20px]">
         {customerData.map((item, i) => {
           return (
             <CardWrapper

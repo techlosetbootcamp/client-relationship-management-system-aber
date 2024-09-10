@@ -8,11 +8,11 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div className="flex flex-col w-full border gap-[22px]">
+    <div className="flex flex-col w-full gap-[22px]">
       <Header text="Order Overview" avatar={true}/>
 
-      <div className="flex xs:flex-col md:flex-row xs:gap-[20px] md:gap-[21.58px] xl:gap-[26px] border border-secondaryGreen justify-between">
-        <div className="flex flex-col flex-1 border border-secondaryGreen md:w-[523px] xl:w-[631px] xs:gap-[20px] md:gap-[8px] lg:gap-[16.6px] xl:gap-[20px]">
+      <div className="flex xs:flex-col md:flex-row xs:gap-[20px] md:gap-[21.58px] xl:gap-[26px] justify-between">
+        <div className="flex flex-col flex-1 md:w-[523px] xl:w-[631px] xs:gap-[20px] md:gap-[8px] lg:gap-[16.6px] xl:gap-[20px]">
           <WeeklySalesStats />
           <Table
             heading="Best Selling Products"

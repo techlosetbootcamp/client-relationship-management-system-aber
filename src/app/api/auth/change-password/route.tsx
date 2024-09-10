@@ -10,21 +10,9 @@ export const POST = async (req: Request) => {
   const { currentPassword, newPassword, confirmNewPassword, userId } =
     await req.json();
 
-  console.log(
-    "in change-password api",
-    currentPassword,
-    newPassword,
-    confirmNewPassword,
-    userId
-  );
-
   if (!currentPassword || !newPassword || !confirmNewPassword) {
     return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
   }
-
-  //   if (password != confirmPassword) {
-  //     return NextResponse.json({ message: "Passwords does not match" });
-  //   }
 
   if (newPassword != confirmNewPassword) {
     return NextResponse.json(

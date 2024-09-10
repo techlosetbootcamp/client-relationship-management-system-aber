@@ -5,7 +5,7 @@ const useSessionData = () => {
   const userId = session?.data?.user?.id;
   const userName = session?.data?.user?.name;
   const userEmail = session?.data?.user?.email;
-  const userImage = session.data?.user?.image
+  const userImage = session.data?.user?.image;
   return { userId, userName, userEmail, userImage };
 };
 

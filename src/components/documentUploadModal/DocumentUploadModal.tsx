@@ -17,7 +17,6 @@ import useDocuments from "@/hooks/useDocuments";
 import { CgSpinner } from "react-icons/cg";
 import { DocumentUploadModalProps } from "@/types/Types";
 
-
 const StatusValues = [
   {
     text: "Active",
@@ -27,7 +26,10 @@ const StatusValues = [
   },
 ];
 
-const DocumentUploadModal = ({ toggleModal, item }: DocumentUploadModalProps) => {
+const DocumentUploadModal = ({
+  toggleModal,
+  item,
+}: DocumentUploadModalProps) => {
   const { userId, userName, userEmail, userImage } = useSessionData();
   const {
     statusHandler,
@@ -42,8 +44,6 @@ const DocumentUploadModal = ({ toggleModal, item }: DocumentUploadModalProps) =>
     setIsClicked,
     isLoading,
   } = useDocuments(item);
-
-  console.log("item in fileModal", item);
 
   return (
     <div className="backdrop-brightness-50 z-10 flex justify-center items-center fixed left-0 overflow-y-hidden overflow-x-hidden top-0 bottom-0 w-screen max-h-screen">
@@ -61,7 +61,6 @@ const DocumentUploadModal = ({ toggleModal, item }: DocumentUploadModalProps) =>
             placeholder="File"
             onChange={handleFileUpload}
             type="file"
-            // value={file}
           />
         )}
 
@@ -76,7 +75,6 @@ const DocumentUploadModal = ({ toggleModal, item }: DocumentUploadModalProps) =>
           type="text"
           value={version}
         />
-
 
         <div className="relative border-2 h-[3rem]">
           <ul

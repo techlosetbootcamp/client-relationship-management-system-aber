@@ -1,11 +1,9 @@
 "use client";
 import useSidebar from "@/hooks/useSidebar";
+import { SidebarContextType } from "@/types/Types";
 import React, { createContext, useContext } from "react";
 
-type SidebarContextType = {
-  toggleSidebar: () => void;
-  toggle: boolean;
-};
+
 
 const SidebarContext = createContext<SidebarContextType | null>(null);
 const SidebarContextProvider = ({
@@ -14,7 +12,7 @@ const SidebarContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { toggleSidebar, toggle } = useSidebar();
-  console.log("inside sidebar context", toggleSidebar, toggle);
+
   return (
     <SidebarContext.Provider value={{ toggleSidebar, toggle }}>
       {children}

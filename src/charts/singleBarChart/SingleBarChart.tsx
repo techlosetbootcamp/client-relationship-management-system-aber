@@ -11,19 +11,11 @@ import {
   Legend,
 } from "chart.js";
 
-ChartJs.register(
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement
-);
+ChartJs.register(Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const SingleBarChart = () => {
   return (
     <Bar
-
-
       options={{
         responsive: true,
         maintainAspectRatio: false,

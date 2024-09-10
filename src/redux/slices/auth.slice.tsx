@@ -1,7 +1,6 @@
 import { axiosInstance } from "@/helpers/axiosInstance";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
 const initialState = {
   data: {},
   loading: false,
@@ -14,14 +13,14 @@ type SignUpArgs = {
     password: string;
     confirmPassword: string;
   };
-  callback : (data:any) =>void
+  callback: (data: any) => void;
 };
 
 type ForgetPasswordArgs = {
   payload: {
     email: string;
   };
-  callback : (data:any) =>void
+  callback: (data: any) => void;
 };
 
 type ResetPasswordArgs = {
@@ -30,7 +29,7 @@ type ResetPasswordArgs = {
     confirmPassword: string;
     userId: string;
   };
-  callback : (data:any) =>void
+  callback: (data: any) => void;
 };
 
 type ChangePasswordArgs = {
@@ -38,19 +37,16 @@ type ChangePasswordArgs = {
     currentPassword: string;
     newPassword: string;
     confirmNewPassword: string;
-    userId:string
+    userId: string;
   };
 };
-
-
 
 export const SignUp = createAsyncThunk<[], SignUpArgs>(
   "auth/signup",
   async (data) => {
-    console.log("async signup data", data);
     const response = await axiosInstance.post("/auth/sign-up", data?.payload);
     data?.callback && data.callback(response);
-    console.log("signup response", response.data.status);
+
     return response.data;
   }
 );
@@ -58,13 +54,12 @@ export const SignUp = createAsyncThunk<[], SignUpArgs>(
 export const ForgetPassword = createAsyncThunk<[], ForgetPasswordArgs>(
   "auth/forgetPassword",
   async (data) => {
-    console.log("async forgetPassword data", data);
     const response = await axiosInstance.post(
       "/auth/forget-password",
       data?.payload
     );
     data?.callback && data.callback(response);
-    console.log("forgetPassword response", response, response.status);
+
     return response.data;
   }
 );
@@ -72,31 +67,27 @@ export const ForgetPassword = createAsyncThunk<[], ForgetPasswordArgs>(
 export const ResetPassword = createAsyncThunk<[], ResetPasswordArgs>(
   "auth/resetPassword",
   async (data) => {
-    console.log("async ResetPassword data", data);
     const response = await axiosInstance.post(
       "/auth/reset-password",
       data?.payload
     );
     data?.callback && data.callback(response);
-    console.log("ResetPassword response", response);
+
     return response.data;
   }
 );
-
 
 export const ChangePassword = createAsyncThunk<[], ChangePasswordArgs>(
   "auth/changePassword",
   async (data) => {
-    console.log("async changePassword data", data);
     const response = await axiosInstance.post(
       "/auth/change-password",
       data?.payload
     );
-    console.log("changePassword response", response, response.status);
+
     return response.data;
   }
 );
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -141,7 +132,6 @@ const authSlice = createSlice({
     builder.addCase(ResetPassword.rejected, (state, action) => {
       state.loading = false;
     });
-
 
     builder.addCase(ChangePassword.pending, (state, action) => {
       state.loading = true;

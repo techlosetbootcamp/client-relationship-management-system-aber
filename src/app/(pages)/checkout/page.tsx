@@ -4,20 +4,17 @@ import CartCard from "@/components/cartCard/CartCard";
 import { Header } from "@/components/header/Header";
 import InputField from "@/components/inputField/InputField";
 import useCart from "@/hooks/useCart";
-import useProducts from "@/hooks/useProducts";
 import useSessionData from "@/hooks/useSessionData";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { US_STATES } from "@/constants/UsStates";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Suspense } from "react";
 import { CgSpinner } from "react-icons/cg";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const [cartData, setCartData] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
-
 
   const { userName, userEmail } = useSessionData();
 
@@ -40,19 +37,12 @@ const Page = () => {
     const cartDataParam = searchParams.get("cartData");
     const totalQuantityParam = searchParams.get("totalQuantity");
     const subTotalParam = searchParams.get("subTotal");
-    
-      // console.log("inside use effect"),
-      // searchParams,
-      // cartDataParam && JSON.parse(decodeURIComponent(cartDataParam)),
-      // totalQuantityParam,
-      // subTotalParam
-   
 
     if (cartDataParam) {
       try {
         setCartData(JSON.parse(decodeURIComponent(cartDataParam)));
       } catch (error) {
-        console.error("Failed to parse cart data:", error);
+        console.error(error);
       }
     }
 
@@ -62,8 +52,6 @@ const Page = () => {
     if (subTotalParam) {
       setSubTotal(parseInt(subTotalParam, 10));
     }
-
-    console.log(totalQuantity, cartData);
   }, [searchParams]);
 
   return (
@@ -169,8 +157,6 @@ const Page = () => {
 
         <div className=" h-full flex flex-col xs:py-[20px] md:py-0 gap-[20px] md:px-[50px] h-full overflow-auto justify-center">
           {cartData.map((item: any) => {
-            console.log("cardData item", item);
-            // setSubtotal(subtotal+(+product.price))
             return (
               <div key={item.product.id} className="">
                 <CartCard
@@ -197,31 +183,3 @@ const Page = () => {
 };
 
 export default Page;
-
-// import CartCard from "@/components/cartCard/CartCard";
-// import { Header } from "@/components/header/Header";
-// import useCart from "@/hooks/useCart";
-// import useProducts from "@/hooks/useProducts";
-
-{
-  /* <Header text="Order List" avatar={false} />
-<div className="border-2 border-secondaryRed h-full">
-{/* {cartData.map((item: any) => {
-  console.log("cardData item", item);
-  // setSubtotal(subtotal+(+product.price))
-  return (
-    <div key={item.product.id}>
-      <CartCard
-        id={item?.product.id}
-        image={item.product.image}
-        category={item.product.category}
-        productName={item?.product.productName}
-        price={item?.product.price}
-        quantity={item?.quantity}
-      />
-    </div>
-  );
-})} */
-}
-
-// </div> */}

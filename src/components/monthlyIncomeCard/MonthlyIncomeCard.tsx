@@ -10,27 +10,10 @@ import StatusTag from "../statusTag/StatusTag";
 import { axiosInstance } from "@/helpers/axiosInstance";
 import { format, startOfMonth, endOfMonth } from "date-fns";
 
-// const data = {
-//   labels: ["May", "Jun", "Jul"],
-//   datasets: [
-//     {
-//       label: "Dataset",
-//       data: [6500, 5000, 4000],
-
-//       backgroundColor: ["#9A55FF", "#41A5FF", "#ED4D5C"],
-
-//       borderWidth: 1,
-//     },
-//   ],
-// };
-
-// Get the current date
 const currentDate = new Date();
 
-// Get the first day of the month
 const firstDayOfMonth = format(startOfMonth(currentDate), "MMM d, yyyy");
 
-// Get the last day of the month
 const lastDayOfMonth = format(endOfMonth(currentDate), "MMM d, yyyy");
 const MonthlyIncomeCard = () => {
   const [checkResponse, setCheckRespone] = useState<any>();
@@ -38,9 +21,8 @@ const MonthlyIncomeCard = () => {
 
   const monthlyIncomeHandler = async () => {
     const response = await axiosInstance.get("/order/get-order-by-month");
-    console.log("monthly income response", response);
+
     const data = {
-      // labels: ["May", "Jun", "Jul"],
       labels: response?.data?.monthlyOrders?.map((monthlyOrder: any) => {
         return monthlyOrder.month;
       }),
@@ -64,10 +46,6 @@ const MonthlyIncomeCard = () => {
     };
     setCheckRespone(data);
   };
-
-  useEffect(() => {
-    console.log("in useEffect card2", checkResponse);
-  }, [checkResponse]);
 
   useEffect(() => {
     monthlyIncomeHandler();

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/button/Button";
 import { Header } from "@/components/header/Header";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import ImageUploadModal from "@/components/productUploadModal/ProductUploadModal";
+import ProductUploadModal from "@/components/productUploadModal/ProductUploadModal";
 import Table from "@/components/table/Table";
 import { ProductsTableHeadings } from "@/constants/TableHeadings";
 import useProducts from "@/hooks/useProducts";
@@ -36,7 +36,7 @@ const Page = () => {
       </div>
 
       <div className={`${isModalOpen ? "block" : "hidden"}`}>
-        <ImageUploadModal toggleModal={toggleModal} />
+        <ProductUploadModal toggleModal={toggleModal} />
       </div>
 
       <Table

@@ -22,17 +22,22 @@ type EditDocumentArgs = {
   callback: (data: any) => void;
 };
 
+type DeleteDownloadDocumentArgs = {
+  payload: {
+    checkedItemsIds: string[];
+  };
+  callback: (data: any) => void;
+};
+
 export const AddDocument = createAsyncThunk<any, AddDocumentArgs>(
   "user/addDocument",
   async (data) => {
-    console.log("async addDocument data", data);
-
     const response = await axiosInstance.post(
       "/documents/add-document",
       data?.payload?.formData
     );
     data?.callback && data.callback(response);
-    console.log("add-document response", response, response.status);
+
     return response.data;
   }
 );
@@ -41,7 +46,6 @@ export const GetDocument = createAsyncThunk<any>(
   "user/getDocuments",
   async (data) => {
     const response = await axiosInstance.get("/documents/get-documents");
-    console.log(response);
 
     return response.data.document;
   }
@@ -55,10 +59,59 @@ export const EditDocument = createAsyncThunk<any, EditDocumentArgs>(
       data?.payload
     );
     data?.callback && data.callback(response);
-    console.log("edit-document response", response, response.status);
+
     return response.data;
   }
 );
+
+export const DeleteDocument = createAsyncThunk<any, DeleteDownloadDocumentArgs>(
+  "user/deleteDocuments",
+  async (data) => {
+    const response = await axiosInstance.post(
+      "/documents/delete-documents",
+      data.payload
+    );
+    data?.callback && data.callback(response);
+
+    return response.data;
+  }
+);
+
+export const DownloadDocument = createAsyncThunk<
+  any,
+  DeleteDownloadDocumentArgs
+>("user/downloadDocuments", async (data) => {
+  const response = await axiosInstance.post(
+    "/documents/download-documents",
+    data.payload
+  );
+
+  if (response.data.documents.length > 0) {
+    response.data.documents.map(async (doc: any) => {
+      if (doc && doc.type && doc.fileName && doc.fileURL) {
+        const filePath = doc.fileName + "." + doc.type;
+        const fetchURL = await fetch(doc.fileURL);
+        if (!fetchURL.ok) throw new Error("Network response was not ok");
+
+        const blob = await fetchURL.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = blobUrl;
+        link.download = filePath;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(blobUrl);
+      }
+    });
+  }
+  data?.callback && data.callback(response);
+
+  return response.data;
+});
 
 const documentSlice = createSlice({
   name: "document",
@@ -96,6 +149,26 @@ const documentSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(EditDocument.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(DeleteDocument.pending, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(DeleteDocument.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(DeleteDocument.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(DownloadDocument.pending, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(DownloadDocument.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(DownloadDocument.rejected, (state, action) => {
       state.loading = false;
     });
   },

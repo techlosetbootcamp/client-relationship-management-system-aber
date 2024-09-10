@@ -11,7 +11,6 @@ import { HeaderProps } from "@/types/Types";
 
 export const Header = ({ text, avatar }: HeaderProps) => {
   const { userName, userImage } = useSessionData();
-  // const { startDate, startDay, endDay, month, year, range } = useCalendar();
 
   return (
     <div className="flex md:flex-row xs:flex-col xs:flex-col-reverse xs:gap-[26.5px] md:justify-between py-[41px] w-full">

@@ -2,23 +2,14 @@
 import Cart from "@/components/cart/Cart";
 import { Header } from "@/components/header/Header";
 import ProductCard from "@/components/productCard/ProductCard";
-import { axiosInstance } from "@/helpers/axiosInstance";
 import useProducts from "@/hooks/useProducts";
-import { handleAddToCart } from "@/redux/slices/cart.slice";
-import { RootState } from "@/redux/store";
 import { ProductProps } from "@/types/Types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsCart3 } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
 
 const Page = () => {
-  const {
-    toggle,
-    productList,
-    totalQuantity,
-    toggleCart,
-    addToCart,
-  } = useProducts("");
+  const { toggle, productList, totalQuantity, toggleCart, addToCart } =
+    useProducts("");
 
   return (
     <div className="flex flex-col gap-[22px] mx-[12px] w-full border-2">
@@ -46,7 +37,7 @@ const Page = () => {
                 category={product.category}
                 price={product.price}
                 image={product.image}
-                stock = {product.totalStock}
+                stock={product.totalStock}
                 onClick={() => addToCart(product)}
               />
             </div>
