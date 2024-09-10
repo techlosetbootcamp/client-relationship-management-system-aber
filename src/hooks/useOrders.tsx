@@ -38,7 +38,7 @@ const useOrders = () => {
       setIsLoading(true);
       await dispatch(GetOrders());
 
-      toast.success("Order list fetched successfully");
+      // toast.success("Order list fetched successfully");
     } catch (error) {
       console.log(error);
       toast.error(null);
