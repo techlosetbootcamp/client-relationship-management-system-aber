@@ -12,7 +12,7 @@ const Page = () => {
   const { fotmattedProducts, toggleModal, isModalOpen } = useProducts("");
 
   return (
-    <div className="flex flex-col border-2 border-primaryPurple gap-[22px] -[12px] w-full">
+    <div className="flex flex-col gap-[22px] -[12px] w-full">
       <Header text="Products" avatar={true} />
       <div className="flex self-end">
         <Button

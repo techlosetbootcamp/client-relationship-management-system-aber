@@ -12,7 +12,7 @@ const Page = () => {
     useProducts("");
 
   return (
-    <div className="flex flex-col gap-[22px] mx-[12px] w-full border-2">
+    <div className="flex flex-col gap-[22px] mx-[12px] w-full">
       <div className="flex w-full items-center gap-[8px]">
         <div className="w-full">
           <Header text="Products List" avatar={false} />

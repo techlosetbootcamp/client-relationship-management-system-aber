@@ -76,6 +76,8 @@ const useProducts = (item: any) => {
     const response = await axiosInstance.get("/products/get-products");
 
     setProductList(response.data.product);
+
+    console.log("response inside get productts", response)
   };
 
   const toggleCart = () => {
