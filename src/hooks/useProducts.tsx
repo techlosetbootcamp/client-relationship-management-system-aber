@@ -3,7 +3,12 @@ import { axiosInstance } from "@/helpers/axiosInstance";
 import { FormatErrors } from "@/helpers/formatErrors";
 import { toast } from "@/helpers/toastify";
 import { handleAddToCart } from "@/redux/slices/cart.slice";
-import { RootState } from "@/redux/store";
+import {
+  AddProduct,
+  DeleteProduct,
+  GetProduct,
+} from "@/redux/slices/product.slice";
+import { AppDispatch, RootState } from "@/redux/store";
 import { ProductProps } from "@/types/Types";
 import { productValidation } from "@/validations/productValidation";
 import React, { useEffect, useState } from "react";
@@ -11,7 +16,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useProducts = (item: any) => {
   const cartData = useSelector((state: RootState) => state.cart.cartData);
-  const dispatch = useDispatch();
+  const productData: any = useSelector(
+    (state: RootState) => state.product.data
+  );
+  const dispatch: AppDispatch = useDispatch();
 
   const [toggle, setToggle] = useState(false);
   const [productList, setProductList] = useState([]);
@@ -53,32 +61,36 @@ const useProducts = (item: any) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const getFormattedProducts = async () => {
-    const productData = await axiosInstance.get("/products/get-products");
-
-    const productsArray = productData?.data?.product?.map((item: any) => {
-      return {
-        id: item.id,
-        imgObject: {
-          img: item.image,
-          name: item.productName,
-        },
-        totalStock: item.totalStock,
-        purchasedPrice: item.purchasedPrice,
-        price: item.price,
-        category: item.category,
-      };
-    });
-    setFormattedProducts(productsArray);
-  };
-
   const getProducts = async () => {
-    const response = await axiosInstance.get("/products/get-products");
-
-    setProductList(response.data.product);
-
-    console.log("response inside get productts", response)
+    try {
+      setIsLoading(true);
+      await dispatch(GetProduct());
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    setProductList(productData);
+    if (productData.length > 0) {
+      const productsArray = productData?.map((item: any) => {
+        return {
+          id: item.id,
+          imgObject: {
+            img: item.image,
+            name: item.productName,
+          },
+          totalStock: item.totalStock,
+          purchasedPrice: item.purchasedPrice,
+          price: item.price,
+          category: item.category,
+        };
+      });
+      setFormattedProducts(productsArray);
+    }
+  }, [productData]);
 
   const toggleCart = () => {
     setToggle(!toggle);
@@ -139,12 +151,19 @@ const useProducts = (item: any) => {
 
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post(
-        "/products/add-product",
-        formData
+      await dispatch(
+        AddProduct({
+          payload: { formData },
+          callback: async (data) => {
+            if (data?.data?.status === 201) {
+              await dispatch(GetProduct());
+              toast.success(data?.data?.message);
+            } else {
+              toast.error(data?.data?.message);
+            }
+          },
+        })
       );
-
-      await getProducts();
     } catch (error) {
       console.log(error);
     } finally {
@@ -199,20 +218,27 @@ const useProducts = (item: any) => {
   const deleteProduct = async (item: any) => {
     try {
       setIsLoading(true);
-
-      const response = await axiosInstance.post("/products/delete-product", {
-        id: item.id,
-      });
+      dispatch(
+        DeleteProduct({
+          payload: {
+            id: item.id,
+          },
+          callback: async (data) => {
+            if (data?.data?.status === 200) {
+              await dispatch(GetProduct());
+              toast.success(data?.data?.message);
+            } else {
+              toast.error(data?.data?.message);
+            }
+          },
+        })
+      );
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    getFormattedProducts();
-  }, []);
 
   useEffect(() => {
     if (toggle) {

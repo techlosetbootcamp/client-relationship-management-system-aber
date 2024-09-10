@@ -23,7 +23,7 @@ export const POST = async (req: Request) => {
     });
 
     if (product) {
-      return NextResponse.json({ message: "Product already exists" });
+      return NextResponse.json({ message: "Product already exists" , status : 409});
     }
     const response: any = await ImageUpload(image);
 
@@ -42,9 +42,10 @@ export const POST = async (req: Request) => {
     return NextResponse.json({
       message: "Product has been added successfully",
       newProduct,
+      status: 201
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error, message: "in error" });
+    return NextResponse.json({ message: error, status : 400});
   }
 };

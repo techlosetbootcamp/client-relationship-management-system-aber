@@ -15,6 +15,7 @@ export const GET = async (req: Request) => {
     return NextResponse.json({
       message: "Product list",
       product,
+      status:200
     });
   } catch (error) {
     console.log("error", error);

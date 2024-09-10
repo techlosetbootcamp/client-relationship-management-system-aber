@@ -19,15 +19,19 @@ export const POST = async (req: Request) => {
     }
 
     if (!product) {
-      return NextResponse.json({ message: "Product do not exist" });
+      return NextResponse.json({
+        message: "Product do not exist",
+        status: 400,
+      });
     }
 
     return NextResponse.json({
       message: "Product has been deleted from the list",
       product,
+      status: 200,
     });
   } catch (error) {
     console.log("error", error);
-    return NextResponse.json({ error, message: "in delete product error" });
+    return NextResponse.json({ message: error, status: 400 });
   }
 };
