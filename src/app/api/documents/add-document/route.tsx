@@ -60,6 +60,6 @@ export const POST = async (req: Request) => {
       status: 201,
     });
   } catch (error) {
-    return NextResponse.json({ message: "Invalid Data", status: 400 });
+    return NextResponse.json({ error,message: "Invalid Data", status: 400 });
   }
 };

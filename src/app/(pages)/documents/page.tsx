@@ -39,7 +39,7 @@ const Page = () => {
             rowBorder={false}
           />
 
-          <div className="flex md:flex-row xs:flex-col gap-[16px] md:justify-end border-2">
+          <div className="flex md:flex-row xs:flex-col gap-[16px] md:justify-end">
             <Button
               text={"Create Document"}
               background="bg-primaryPurple"
