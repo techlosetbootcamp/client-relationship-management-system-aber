@@ -4,10 +4,11 @@ import logo from "@/assets/images/logo.svg";
 import fb from "@/assets/images/facebook.svg";
 import insta from "@/assets/images/instagram.svg";
 import twitter from "@/assets/images/twitter.svg";
+import Link from "next/link";
 
 const MobileFooter = () => {
   return (
-    <div className="w-full xs:flex flex-col gap-[10px] lg:hidden bg-white sticky mt-auto font-barlow mt-[67px] py-[17px] px-[32px] ">
+    <div className="w-full xs:flex flex-col gap-[10px] md:hidden bg-white sticky mt-auto font-barlow mt-[67px] py-[17px] px-[32px] ">
       <div className="flex flex-col gap-[43px]">
         <div>
           <Image src={logo} alt="logo-img" />
@@ -17,15 +18,34 @@ const MobileFooter = () => {
           </p>
         </div>
         <ul className="flex flex-col gap-[24px] font-[400] text-[16px] leading-[19.2px] text-darkGray">
-          <li className="">Dashboard</li>
-          <li className="">Customers</li>
-          <li className="">
-            Order Overview
-          </li>
-          <li className="">Analytics</li>
-          <li className="">
-            Accounting
-          </li>
+
+            <Link href="/">
+              <li className="px-[8px] leading-[19.2px] text-darkGray">
+                Dashboard
+              </li>
+            </Link>
+
+            <Link href="/customers">
+              <li className="px-[8px] leading-[19.2px] text-darkGray">
+                Customers
+              </li>
+            </Link>
+
+            <Link href="/order-overview">
+              <li className="">
+                Order Overview
+              </li>
+            </Link>
+
+            <Link href="/analytics">
+            <li className="">
+              Analytics
+            </li>
+            </Link>
+
+            <li className="">
+              Accounting
+            </li>
         </ul>
         <ul className="flex gap-[24px]">
           <li className="">

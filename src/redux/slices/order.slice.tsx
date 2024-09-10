@@ -2,10 +2,15 @@ import { axiosInstance } from "@/helpers/axiosInstance";
 import { AddOrderArgs, GetOrderByDateArgs } from "@/types/Types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
+type GetOrderByIdArgs = {
+  payload: {
+    orderId: string;
+  };
+};
 
 const initialState = {
   data: [],
+  orderById : [],
   loading: false,
 };
 
@@ -14,6 +19,17 @@ export const GetOrders = createAsyncThunk<any>("order/getOrders", async () => {
 
   return response.data.orderList;
 });
+
+export const GetOrderById = createAsyncThunk<any, GetOrderByIdArgs>(
+  "user/getOrderById",
+  async (data) => {
+    const response = await axiosInstance.post(
+      "/order/get-order-by-id",
+      data.payload
+    );
+    return response.data;
+  }
+);
 
 export const AddOrder = createAsyncThunk<any, AddOrderArgs>(
   "user/addOrder",
@@ -60,6 +76,16 @@ const orderSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(GetOrderByDate.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(GetOrderById.pending, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(GetOrderById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.orderById = action.payload;
+    });
+    builder.addCase(GetOrderById.rejected, (state, action) => {
       state.loading = false;
     });
   },

@@ -1,6 +1,5 @@
-import { axiosInstance } from "@/helpers/axiosInstance";
 import { toast } from "@/helpers/toastify";
-import { GetOrders } from "@/redux/slices/order.slice";
+import { GetOrderById, GetOrders } from "@/redux/slices/order.slice";
 import { AppDispatch, RootState } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -13,10 +12,13 @@ const useOrders = () => {
   const [orderById, setOrderById] = useState<any>([]);
 
   const order = useSelector((state: RootState) => state.order.data);
+  const orderByIdResponse: any = useSelector(
+    (state: RootState) => state.order.orderById
+  );
 
   useEffect(() => {
     if (order && order.length > 0) {
-      const orderListArray = order.map((item: any) => {
+      const orderListArray = order?.map((item: any) => {
         return {
           orderId: item.id,
           customerId: item.userId,
@@ -48,14 +50,22 @@ const useOrders = () => {
   };
 
   const getOrderById = async (orderId: string, toggleFunc: () => void) => {
-    const response = await axiosInstance.post("/order/get-order-by-id", {
-      orderId,
-    });
-
-    setOrderById(response.data.order.orders);
+    try {
+      dispatch(
+        GetOrderById({
+          payload: { orderId },
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
 
     toggleFunc();
   };
+
+  useEffect(() => {
+    setOrderById(orderByIdResponse?.order?.orders);
+  }, [orderByIdResponse]);
 
   useEffect(() => {
     getOrders();

@@ -16,7 +16,7 @@ const Page = () => {
   const { isModalOpen, document, toggleModal, isLoading } = useDocuments();
 
   return (
-    <div className="flex flex-col gap-[22px] md:ml-[12px] w-full">
+    <div className="flex flex-col gap-[22px] md:ml-[12px] w-full mb-[67px]">
       <Header text="Documents" avatar={true} />
       {isLoading ? (
         <Loader />

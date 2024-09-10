@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import useSessionData from "./useSessionData";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { axiosInstance } from "@/helpers/axiosInstance";
 import { toast } from "@/helpers/toastify";
 import { checkoutValidation } from "@/validations/checkoutValidation";
 import { FormatErrors } from "@/helpers/formatErrors";

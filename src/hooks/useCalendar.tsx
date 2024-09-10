@@ -1,6 +1,6 @@
 "use client";
 import { addDays, format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useCalendar = () => {
   type SelectionRange = {

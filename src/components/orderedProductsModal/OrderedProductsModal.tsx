@@ -36,7 +36,7 @@ const OrderedProductsModal = ({
   const [orderData, setOrderData] = useState<any>([]);
 
   useEffect(() => {
-    const orderDataArray = order.map((item: any) => {
+    const orderDataArray = order?.map((item: any) => {
       return {
         productId: item.product.id,
         image: item.product.image,
@@ -73,7 +73,7 @@ const OrderedProductsModal = ({
             </tr>
           </thead>
           <tbody className="bg-transparent">
-            {orderData.map((item: any) => {
+            {orderData?.map((item: any) => {
               return (
                 <tr
                   key={item.productId}

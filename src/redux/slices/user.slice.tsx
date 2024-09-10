@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/helpers/axiosInstance";
+import { GetUserByDateArgs } from "@/types/Types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -45,6 +46,19 @@ export const UpdateProfilePicture = createAsyncThunk<
   return response.data;
 });
 
+
+export const GetUserByDate = createAsyncThunk<any, GetUserByDateArgs>(
+  "user/getOrderByDate",
+  async (data) => {
+    const response = await axiosInstance.post(
+      "/user/get-user-by-date",
+      data?.payload
+    );
+
+    return response.data;
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -75,6 +89,20 @@ const userSlice = createSlice({
       }
     );
     builder.addCase(UpdateProfilePicture.rejected, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(GetUserByDate.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      GetUserByDate.fulfilled,
+      (state, action: PayloadAction<[]>) => {
+        (state.loading = false), (state.data = action.payload);
+      }
+    );
+    builder.addCase(GetUserByDate.rejected, (state, action) => {
       state.loading = false;
     });
   },

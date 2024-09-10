@@ -8,7 +8,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div className="flex flex-col w-full gap-[22px]">
+    <div className="flex flex-col w-full gap-[22px] mb-[67px]">
       <Header text="Order Overview" avatar={true}/>
 
       <div className="flex xs:flex-col md:flex-row xs:gap-[20px] md:gap-[21.58px] xl:gap-[26px] justify-between">

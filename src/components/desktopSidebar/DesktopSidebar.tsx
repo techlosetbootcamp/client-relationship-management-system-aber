@@ -14,11 +14,13 @@ import { SignOutHandler } from "@/helpers/SignOutHandler";
 const DesktopSidebar = () => {
   const pathname = usePathname();
   return (
-    // Apply shadow later
+
     <div className="xs:hidden lg:block bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
       <div className="px-[16px] py-[32px] flex flex-col gap-[32px]">
         <div className="px-[16px]">
+          <Link href="/">
           <Image src={logo} alt="company-logo" className="" />
+          </Link>
         </div>
 
         <div className="flex flex-col gap-[32px]">

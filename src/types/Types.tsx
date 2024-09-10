@@ -238,3 +238,11 @@ export type GetOrderByDateArgs = {
   };
   callback: (data: any) => void;
 };
+
+export type GetUserByDateArgs = {
+  payload: {
+    startDate: string | null;
+    endDate: string | null;
+  };
+
+};

@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/helpers/axiosInstance";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useGraphCard = (chart: string) => {
   const [profitData, setProfitData] = useState<any>([]);

@@ -1,10 +1,9 @@
-import { axiosInstance } from "@/helpers/axiosInstance";
 import { ChangePassword } from "@/redux/slices/auth.slice";
 
 import { AppDispatch } from "@/redux/store";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const useChangePassword = () => {

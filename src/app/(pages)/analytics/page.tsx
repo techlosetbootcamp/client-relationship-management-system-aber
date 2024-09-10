@@ -23,7 +23,7 @@ const barData = {
 };
 const Page = () => {
   return (
-    <div className="flex flex-col border gap-[22px] md:ml-[12px] w-full  ">
+    <div className="flex flex-col gap-[22px] md:ml-[12px] mb-[67px] w-full  ">
       <Header text="Analytics" avatar={true} />
 
       <div className="flex md:flex-row xs:flex-col xs:gap-[20px] md:gap-[10px] lg:gap-[19.65px] xl:gap-[24px] w-full">
