@@ -35,7 +35,7 @@ export const POST = async (req: Request) => {
       },
     });
 
-    return NextResponse.json({ response });
+    return NextResponse.json({ response, message:"Profile Picture Updated Successfully", status:200 });
   } catch (error) {
     console.log("error", error);
     return NextResponse.json({ error, message: "in error" });

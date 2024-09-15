@@ -47,7 +47,6 @@ export const GetOrderByDate = createAsyncThunk<any, GetOrderByDateArgs>(
       "/order/get-order-by-date",
       data?.payload
     );
-    data?.callback && data.callback(response);
 
     return response.data;
   }

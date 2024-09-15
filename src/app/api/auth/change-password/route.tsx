@@ -11,14 +11,14 @@ export const POST = async (req: Request) => {
     await req.json();
 
   if (!currentPassword || !newPassword || !confirmNewPassword) {
-    return NextResponse.json({ message: "Invalid Data" }, { status: 422 });
+    return NextResponse.json({ message: "Invalid Data", status: 400 });
   }
 
   if (newPassword != confirmNewPassword) {
-    return NextResponse.json(
-      { message: "Passwords do not match" },
-      { status: 422 }
-    );
+    return NextResponse.json({
+      message: "Passwords do not match",
+      status: 400,
+    });
   }
 
   const updatedPassword = await bcrypt.hash(newPassword, 10);
@@ -32,7 +32,7 @@ export const POST = async (req: Request) => {
     });
 
     if (!existingUser) {
-      return NextResponse.json({ message: "Invalid User" }, { status: 422 });
+      return NextResponse.json({ message: "Invalid User" , status:400});
     }
 
     const passwordCompare = await bcrypt.compare(
@@ -42,9 +42,16 @@ export const POST = async (req: Request) => {
 
     if (!passwordCompare) {
       return NextResponse.json(
-        { message: "Old password is incorrect" },
-        { status: 422 }
+        { message: "Old password is incorrect" ,status: 400},
+     
       );
+    }
+
+    if (currentPassword === newPassword && newPassword === confirmNewPassword) {
+      return NextResponse.json({
+        message: "New Password cannot be same as old password",
+        status: 400,
+      });
     }
 
     const updatedUser = await prisma.user.update({
@@ -56,7 +63,7 @@ export const POST = async (req: Request) => {
       },
     });
 
-    return NextResponse.json({ message: "Passwords changed successfully" });
+    return NextResponse.json({ message: "Passwords changed successfully! Please sign in again" , status:200});
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: error });

@@ -14,12 +14,11 @@ import { SignOutHandler } from "@/helpers/SignOutHandler";
 const DesktopSidebar = () => {
   const pathname = usePathname();
   return (
-
     <div className="xs:hidden lg:block bg-white min-w-[220px] h-full border-2 box-border my-[22px]">
       <div className="px-[16px] py-[32px] flex flex-col gap-[32px]">
         <div className="px-[16px]">
           <Link href="/">
-          <Image src={logo} alt="company-logo" className="" />
+            <Image src={logo} alt="company-logo" className="" />
           </Link>
         </div>
 
@@ -29,7 +28,7 @@ const DesktopSidebar = () => {
               GENERAL
             </p>
             <div className="flex flex-col gap-[16px] ">
-              {NavLinks.slice(0, 8).map((item) => {
+              {NavLinks.slice(0, 6).map((item) => {
                 return (
                   <Link
                     key={item.text}
@@ -39,11 +38,32 @@ const DesktopSidebar = () => {
                     }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF] rounded-[4px]`}
                   >
                     <div className="flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer">
-                      {/* <Img fill=""/> */}
-
-                      {/* <Image src={item.icon} alt="nav-icon" /> */}
                       <div className="flex items-center">{item.icon}</div>
-                      {/* <item.icon/> */}
+
+                      <div className="font-barlow ">{item.text}</div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-[16px]">
+            <p className="py-[8px] text-mediumGray text-[12px] leading-[18px] font-albertSans font-[700]">
+              STORE
+            </p>
+            <div className="flex flex-col gap-[16px] ">
+              {NavLinks.slice(6, 9).map((item) => {
+                return (
+                  <Link
+                    key={item.text}
+                    href={item.path}
+                    className={`${
+                      pathname === item.path ? "active" : ""
+                    }  [&.active]:text-[#9A55FF] [&.active]:bg-[#E7D7FF] text-darkGray hover:text-[#9A55FF] hover:bg-[#E7D7FF] rounded-[4px]`}
+                  >
+                    <div className="flex h-[40px] px-[16px] py-[8px] w-full gap-[8px] cursor-pointer">
+                      <div className="flex items-center">{item.icon}</div>
 
                       <div className="font-barlow ">{item.text}</div>
                     </div>
@@ -58,7 +78,7 @@ const DesktopSidebar = () => {
               SUPPORT
             </p>
             <div className="flex flex-col gap-[16px] ">
-              {NavLinks.slice(8, 10).map((item) => {
+              {NavLinks.slice(9, 11).map((item) => {
                 return (
                   <Link
                     key={item.text}
@@ -81,7 +101,7 @@ const DesktopSidebar = () => {
           </div>
 
           <div className="">
-            {NavLinks.slice(10, 11).map((item) => {
+            {NavLinks.slice(11, 12).map((item) => {
               return (
                 <div
                   key={item.text}
@@ -101,4 +121,3 @@ const DesktopSidebar = () => {
 };
 
 export default DesktopSidebar;
-// box-shadow: 0px 4px 10px 0px #00000014;

@@ -34,10 +34,11 @@ export const POST = async (req: Request) => {
 
     return NextResponse.json(
       {
-        message: "Updated User successfully",
+        message: "User updated successfully",
         updatedUser,
+        status : 200
       },
-      { status: 201 }
+    
     );
   } catch (error) {
     console.log(error);

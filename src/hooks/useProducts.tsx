@@ -74,7 +74,7 @@ const useProducts = (item: any) => {
 
   useEffect(() => {
     setProductList(productData);
-    if (productData.length > 0) {
+    if (productData?.length > 0) {
       const productsArray = productData?.map((item: any) => {
         return {
           id: item.id,

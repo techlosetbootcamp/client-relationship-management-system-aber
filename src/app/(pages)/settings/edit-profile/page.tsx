@@ -9,6 +9,9 @@ import InputField from "@/components/inputField/InputField";
 
 import useEditProfile from "@/hooks/useEditProfile";
 
+import { LuLoader2 } from "react-icons/lu";
+import { CgSpinner } from "react-icons/cg";
+
 const Page = () => {
   const {
     name,
@@ -20,6 +23,8 @@ const Page = () => {
     updateProfile,
     fileInputRef,
     session,
+    isProfileLoading,
+    isLoading,
   } = useEditProfile();
 
   return (
@@ -28,13 +33,19 @@ const Page = () => {
         <div className="flex md:flex-row xs:flex-col gap-[20px] justify-between w-full">
           <div className="flex xs:justify-center items-center xs:gap-[8px] md:gap-[16px]">
             <div className="w-fit">
-              <Avatar
-                height="xs:h-[50px] md:h-[64px]"
-                width="xs:w-[50px] md:w-[64px]"
-                radius="rounded-full"
-                background=""
-                img={session.data?.user?.image ?? userAvatar}
-              />
+              {isProfileLoading ? (
+                <div className="xs:h-[50px] md:h-[64px] xs:w-[50px] md:w-[64px] rounded-full border-2 border-mediumGray flex justify-center items-center">
+                  <LuLoader2 className="animate-spin mx-auto" size={35} />
+                </div>
+              ) : (
+                <Avatar
+                  height="xs:h-[50px] md:h-[64px]"
+                  width="xs:w-[50px] md:w-[64px]"
+                  radius="rounded-full"
+                  background=""
+                  img={session.data?.user?.image ?? userAvatar}
+                />
+              )}
             </div>
             <p className="font-[600] xs:text-[15px] md:text-[18px]">
               {session?.data?.user?.name}
@@ -84,7 +95,7 @@ const Page = () => {
 
       <div className="w-full flex md:justify-end ">
         <Button
-          text={"Update Profile"}
+          text={isLoading ? "Updating Profile..." : "Update Profile"}
           background="bg-primaryPurple"
           color="text-white"
           fontSize="text-[16px]"
@@ -98,7 +109,8 @@ const Page = () => {
           img={""}
           width="xs:w-full md:w-fit"
           onClick={updateProfile}
-          disabled={false}
+          Icon={isLoading ? CgSpinner : null}
+          disabled={isLoading ? true : false}
         />
       </div>
 

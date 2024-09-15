@@ -35,6 +35,7 @@ const SingleBarChart = () => {
           legend: {
             display: false,
           },
+          
         },
         layout: {
           padding: 0,

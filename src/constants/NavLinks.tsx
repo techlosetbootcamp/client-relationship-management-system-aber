@@ -8,67 +8,114 @@ import Icon7 from "@/assets/images/Icon7";
 import Icon8 from "@/assets/images/Icon8";
 import Icon9 from "@/assets/images/Icon9";
 
-export const NavLinks = [
-    {
-      text: "Dashboard",
-      icon: <Icon1 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/",
-    },
-    {
-      text: "Orders",
-      icon: <Icon2 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/orders",
-    },
+import { LiaStoreAltSolid } from "react-icons/lia";
+import { CiViewList } from "react-icons/ci";
+import { RiShoppingBag4Line } from "react-icons/ri";
 
-    //CHANGE LATER
-    // {
-    //   text: "Notifications",
-    //   icon: <Icon2 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-    //   path: "#",
-    // },
-    {
-      text: "Customers",
-      icon: <Icon3 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/customers",
-    },
-    {
-      text: "Order Overview",
-      icon:<Icon4 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/order-overview",
-    },
-    {
-      text: "Analytics",
-      icon:<Icon5 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/analytics",
-    },
-    {
-      text: "Documents",
-      icon: <Icon6 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/documents",
-    },
-    {
-      text: "Products Overview",
-      icon: <Icon6 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/products-overview",
-    },
-    {
-      text: "Products",
-      icon: <Icon6 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/products",
-    },
-    {
-      text: "Help",
-      icon: <Icon7 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "#",
-    },
-    {
-      text: "Settings",
-      icon: <Icon8 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "/settings",
-    },
-    {
-      text: "Log Out",
-      icon: <Icon9 fill="currentColor" hover="hover:stroke-primaryPurple hover:fill-primaryPurple"/>,
-      path: "#",
-    },
-  ];
+export const NavLinks = [
+  {
+    text: "Dashboard",
+    icon: (
+      <Icon1
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/",
+  },
+  {
+    text: "Notifications",
+    icon: (
+      <Icon2
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "#",
+  },
+  {
+    text: "Customers",
+    icon: (
+      <Icon3
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/customers",
+  },
+  {
+    text: "Order Overview",
+    icon: (
+      <Icon4
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/order-overview",
+  },
+  {
+    text: "Analytics",
+    icon: (
+      <Icon5
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/analytics",
+  },
+  {
+    text: "Documents",
+    icon: (
+      <Icon6
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/documents",
+  },
+  {
+    text: "Products Overview",
+    icon: <RiShoppingBag4Line fill="currentColor" size={14} />,
+    path: "/products-overview",
+  },
+  {
+    text: "Products",
+    icon: <LiaStoreAltSolid fill="currentColor" />,
+    path: "/products",
+  },
+  {
+    text: "Orders",
+    icon: <CiViewList fill="currentColor" />,
+    path: "/orders",
+  },
+  {
+    text: "Help",
+    icon: (
+      <Icon7
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "#",
+  },
+  {
+    text: "Settings",
+    icon: (
+      <Icon8
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "/settings",
+  },
+  {
+    text: "Log Out",
+    icon: (
+      <Icon9
+        fill="currentColor"
+        hover="hover:stroke-primaryPurple hover:fill-primaryPurple"
+      />
+    ),
+    path: "#",
+  },
+];

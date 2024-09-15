@@ -1,23 +1,21 @@
 import nodemailer from "nodemailer";
-export const SendEmail = async (emailTemplate:string, email : string) => {
-
+export const SendEmail = async (emailTemplate: string, email: string) => {
   const transporter = nodemailer.createTransport({
-    service:"gmail",
+    service: process.env.EMAIL_SERVICE,
     auth: {
-      user: "azhayat3@gmail.com",
-      pass: "oefv vcdv ydkd mlqk",
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.GOOGLE_PASSWORD,
     },
   });
 
   const info = await transporter.sendMail({
-    from: "azhayat3@gmail.com", // sender address
-    to: email, // list of receivers
-    subject: "Hello ✔", // Subject line
-    // text: "Hello world?", // plain text body
-    html: emailTemplate, // html body
+    from: process.env.SENDER_EMAIL,
+    to: email,
+    subject: "Hello ✔",
+
+    html: emailTemplate,
   });
 
-  console.log("Message sent: %s", info.messageId);
 };
 
 export default SendEmail;

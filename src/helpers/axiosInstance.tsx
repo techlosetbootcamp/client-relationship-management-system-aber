@@ -2,11 +2,10 @@ import axios from "axios";
 
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://client-relationship-management-system-techloset.vercel.app/api"
-    // ? "client-relationship-management-system-techloset.vercel.app/api"
-    : "http://localhost:3000/api";
+    ? process.env.NEXT_PUBLIC_PRODUCTION_API_URL
+    : process.env.NEXT_PUBLIC_LOCAL_API_URL;
 
 export const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout:40000
+  timeout: 20000,
 });

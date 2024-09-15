@@ -1,8 +1,4 @@
-import { resetPasswordTemplate } from "@/constants/EmailTemplates";
-import cloudinary from "@/helpers/cloudinary";
-import { ImageUpload } from "@/helpers/ImageUpload";
-import SendEmail from "@/helpers/SendEmail";
-import { PrismaClient } from "@prisma/client";
+
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { NextResponse } from "next/server";
 import { app } from "@/helpers/firebaseConfig";

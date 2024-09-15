@@ -30,7 +30,7 @@ export default function RootLayout({
         </SidebarContextProvider>
         <div
           className={
-            "gap-[29px]  sm:px-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex lg:flex-row xs:flex-col"
+            "gap-[29px] xs:px-[10px]  sm:px-[43px]  md:px-[20px] lg:px-[39px] xl:px-[72px] flex lg:flex-row xs:flex-col"
           }
         >
           <DesktopSidebar />

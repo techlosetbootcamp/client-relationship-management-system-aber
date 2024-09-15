@@ -86,7 +86,7 @@ export const DownloadDocument = createAsyncThunk<
     data.payload
   );
 
-  if (response.data.documents.length > 0) {
+  if (response?.data?.documents?.length > 0) {
     response.data.documents.map(async (doc: any) => {
       if (doc && doc.type && doc.fileName && doc.fileURL) {
         const filePath = doc.fileName + "." + doc.type;

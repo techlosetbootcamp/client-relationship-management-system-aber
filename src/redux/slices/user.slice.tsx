@@ -14,12 +14,14 @@ type EditProfileArgs = {
     newEmail: string;
     name: string;
   };
+  callback: (data: any) => void;
 };
 
 type UpdateProfilePictureArgs = {
   payload: {
     formData: object;
   };
+  callback: (data: any) => void;
 };
 
 export const EditProfile = createAsyncThunk<[], EditProfileArgs>(
@@ -29,6 +31,7 @@ export const EditProfile = createAsyncThunk<[], EditProfileArgs>(
       "/user/update-user",
       data?.payload
     );
+    data?.callback && data.callback(response);
 
     return response.data;
   }
@@ -42,6 +45,7 @@ export const UpdateProfilePicture = createAsyncThunk<
     "/user/update-profile-image",
     data.payload.formData
   );
+  data?.callback && data.callback(response);
 
   return response.data;
 });

@@ -39,6 +39,7 @@ type ChangePasswordArgs = {
     confirmNewPassword: string;
     userId: string;
   };
+  callback: (data: any) => void;
 };
 
 export const SignUp = createAsyncThunk<[], SignUpArgs>(
@@ -84,6 +85,7 @@ export const ChangePassword = createAsyncThunk<[], ChangePasswordArgs>(
       "/auth/change-password",
       data?.payload
     );
+    data?.callback && data.callback(response);
 
     return response.data;
   }

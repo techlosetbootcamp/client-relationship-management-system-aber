@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 import InputField from "@/components/inputField/InputField";
 import Button from "@/components/button/Button";
-
 import useChangePassword from "@/hooks/useChangePassword";
+import { CgSpinner } from "react-icons/cg";
 
 const Page = () => {
   const {
@@ -15,6 +15,7 @@ const Page = () => {
     confirmNewPassword,
     setConfirmNewPassword,
     onsubmit,
+    isLoading
   } = useChangePassword();
 
   return (
@@ -54,7 +55,7 @@ const Page = () => {
           />
 
           <Button
-            text="Update Password"
+            text={isLoading ? "Updating Password..." : "Update Password"}
             background="bg-primaryPurple"
             color="text-white"
             fontSize="text-[16px]"
@@ -68,7 +69,8 @@ const Page = () => {
             img={""}
             width=""
             onClick={onsubmit}
-            disabled={false}
+            Icon={isLoading ? CgSpinner : null}
+          disabled={isLoading ? true : false}
           />
         </div>
       </div>

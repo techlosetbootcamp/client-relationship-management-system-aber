@@ -1,4 +1,3 @@
-import React from "react";
 import cloudinary from "./cloudinary";
 
 export const ImageUpload = async (file: File) => {
